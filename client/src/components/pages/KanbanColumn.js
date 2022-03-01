@@ -31,7 +31,7 @@ const onDragEnd = (e, columns, setColumns) => {
   })
 }
 
-const Planner = ({ isDragging, text }) => {
+const KanbanColumn = ({ isDragging, text }) => {
   const [columns, setColumns] = useState(columnsFromBackEnd)
 
   return (
@@ -81,4 +81,4 @@ const Planner = ({ isDragging, text }) => {
   )
 }
 
-export default Planner
+export default KanbanColumn
