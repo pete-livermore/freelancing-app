@@ -1,3 +1,4 @@
+import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import Box from '@mui/material/Box'
 import Container from '@mui/material/Container'
@@ -5,8 +6,16 @@ import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
 import homeImage from '../../../assets/images/WFH.png'
 import waves from '../../../assets/images/waves.png'
+import { AuthContext } from '../../../App'
 
-const Home = () => {
+const Home = ({ setSelectedPage }) => {
+  const isAuth = useContext(AuthContext)
+  console.log(isAuth.isAuthenticated)
+
+  const handleClick = () => {
+    setSelectedPage('Register')
+  }
+
   return (
     <>
       <div style={{ width: '100%', minHeight: '400px', backgroundColor: '#182b3a' }}>
@@ -20,13 +29,13 @@ const Home = () => {
                 Acquire prefiltered candidates using data-driven methods that integrate into your existing recruitment process.
               </Typography>
               <Box display='flex' mt={4}>
-                <Link to='/find' style={{ textDecoration: 'none' }}>
-                  <Button sx={{ py: '8px', px: '15px', color: '#C2185B', backgroundColor: '#13222E', '&:hover': { backgroundColor: '#eceff1' }, mr: '30px' }}>
+                <Link to={isAuth.isAuthenticated ? '/find' : `/auth`} state={{ user: 'Client', destinationPage: 'Register' }} style={{ textDecoration: 'none' }}>
+                  <Button onClick={handleClick} sx={{ py: '8px', px: '15px', color: '#C2185B', backgroundColor: '#13222E', '&:hover': { backgroundColor: '#eceff1' }, mr: '30px' }}>
                     Find a freelancer
                   </Button>
                 </Link>
-                <Link to='/find' style={{ textDecoration: 'none' }}>
-                  <Button sx={{ py: '8px', px: '15px', backgroundColor: '#13222E', '&:hover': { backgroundColor: '#eceff1' } }}>
+                <Link to={isAuth.isAuthenticated ? '/find' : `/auth`} state={{ user: 'Freelancer', destinationPage: 'Register' }} style={{ textDecoration: 'none' }}>
+                  <Button onClick={handleClick} sx={{ py: '8px', px: '15px', backgroundColor: '#13222E', '&:hover': { backgroundColor: '#eceff1' } }}>
                     Find a job
                   </Button>
                 </Link>

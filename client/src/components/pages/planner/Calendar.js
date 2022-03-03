@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Box from '@mui/material/Box'
-import arrowRight from '../../assets/images/fast-forward-right.png'
-import arrowLeft from '../../assets/images/fast-forward-left.png'
+import arrowRight from '../../../assets/images/fast-forward-right.png'
+import arrowLeft from '../../../assets/images/fast-forward-left.png'
 
 const Calendar = ({ years, year, setYear, months, month, setMonth, days }) => {
   const [daysInMonth, setDaysInMonth] = useState(0)

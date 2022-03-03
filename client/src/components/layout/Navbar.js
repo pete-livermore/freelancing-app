@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Box from '@mui/material/Box'
 import Toolbar from '@mui/material/Toolbar'
 import IconButton from '@mui/material/IconButton'
@@ -13,27 +13,30 @@ import Tooltip from '@mui/material/Tooltip'
 import MenuItem from '@mui/material/MenuItem'
 import { Link } from 'react-router-dom'
 
-const pages = ['Find', 'Register', 'Login'];
+const pages = ['Find', 'Register', 'Log in']
 const settings = ['Profile', 'Workspace', 'Dashboard', 'Planner', 'Logout']
 
-const ResponsiveAppBar = () => {
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
+const ResponsiveAppBar = ({ setSelectedPage }) => {
+  const [anchorElNav, setAnchorElNav] = useState(null)
+  const [anchorElUser, setAnchorElUser] = useState(null)
+
 
   const handleOpenNavMenu = (event) => {
-    setAnchorElNav(event.currentTarget);
-  };
+    setAnchorElNav(event.currentTarget)
+  }
   const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
-  };
+    setAnchorElUser(event.currentTarget)
+  }
 
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
-  };
+  const handleCloseNavMenu = (e) => {
+    console.log(e.target.name)
+    setAnchorElNav(null)
+    if (e.target.name === 'Register' || e.target.name === 'Log in') setSelectedPage(e.target.name)
+  }
 
   const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-  };
+    setAnchorElUser(null)
+  }
 
   return (
     <nav style={{ width: '100%', backgroundColor: '#182b3a' }}>
@@ -71,12 +74,12 @@ const ResponsiveAppBar = () => {
                 display: { xs: 'block', md: 'none' }
               }}
             >
-              {pages.map((page) => (
-                <Link to={`/${page.toLowerCase()}`}>
-                  <MenuItem key={page} onClick={handleCloseNavMenu}>
+              {pages.map(page => (
+                <MenuItem key={page} onClick={handleCloseNavMenu}>
+                  <Link to={page === 'Register' || page === 'Log in' ? `/auth` : `/${page.toLowerCase()}`}>
                     <Typography textAlign="center">{page}</Typography>
-                  </MenuItem>
-                </Link>
+                  </Link>
+                </MenuItem>
               ))}
             </Menu>
           </Box>
@@ -89,19 +92,18 @@ const ResponsiveAppBar = () => {
             LOGO
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((page) => (
-              <Link to={`/${page.toLowerCase()}`} style={{ textDecoration: 'none' }}>
+            {pages.map(page => (
+              <Link key={page} to={page === 'Register' || page === 'Log in' ? `/auth` : `/${page.toLowerCase()}`} state={{ destinationPage: page }} style={{ textDecoration: 'none' }} >
                 <Button
-                  key={page}
                   onClick={handleCloseNavMenu}
                   sx={{ my: 2, color: 'white', display: 'block' }}
+                  name={page}
                 >
                   {page}
                 </Button>
               </Link>
             ))}
           </Box>
-
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
@@ -124,7 +126,7 @@ const ResponsiveAppBar = () => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
+              {settings.map(setting => (
                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
                   <Link to={`/${setting.toLowerCase()}`} style={{ textDecoration: 'none' }}>
                     <Typography textAlign="center" color='black'>{setting}</Typography>

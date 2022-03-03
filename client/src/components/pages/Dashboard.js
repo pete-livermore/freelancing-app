@@ -7,7 +7,7 @@ import CardContent from '@mui/material/CardContent'
 import CardActions from '@mui/material/CardActions'
 import Button from '@mui/material/Button'
 import Avatar from '@mui/material/Avatar'
-import Calendar from '../planner/Calendar'
+import Calendar from './planner/Calendar'
 import Rating from '@mui/material/Rating';
 import Typography from '@mui/material/Typography'
 import CardMedia from '@mui/material/CardMedia'
@@ -42,6 +42,7 @@ const Dashboard = () => {
             setValue(newValue);
           }}
         />
+        <p>Skills:</p>
       </Box>
       <Box flexGrow={1}>
         <Box display='flex' justifyContent='space-between' >
@@ -90,7 +91,7 @@ const Dashboard = () => {
             </Card>
           </Box>
           <Box backgroundColor='white'>
-            More here
+            Testimonials/reviews
           </Box>
         </Box>
       </Box>
