@@ -4,7 +4,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.exceptions import PermissionDenied
 from rest_framework import status
-from jwt_auth.serializers.common import UserSerializer
+from jwt_auth.serializers.common import AuthUserSerializer
 from datetime import datetime, timedelta
 import jwt
 
@@ -16,7 +16,7 @@ User = get_user_model()
 class RegisterView(APIView):
     def post(self, request):
         print(request.data)
-        user_to_create = UserSerializer(data=request.data)
+        user_to_create = AuthUserSerializer(data=request.data)
         try:
             user_to_create.is_valid()
             user_to_create.save()

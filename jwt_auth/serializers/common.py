@@ -7,7 +7,7 @@ from django.contrib.auth.hashers import make_password
 User = get_user_model()
 
 
-class UserSerializer(serializers.ModelSerializer):
+class AuthUserSerializer(serializers.ModelSerializer):
 
     password = serializers.CharField(write_only=True)
     password_confirmation = serializers.CharField(write_only=True)
@@ -27,6 +27,12 @@ class UserSerializer(serializers.ModelSerializer):
         data["password"] = make_password(password)
         return data
 
+    class Meta:
+        model = User
+        fields = "__all__"
+
+
+class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = '__all__'

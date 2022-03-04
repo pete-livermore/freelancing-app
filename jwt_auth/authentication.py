@@ -12,13 +12,15 @@ class JWTAuthentication(BasicAuthentication):
         header = request.headers.get("Authorization")
         if not header:
             return None
-        if not header.startsWith("Bearer"):
+        if not header.startswith("Bearer"):
             raise PermissionDenied(detail="Invalid auth token format")
         token = header.replace("Bearer ", "")
+
         try:
             payload = jwt.decode(
                 token, settings.SECRET_KEY, algorithms=["HS256"]
             )
+            print(payload)
             user = User.objects.get(pk=payload.get("sub"))
         except jwt.exceptions.InvalidTokenError as err:
             print(err)
