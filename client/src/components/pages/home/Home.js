@@ -6,15 +6,16 @@ import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
 import homeImage from '../../../assets/images/WFH.png'
 import waves from '../../../assets/images/waves.png'
-import { AuthContext } from '../../../App'
+import { userIsAuthenticated } from '../../../helpers/auth'
+
 
 const Home = ({ setSelectedPage }) => {
-  const isAuth = useContext(AuthContext)
-  console.log(isAuth.isAuthenticated)
 
   const handleClick = () => {
     setSelectedPage('Register')
   }
+
+  console.log(userIsAuthenticated())
 
   return (
     <>
@@ -29,12 +30,12 @@ const Home = ({ setSelectedPage }) => {
                 Acquire prefiltered candidates using data-driven methods that integrate into your existing recruitment process.
               </Typography>
               <Box display='flex' mt={4}>
-                <Link to={isAuth.isAuthenticated ? '/find' : `/auth`} state={{ user: 'Client', destinationPage: 'Register' }} style={{ textDecoration: 'none' }}>
+                <Link to={userIsAuthenticated() ? '/find' : `/auth`} state={{ user: 'Client', destinationPage: 'Register' }} style={{ textDecoration: 'none' }}>
                   <Button onClick={handleClick} sx={{ py: '8px', px: '15px', color: '#C2185B', backgroundColor: '#13222E', '&:hover': { backgroundColor: '#eceff1' }, mr: '30px' }}>
                     Find a freelancer
                   </Button>
                 </Link>
-                <Link to={isAuth.isAuthenticated ? '/find' : `/auth`} state={{ user: 'Freelancer', destinationPage: 'Register' }} style={{ textDecoration: 'none' }}>
+                <Link to={userIsAuthenticated() ? '/find' : `/auth`} state={{ user: 'Freelancer', destinationPage: 'Register' }} style={{ textDecoration: 'none' }}>
                   <Button onClick={handleClick} sx={{ py: '8px', px: '15px', backgroundColor: '#13222E', '&:hover': { backgroundColor: '#eceff1' } }}>
                     Find a job
                   </Button>

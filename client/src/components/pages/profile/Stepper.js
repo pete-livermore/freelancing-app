@@ -6,22 +6,24 @@ import StepLabel from '@mui/material/StepLabel'
 import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
 import Grid from '@mui/material/Grid'
+import { ImageUpload } from '../../../helpers/imageUpload'
 
 const steps = [{
   text: 'Personal details',
-  fields: [{ text: 'First name', type: 'text' }, { text: 'Last name', type: 'text' }, { text: 'Address', type: 'text' }, { text: 'Photo', type: 'file' }]
+  fields: [{ text: 'First name', type: 'text' }, { text: 'Last name', type: 'text' }, { text: 'Address', type: 'text' }]
 },
 {
   text: 'Business information',
   fields: [{ text: 'Name', type: 'text' }, { text: 'Website', type: 'url' },]
 },
 {
-  text: 'About you',
+  text: 'About your work',
   fields: [{ text: 'Sector', type: 'text' }, { text: 'Skills', type: 'text' }]
 }]
-export default function HorizontalStepper() {
+export default function HorizontalStepper({ handleChange, formValues, handleImageUrl }) {
   const [activeStep, setActiveStep] = useState(0)
   const [skipped, setSkipped] = useState(new Set())
+  const [imageUploading, setImageUploading] = useState(false)
 
   const isStepOptional = (step) => {
     return step === 1
@@ -105,11 +107,17 @@ export default function HorizontalStepper() {
                   <Grid item key={field.text} display='flex' mb={2}>
                     <Box pt='10px' minWidth='80px' mr={2}><label htmlFor={field.text}><Typography>{field.text}</Typography></label></Box>
                     <Box >
-                      <input className='stepper-input' type={field.type} name={field.text} placeholder={field.text}></input>
+                      <input onChange={handleChange} className='stepper-input' type={field.type} name={field.text.replace(/\s+/g, '_').toLowerCase()} placeholder={field.text} value={formValues[field.text]}></input>
                     </Box>
                   </Grid>
                 )
               })}
+              {activeStep === 0 && <ImageUpload
+                value={formValues.profile_image}
+                name='profile_image'
+                handleImageUrl={handleImageUrl}
+                setImageUploading={setImageUploading} />
+              }
             </Grid>
           </form>
 
@@ -128,7 +136,6 @@ export default function HorizontalStepper() {
                 Skip
               </Button>
             )}
-
             <Button onClick={handleNext}>
               {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
             </Button>

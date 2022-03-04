@@ -14,7 +14,7 @@ import MenuItem from '@mui/material/MenuItem'
 import { Link } from 'react-router-dom'
 
 const pages = ['Find', 'Register', 'Log in']
-const settings = ['Profile', 'Workspace', 'Dashboard', 'Planner', 'Logout']
+const settings = ['Profile', 'Workspace', 'Dashboard', 'Planner', 'Log out']
 
 const ResponsiveAppBar = ({ setSelectedPage }) => {
   const [anchorElNav, setAnchorElNav] = useState(null)
@@ -34,8 +34,10 @@ const ResponsiveAppBar = ({ setSelectedPage }) => {
     if (e.target.name === 'Register' || e.target.name === 'Log in') setSelectedPage(e.target.name)
   }
 
-  const handleCloseUserMenu = () => {
+  const handleCloseUserMenu = (e) => {
+    console.log(e.target.id)
     setAnchorElUser(null)
+    if (e.target.id === 'Log out') window.localStorage.removeItem('outsourcd-token')
   }
 
   return (
@@ -127,8 +129,9 @@ const ResponsiveAppBar = ({ setSelectedPage }) => {
               onClose={handleCloseUserMenu}
             >
               {settings.map(setting => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Link to={`/${setting.toLowerCase()}`} style={{ textDecoration: 'none' }}>
+                <MenuItem id={setting} key={setting} onClick={handleCloseUserMenu}>
+                  <Link
+                    to={setting === 'Log out' ? '/auth' : `/${setting.toLowerCase()}`} style={{ textDecoration: 'none' }}>
                     <Typography textAlign="center" color='black'>{setting}</Typography>
                   </Link>
                 </MenuItem>

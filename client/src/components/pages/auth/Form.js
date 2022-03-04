@@ -8,10 +8,9 @@ import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
 import { useNavigate } from 'react-router-dom'
 
-const Form = ({ formType }) => {
+const Form = ({ formType, setIsFlipped, isFlipped, setSelectedPage }) => {
   const [isFreelancer, setIsFreelancer] = useState(true)
   const [isClient, setIsClient] = useState(false)
-
 
   // Setting form fields
   const availablefields = [{
@@ -38,9 +37,6 @@ const Form = ({ formType }) => {
     const sliced = availablefields.slice(0, 3)
     usedFields = sliced
   }
-  console.log(usedFields)
-
-
 
   // Setting form values
   const [formValues, setFormValues] = useState({
@@ -51,6 +47,8 @@ const Form = ({ formType }) => {
     is_freelancer: isFreelancer,
     is_client: isClient
   })
+
+  console.log(formValues)
 
   // Setting form errors
   const [formErrors, setFormErrors] = useState({
@@ -72,15 +70,18 @@ const Form = ({ formType }) => {
     e.preventDefault()
     const postData = async () => {
       try {
-        await axios.post(`api/auth/${formType.toLowerCase()}/`, formValues)
+        const { data } = await axios.post(`api/auth/${formType.toLowerCase().replace(/\s/g, "")}/`, formValues)
         if (formType === 'Register') {
-          // setFormType('Log in')
+          setIsFlipped(true)
           setFormSuccess(true)
           setTimeout(() => {
             setFormSuccess(false)
           }, 2000)
         }
-        else navigate('/profile')
+        else {
+          window.localStorage.setItem('outsourcd-token', data.token)
+          navigate('/profile')
+        }
       } catch (error) {
         console.log('error =>', error.message)
       }
@@ -108,10 +109,14 @@ const Form = ({ formType }) => {
     return string.slice(0, 8) + '_' + string.slice(8).toLowerCase()
   }
 
+  const handleButtonClick = () => {
+    setIsFlipped(true)
+  }
+
 
   return (
     <form onSubmit={handleFormSubmit}>
-      {formSuccess && <Alert severity="success" sx={{ mb: '5px' }}>Registration successful! Now please log in</Alert>}
+      {/* {formSuccess && <Alert severity="success" sx={{ mb: '5px' }}>Registration successful! Now please log in</Alert>} */}
       <Typography variant="h4" component="h2" align='center' sx={{ mb: '15px' }}>
         {formType}
       </Typography>
@@ -123,7 +128,8 @@ const Form = ({ formType }) => {
           return (
             <Grid item key={i} sx={{ marginBottom: '12px' }}>
               <TextField
-                id={`${field.name}-input`}
+                id={`${formType}-${field.name}-input`}
+                key={field.name}
                 name={field.name === 'passwordConfirmation' ? formatPwordConfirmSend(field.name) : field.name}
                 label={field.name === 'passwordConfirmation' ? formatPwordConfirmDisplay(field.name) : capitalizeFirstLetter(field.name)}
                 type={field.type}
@@ -139,6 +145,12 @@ const Form = ({ formType }) => {
           <Button type='submit'>Submit</Button>
         </Grid>
       </Grid>
+      {formType === 'Register' &&
+        <Grid display='flex' flexDirection='column' alignItems='center' mt={4}>
+          <Typography align='center'>Already have an account?</Typography>
+          <Button sx={{ textAlign: 'center' }} onClick={handleButtonClick}>Log in instead</Button>
+        </Grid>
+      }
     </form>
   )
 }

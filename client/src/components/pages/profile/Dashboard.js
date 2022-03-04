@@ -7,13 +7,12 @@ import CardContent from '@mui/material/CardContent'
 import CardActions from '@mui/material/CardActions'
 import Button from '@mui/material/Button'
 import Avatar from '@mui/material/Avatar'
-import Calendar from './planner/Calendar'
+import Calendar from '../planner/Calendar'
 import Rating from '@mui/material/Rating';
 import Typography from '@mui/material/Typography'
 import CardMedia from '@mui/material/CardMedia'
-import image from '../../assets/images/home-image-1.jpg'
-import eagleLogo from '../../assets/images/eagle.png'
-import arrowLogo from '../../assets/images/arrow.png'
+import image from '../../../assets/images/home-image-1.jpg'
+import arrowLogo from '../../../assets/images/arrow.png'
 
 
 const Dashboard = () => {
