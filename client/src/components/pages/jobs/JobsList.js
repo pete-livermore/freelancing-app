@@ -23,7 +23,7 @@ const JobsList = () => {
   return (
     <Container>
       {jobsData.length && jobsData.map(job => {
-        return <JobCard job={job} />
+        return <JobCard key={job.name} job={job} />
       }
       )}
     </Container>

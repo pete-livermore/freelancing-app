@@ -29,9 +29,10 @@ class LoginView(APIView):
     def post(self, request):
         try:
             user_to_login = User.objects.get(email=request.data.get("email"))
-            print(type(request.data))
         except User.DoesNotExist:
             return PermissionDenied
+        print(request.data.get("password"))
+        print(user_to_login.check_password(request.data.get("password")))
         if not user_to_login.check_password(request.data.get("password")):
             return PermissionDenied(detail="Unauthorised")
         dt = datetime.now() + timedelta(days=7)

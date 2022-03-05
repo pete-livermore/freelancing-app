@@ -1,17 +1,16 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import Container from '@mui/material/Container'
+import Box from '@mui/material/Box'
+import CircularProgress from '@mui/material/CircularProgress'
 import CreateProfile from './CreateProfile'
 import Dashboard from './Dashboard'
 
 
 const Profile = () => {
-  const [profileData, setProfileDate] = useState({})
+  const [profileData, setProfileData] = useState({})
   const [formValues, setFormValues] = useState({})
-  const formData = profileData
-
+  const [isLoading, setIsLoading] = useState(false)
   const token = window.localStorage.getItem('outsourcd-token')
-  console.log(token)
 
   useEffect(() => {
     const getProfileData = async () => {
@@ -21,7 +20,8 @@ const Profile = () => {
             Authorization: `Bearer ${token}`
           }
         })
-        setProfileDate(data)
+        setProfileData(data)
+        setFormValues(data)
       } catch (error) {
         console.log(error)
       }
@@ -29,23 +29,24 @@ const Profile = () => {
     getProfileData()
   }, [token])
 
-  const handleChange = (e) => {
-    console.log(e.target.name.replace(/\s+/g, '_').toLowerCase(), e.target.value)
-    setFormValues({ ...formData, [e.target.name.replace(/\s+/g, '_').toLowerCase()]: e.target.value })
-  }
-
-  const handleImageUrl = url => {
-    setFormValues({ ...formValues, profilePicture: url })
-  }
-
-  console.log(formValues)
 
 
   return (
     <>
-      {!profileData.first_name ? <CreateProfile handleChange={handleChange} handleImageUrl={handleImageUrl} formValues={formValues} />
-        :
+      {profileData.first_name ?
         <Dashboard />
+        :
+        (
+          <>
+            {!isLoading ?
+              <CreateProfile formValues={formValues} setFormValues={setFormValues} setIsLoading={setIsLoading} />
+              :
+              <Box display='flex' justifyContent='center' mt={4}>
+                <CircularProgress />
+              </Box>
+            }
+          </>
+        )
       }
     </>
   )

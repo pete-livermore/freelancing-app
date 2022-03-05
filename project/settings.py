@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'jwt_auth',
     'profiles',
-    'jobs'
+    'jobs',
+    'companies'
 ]
 
 MIDDLEWARE = [

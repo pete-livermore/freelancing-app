@@ -8,15 +8,16 @@ export const getTokenFromLocalStorage = () => {
 
 export const getPayload = () => {
   const token = getTokenFromLocalStorage()
-  if (!token) return
+  if (!token) return false
   const splitToken = token.split('.')
-  if (splitToken.length !== 3) return
+  if (splitToken.length !== 3) return false
   return JSON.parse(Buffer.from(splitToken[1], 'base64'))
 }
 
 export const userIsAuthenticated = () => {
   const payload = getPayload()
-  if (!payload) return
+  console.log(payload)
+  if (!payload) return false
   const currentTime = Math.round(Date.now() / 1000)
   return currentTime < payload.expiry
 }

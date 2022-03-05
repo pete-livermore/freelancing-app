@@ -1,0 +1,93 @@
+[
+{
+  "model": "jwt_auth.user",
+  "pk": 1,
+  "fields": {
+    "password": "pbkdf2_sha256$320000$sXpwR5LadOw6Qnr7JFsUCg$L9rCrXgeSpCbGmTPVmzWk7L7z2uOp8qPD4LpRiB1fnk=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "pedrito2",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2022-03-05T14:56:13.363Z",
+    "first_name": "",
+    "last_name": "",
+    "email": "pedrito2@email.com",
+    "profile_image": "",
+    "is_freelancer": false,
+    "is_client": false,
+    "business_name": "",
+    "address": "",
+    "business_website": "",
+    "sector": "",
+    "about_me": "",
+    "experience": null,
+    "groups": [],
+    "user_permissions": [],
+    "skills": []
+  }
+},
+{
+  "model": "jwt_auth.user",
+  "pk": 2,
+  "fields": {
+    "password": "pbkdf2_sha256$320000$pIjyoJMs5HV9ihp7UXZ0Fc$n96sC/l0e23rL7ZhWy7GXdd9m/n6J72dyYGlHbgJBAU=",
+    "last_login": "2022-03-05T16:21:19.580Z",
+    "is_superuser": true,
+    "username": "pete",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2022-03-05T15:54:32.170Z",
+    "first_name": "",
+    "last_name": "",
+    "email": "pete@email.com",
+    "profile_image": "",
+    "is_freelancer": false,
+    "is_client": false,
+    "business_name": "",
+    "address": "",
+    "business_website": "",
+    "sector": "",
+    "about_me": "",
+    "experience": null,
+    "groups": [],
+    "user_permissions": [],
+    "skills": []
+  }
+},
+{
+  "model": "jwt_auth.skill",
+  "pk": 1,
+  "fields": {
+    "name": "Content strategy"
+  }
+},
+{
+  "model": "jwt_auth.skill",
+  "pk": 2,
+  "fields": {
+    "name": "Social media"
+  }
+},
+{
+  "model": "jwt_auth.skill",
+  "pk": 3,
+  "fields": {
+    "name": "Copywriting"
+  }
+},
+{
+  "model": "jwt_auth.skill",
+  "pk": 4,
+  "fields": {
+    "name": "Search Engine Optimisation"
+  }
+},
+{
+  "model": "jwt_auth.skill",
+  "pk": 5,
+  "fields": {
+    "name": "PPC"
+  }
+}
+]

@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import axios from 'axios'
 import Box from '@mui/material/Box'
 import Stepper from '@mui/material/Stepper'
 import Step from '@mui/material/Step'
@@ -7,20 +8,10 @@ import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
 import Grid from '@mui/material/Grid'
 import { ImageUpload } from '../../../helpers/imageUpload'
+import Select from 'react-select'
 
-const steps = [{
-  text: 'Personal details',
-  fields: [{ text: 'First name', type: 'text' }, { text: 'Last name', type: 'text' }, { text: 'Address', type: 'text' }]
-},
-{
-  text: 'Business information',
-  fields: [{ text: 'Name', type: 'text' }, { text: 'Website', type: 'url' },]
-},
-{
-  text: 'About your work',
-  fields: [{ text: 'Sector', type: 'text' }, { text: 'Skills', type: 'text' }]
-}]
-export default function HorizontalStepper({ handleChange, formValues, handleImageUrl }) {
+
+export default function HorizontalStepper({ formValues, handleImageUrl, steps, options, setFormValues, setIsLoading }) {
   const [activeStep, setActiveStep] = useState(0)
   const [skipped, setSkipped] = useState(new Set())
   const [imageUploading, setImageUploading] = useState(false)
@@ -39,10 +30,27 @@ export default function HorizontalStepper({ handleChange, formValues, handleImag
       newSkipped = new Set(newSkipped.values())
       newSkipped.delete(activeStep)
     }
-
     setActiveStep((prevActiveStep) => prevActiveStep + 1)
     setSkipped(newSkipped)
-  };
+    if (activeStep === steps.length - 1) {
+      const postData = async () => {
+        try {
+          const token = localStorage.getItem('outsourcd-token')
+          await axios.put('/api/profiles/profile/', formValues,
+            {
+              'headers': {
+                'Authorization': 'Bearer ' + token
+              }
+            })
+          window.location.reload(false)
+          setIsLoading(true)
+        } catch (err) {
+          console.log(err)
+        }
+      }
+      postData()
+    }
+  }
 
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1)
@@ -63,9 +71,20 @@ export default function HorizontalStepper({ handleChange, formValues, handleImag
     })
   }
 
+  const handleChange = (e) => {
+    setFormValues({ ...formValues, [e.target.name.replace(/\s+/g, '_').toLowerCase()]: e.target.value })
+  }
+
+  const handleMultiSelectChange = (selected, name) => {
+    console.log(selected)
+    const selectedItems = selected.map(obj => obj.value)
+    setFormValues({ ...formValues, [name]: [...selectedItems] })
+  }
+
   const handleReset = () => {
     setActiveStep(0)
   }
+
 
   return (
     <Box sx={{ width: '100%' }}>
@@ -118,9 +137,11 @@ export default function HorizontalStepper({ handleChange, formValues, handleImag
                 handleImageUrl={handleImageUrl}
                 setImageUploading={setImageUploading} />
               }
+              <Box pt='10px' minWidth='80px' mr={2}><label htmlFor='skills'><Typography>Skills</Typography></label></Box>
+              {activeStep === 2 && <Select onChange={(selected) => handleMultiSelectChange(selected, 'skills')} options={options} isMulti />
+              }
             </Grid>
           </form>
-
           <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
             <Button
               color="inherit"
