@@ -2,7 +2,7 @@ from django.contrib.auth import get_user_model
 from django.conf import settings
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework.exceptions import PermissionDenied
+from rest_framework.exceptions import PermissionDenied, NotFound
 from rest_framework import status
 from jwt_auth.serializers.common import AuthUserSerializer
 from datetime import datetime, timedelta
@@ -30,11 +30,11 @@ class LoginView(APIView):
         try:
             user_to_login = User.objects.get(email=request.data.get("email"))
         except User.DoesNotExist:
-            return PermissionDenied
+            raise NotFound(detail="User doesn't exist")
         print(request.data.get("password"))
         print(user_to_login.check_password(request.data.get("password")))
         if not user_to_login.check_password(request.data.get("password")):
-            return PermissionDenied(detail="Unauthorised")
+            raise PermissionDenied(detail="Unauthorised")
         dt = datetime.now() + timedelta(days=7)
         token = jwt.encode(
             {"sub": user_to_login.id, "expiry": int(dt.strftime("%s"))},

@@ -4,7 +4,7 @@ import HorizontalStepper from './Stepper'
 import Container from '@mui/material/Container'
 import Typography from '@mui/material/Typography'
 
-const CreateProfile = ({ formValues, setFormValues, setIsLoading }) => {
+const CreateProfile = ({ formValues, setFormValues, setIsLoading, setProfileComplete }) => {
   const [skillsData, setSkillsData] = useState([])
   const newSkillsArr = []
   skillsData.forEach(obj => {
@@ -46,7 +46,7 @@ const CreateProfile = ({ formValues, setFormValues, setIsLoading }) => {
   return (
     <Container sx={{ backgroundColor: 'white', borderRadius: '5px', mt: '35px', p: '30px' }}>
       <Typography variant='h5' element='h1' sx={{ mb: '25px' }}>Create your freelancer profile</Typography>
-      <HorizontalStepper steps={steps} options={newSkillsArr} handleImageUrl={handleImageUrl} setFormValues={setFormValues} formValues={formValues} setIsLoading={setIsLoading} />
+      <HorizontalStepper steps={steps} options={newSkillsArr} handleImageUrl={handleImageUrl} setFormValues={setFormValues} formValues={formValues} setIsLoading={setIsLoading} setProfileComplete={setProfileComplete} />
     </Container>
   )
 }

@@ -13,6 +13,7 @@ import Typography from '@mui/material/Typography'
 import CardMedia from '@mui/material/CardMedia'
 import image from '../../../assets/images/home-image-1.jpg'
 import arrowLogo from '../../../assets/images/arrow.png'
+import CheckList from './Checklist'
 
 
 const Dashboard = () => {
@@ -72,7 +73,7 @@ const Dashboard = () => {
                   <Button size="medium">See full job listing</Button>
                 </CardActions>
               </Card>
-              <Box>Some info here</Box>
+              <Box flexGrow='1' p={4}><CheckList /></Box>
             </Box>
           </Box>
           <Box backgroundColor='white' p={2} borderRadius={2}>

@@ -11,6 +11,7 @@ const Profile = () => {
   const [formValues, setFormValues] = useState({})
   const [isLoading, setIsLoading] = useState(false)
   const token = window.localStorage.getItem('outsourcd-token')
+  const [profileComplete, setProfileComplete] = useState(false)
 
   useEffect(() => {
     const getProfileData = async () => {
@@ -33,22 +34,25 @@ const Profile = () => {
 
   return (
     <>
-      {profileData.first_name ?
+      {profileComplete ?
         <Dashboard />
         :
-        (
-          <>
-            {!isLoading ?
-              <CreateProfile formValues={formValues} setFormValues={setFormValues} setIsLoading={setIsLoading} />
-              :
-              <Box display='flex' justifyContent='center' mt={4}>
-                <CircularProgress />
-              </Box>
-            }
-          </>
-        )
+        <CreateProfile formValues={formValues} setFormValues={setFormValues} setIsLoading={setIsLoading} setProfileComplete={setProfileComplete} />
       }
     </>
+    // (
+    //   <>
+    //     {!isLoading ?
+    //       <CreateProfile formValues={formValues} setFormValues={setFormValues} setIsLoading={setIsLoading} setProfileComplete={setProfileComplete} />
+    //       :
+    //       <Box display='flex' justifyContent='center' mt={4}>
+    //         <CircularProgress />
+    //       </Box>
+    //     }
+    //   </>
+    // )
+    //   }
+    // </>
   )
 }
 

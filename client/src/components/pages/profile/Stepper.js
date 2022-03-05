@@ -11,7 +11,7 @@ import { ImageUpload } from '../../../helpers/imageUpload'
 import Select from 'react-select'
 
 
-export default function HorizontalStepper({ formValues, handleImageUrl, steps, options, setFormValues, setIsLoading }) {
+export default function HorizontalStepper({ formValues, handleImageUrl, steps, options, setFormValues, setIsLoading, setProfileComplete }) {
   const [activeStep, setActiveStep] = useState(0)
   const [skipped, setSkipped] = useState(new Set())
   const [imageUploading, setImageUploading] = useState(false)
@@ -42,7 +42,7 @@ export default function HorizontalStepper({ formValues, handleImageUrl, steps, o
                 'Authorization': 'Bearer ' + token
               }
             })
-          window.location.reload(false)
+          setProfileComplete(true)
           setIsLoading(true)
         } catch (err) {
           console.log(err)

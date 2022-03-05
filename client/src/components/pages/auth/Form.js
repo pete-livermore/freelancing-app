@@ -48,20 +48,15 @@ const Form = ({ formType, setIsFlipped, isFlipped, setSelectedPage }) => {
     is_client: isClient
   })
 
-  console.log(formValues)
-
   // Setting form errors
-  const [formErrors, setFormErrors] = useState({
-    username: '',
-    email: '',
-    password: '',
-    passwordConfirmation: ''
+  const [formError, setFormError] = useState({
+    error: false,
+    detail: ''
   })
   const [formSuccess, setFormSuccess] = useState(false)
 
   const handleInputChange = (e) => {
     setFormValues({ ...formValues, [e.target.name]: e.target.value })
-    console.log(e.target.name, e.target.value)
   }
 
   const navigate = useNavigate()
@@ -82,8 +77,12 @@ const Form = ({ formType, setIsFlipped, isFlipped, setSelectedPage }) => {
           window.localStorage.setItem('outsourcd-token', data.token)
           navigate('/profile')
         }
-      } catch (error) {
-        console.log('error =>', error.message)
+      } catch (err) {
+        console.log(err.response)
+        setFormError({ error: true, detail: err.response.data.detail })
+        setTimeout(() => {
+          setFormError({ error: false, detail: '' })
+        }, 3000)
       }
     }
     postData()
@@ -144,6 +143,9 @@ const Form = ({ formType, setIsFlipped, isFlipped, setSelectedPage }) => {
         <Grid item>
           <Button type='submit'>Submit</Button>
         </Grid>
+      </Grid>
+      <Grid item>
+        {formError.error && <Alert severity="error">{formError.detail}</Alert>}
       </Grid>
       {formType === 'Register' &&
         <Grid display='flex' flexDirection='column' alignItems='center' mt={4}>
