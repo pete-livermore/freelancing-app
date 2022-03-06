@@ -1,2 +1,72 @@
 [
+{
+  "model": "jobs.job",
+  "pk": 9,
+  "fields": {
+    "name": "Develop a website for our business",
+    "brief": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at pellentesque sapien. Nullam eget metus mi.",
+    "date_listed": "2022-03-06T11:40:11.564Z",
+    "completion_date": "2022-06-12T00:00:00Z",
+    "pay": 500,
+    "owner": 3,
+    "company": 1,
+    "sector": [],
+    "deliverables": [
+      1,
+      2
+    ],
+    "milestones": [
+      1
+    ],
+    "assigned_freelancer": [
+      2
+    ]
+  }
+},
+{
+  "model": "jobs.job",
+  "pk": 10,
+  "fields": {
+    "name": "Generate a social media campaign",
+    "brief": "We are aiming to increase our target audience and we need someone to design and a run a social media campaign that drives increased traffic to our products",
+    "date_listed": "2022-03-06T12:28:25.707Z",
+    "completion_date": "2022-03-09T00:00:00Z",
+    "pay": 1000,
+    "owner": 2,
+    "company": null,
+    "sector": [
+      1
+    ],
+    "deliverables": [
+      1,
+      2
+    ],
+    "milestones": [
+      1
+    ],
+    "assigned_freelancer": []
+  }
+},
+{
+  "model": "jobs.deliverable",
+  "pk": 1,
+  "fields": {
+    "name": "Twitter campaign"
+  }
+},
+{
+  "model": "jobs.deliverable",
+  "pk": 2,
+  "fields": {
+    "name": "Facebook campaign"
+  }
+},
+{
+  "model": "jobs.milestone",
+  "pk": 1,
+  "fields": {
+    "name": "Draft copy for campaign posts",
+    "due_date": "2022-04-13T11:22:17Z"
+  }
+}
 ]

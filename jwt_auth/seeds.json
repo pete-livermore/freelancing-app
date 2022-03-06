@@ -10,21 +10,24 @@
     "is_staff": false,
     "is_active": true,
     "date_joined": "2022-03-05T14:56:13.363Z",
-    "first_name": "",
-    "last_name": "",
+    "first_name": "Pedro",
+    "last_name": "Jimenez",
     "email": "pedrito2@email.com",
     "profile_image": "",
     "is_freelancer": false,
     "is_client": false,
-    "business_name": "",
-    "address": "",
-    "business_website": "",
-    "sector": "",
+    "business_name": "DigiMark",
+    "address": "Flat 11, Alstron House",
+    "business_website": "www.digimark.com",
+    "sector": "Digital marketing",
     "about_me": "",
-    "experience": null,
     "groups": [],
     "user_permissions": [],
-    "skills": []
+    "skills": [
+      1,
+      2
+    ],
+    "experience": []
   }
 },
 {
@@ -49,10 +52,135 @@
     "business_website": "",
     "sector": "",
     "about_me": "",
-    "experience": null,
     "groups": [],
     "user_permissions": [],
-    "skills": []
+    "skills": [],
+    "experience": []
+  }
+},
+{
+  "model": "jwt_auth.user",
+  "pk": 3,
+  "fields": {
+    "password": "pbkdf2_sha256$320000$sBlw3GfPb3y8rZIoi1LjU9$SPpJOrddkp4Q1YHB7SGg1QDrudi3zK1oSJsLtw6YEJk=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "pete2",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2022-03-05T18:03:27.021Z",
+    "first_name": "David",
+    "last_name": "Owusu",
+    "email": "pete2@email.com",
+    "profile_image": "",
+    "is_freelancer": true,
+    "is_client": false,
+    "business_name": "Medicine Matters",
+    "address": "London",
+    "business_website": "www.medicinematters.com",
+    "sector": "Digital marketing",
+    "about_me": "",
+    "groups": [],
+    "user_permissions": [],
+    "skills": [
+      1,
+      3,
+      4
+    ],
+    "experience": []
+  }
+},
+{
+  "model": "jwt_auth.user",
+  "pk": 4,
+  "fields": {
+    "password": "pbkdf2_sha256$320000$9l6QGmBQ7VSMv4Bg67htBU$9aVsGkzdyUdfstAFYx9uP34VdkC5vLZRd2pAcnHLjxU=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "pete3",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2022-03-05T18:11:47.899Z",
+    "first_name": "",
+    "last_name": "",
+    "email": "pete3@email.com",
+    "profile_image": "",
+    "is_freelancer": true,
+    "is_client": false,
+    "business_name": "",
+    "address": "",
+    "business_website": "",
+    "sector": "",
+    "about_me": "",
+    "groups": [],
+    "user_permissions": [],
+    "skills": [],
+    "experience": []
+  }
+},
+{
+  "model": "jwt_auth.user",
+  "pk": 5,
+  "fields": {
+    "password": "pbkdf2_sha256$320000$RIpzFrDASYCUu6ozLwaun6$p/Co7eTyIVZVj4J9N+TNlUsJb0xWRsV8q6ej8eNZ9Xk=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "pete4",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2022-03-05T18:16:32.456Z",
+    "first_name": "Heather",
+    "last_name": "Hart",
+    "email": "pete4@email.com",
+    "profile_image": "",
+    "is_freelancer": true,
+    "is_client": false,
+    "business_name": "Telefonica",
+    "address": "Manchester",
+    "business_website": "www.telefonica.com",
+    "sector": "Digital marketing",
+    "about_me": "",
+    "groups": [],
+    "user_permissions": [],
+    "skills": [
+      1,
+      3,
+      4,
+      5
+    ],
+    "experience": []
+  }
+},
+{
+  "model": "jwt_auth.user",
+  "pk": 6,
+  "fields": {
+    "password": "pbkdf2_sha256$320000$cjldr1ZnJWKRoZSEdrg2P5$JhNZcLRY453DOqVrCne1mraw72+B4Xu95jfVGBOgJEQ=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "pete5",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2022-03-05T18:36:46.542Z",
+    "first_name": "Dave",
+    "last_name": "Williams",
+    "email": "pete5@email.com",
+    "profile_image": "",
+    "is_freelancer": true,
+    "is_client": false,
+    "business_name": "Mybusiness",
+    "address": "Manchester",
+    "business_website": "www.mybusiness.com",
+    "sector": "Digital marketing",
+    "about_me": "",
+    "groups": [],
+    "user_permissions": [],
+    "skills": [
+      1,
+      4,
+      3
+    ],
+    "experience": []
   }
 },
 {
@@ -88,6 +216,75 @@
   "pk": 5,
   "fields": {
     "name": "PPC"
+  }
+},
+{
+  "model": "jwt_auth.skill",
+  "pk": 6,
+  "fields": {
+    "name": "HTML"
+  }
+},
+{
+  "model": "jwt_auth.skill",
+  "pk": 7,
+  "fields": {
+    "name": "CSS"
+  }
+},
+{
+  "model": "jwt_auth.skill",
+  "pk": 8,
+  "fields": {
+    "name": "Javascript"
+  }
+},
+{
+  "model": "jwt_auth.skill",
+  "pk": 9,
+  "fields": {
+    "name": "Adobe Photoshop"
+  }
+},
+{
+  "model": "jwt_auth.skill",
+  "pk": 10,
+  "fields": {
+    "name": "Adobe Illustrator"
+  }
+},
+{
+  "model": "jwt_auth.skill",
+  "pk": 11,
+  "fields": {
+    "name": "Google Cloud Platform"
+  }
+},
+{
+  "model": "jwt_auth.skill",
+  "pk": 12,
+  "fields": {
+    "name": "Digital analytics"
+  }
+},
+{
+  "model": "jwt_auth.experience",
+  "pk": 2,
+  "fields": {
+    "job_title": "Digital Editor",
+    "start_year": "2021-03-06",
+    "end_year": "2022-03-06",
+    "company_name": 1
+  }
+},
+{
+  "model": "jwt_auth.experience",
+  "pk": 3,
+  "fields": {
+    "job_title": "Digital Marketing Executive",
+    "start_year": "2017-09-09",
+    "end_year": "2022-03-05",
+    "company_name": 2
   }
 }
 ]

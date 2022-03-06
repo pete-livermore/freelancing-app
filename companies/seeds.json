@@ -1,0 +1,49 @@
+[
+{
+  "model": "companies.company",
+  "pk": 1,
+  "fields": {
+    "name": "Springer Healthcare",
+    "description": "Blah blah",
+    "logo": "www.logo.png",
+    "website": "www.springerhealthcare.com",
+    "country": "United Kingdom",
+    "sector": []
+  }
+},
+{
+  "model": "companies.company",
+  "pk": 2,
+  "fields": {
+    "name": "Blabbermouth Media",
+    "description": "Founded in 2010, we have become the premier digital marketing agency in the UK. We develop creative email, website and social media campaigns to ensure that brands find their target audience.",
+    "logo": "https://res.cloudinary.com/di7ndofao/image/upload/v1646568994/Habit_tracker_app/9b523bc08d6e4fb485d53cba9e1dca3e_jhlfln.png",
+    "website": "www.blabbermouthmedia.com",
+    "country": "United Kingdom",
+    "sector": [
+      1
+    ]
+  }
+},
+{
+  "model": "companies.sector",
+  "pk": 1,
+  "fields": {
+    "name": "Digital marketing"
+  }
+},
+{
+  "model": "companies.sector",
+  "pk": 2,
+  "fields": {
+    "name": "Graphic design"
+  }
+},
+{
+  "model": "companies.sector",
+  "pk": 3,
+  "fields": {
+    "name": "Software engineering/web development"
+  }
+}
+]

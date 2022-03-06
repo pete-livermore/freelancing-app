@@ -50,7 +50,6 @@ class OwnProfileDetailView(APIView):
         user_to_update = User.objects.get(pk=request.user.id)
         serialized_user = UserSerializer(
             user_to_update, data=request.data)
-        print(serialized_user.is_valid())
         try:
             serialized_user.is_valid()
             serialized_user.save()
@@ -70,7 +69,10 @@ class SkillsListView(APIView):
         print(serialized_skill)
         try:
             serialized_skill.is_valid()
+            print(serialized_skill.errors)
             serialized_skill.save()
             return Response(serialized_skill.data, status=status.HTTP_201_CREATED)
+        except AssertionError as err:
+            return Response(serialized_skill.errors, status=status.HTTP_422_UNPROCESSABLE_ENTITY)
         except IntegrityError:
             return Response("Unprocessable entity", status=status.HTTP_422_UNPROCESSABLE_ENTITY)

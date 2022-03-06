@@ -1,3 +1,4 @@
+from urllib import request
 from django.db import IntegrityError
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -21,36 +22,49 @@ class JobListView(APIView):
 
     def post(self, request):
         request.data["owner"] = request.user.id
-        print(JobSerializer(data=request.data))
         serialized_job = JobSerializer(data=request.data)
         try:
             serialized_job.is_valid()
+            # print(serialized_job.errors)
             serialized_job.save()
             return Response(serialized_job.data, status=status.HTTP_201_CREATED)
-        except AssertionError as err:  # AssertionError can't be converted to JSON so need to convert to string
+        except AssertionError as err:
             return Response(
                 {"detail": str(err)}, status=status.HTTP_422_UNPROCESSABLE_ENTITY
             )
-        except:
+        except IntegrityError as err:
             return Response(
-                "Unprocessable entity", status=status.HTTP_422_UNPROCESSABLE_ENTITY
+                str(err), status=status.HTTP_422_UNPROCESSABLE_ENTITY
             )
 
 
 class JobDetailedView(APIView):
+    permissions_classes = (IsAuthenticatedOrReadOnly,)
+
+    def retrieve_job(self, pk):
+        try:
+            return Job.objects.get(pk=pk)
+        except Job.DoesNotExist:
+            raise NotFound(detail="Job not found")
 
     def get(self, _request, pk):
+        job_to_retrieve = self.retrieve_job(pk=pk)
+        serialized_job = PopulatedJobSerializer(job_to_retrieve)
+        return Response(serialized_job.data, status=status.HTTP_200_OK)
+
+    def put(self, request, pk):
+        job_to_retrieve = self.retrieve_job(pk=pk)
+        serialized_job = JobSerializer(
+            job_to_retrieve, data=request.data)
         try:
-            job_to_retrieve = Job.objects.get(pk=pk)
-            serialized_job = PopulatedJobSerializer(job_to_retrieve)
+            serialized_job.is_valid()
+            print(serialized_job.errors)
+            serialized_job.save()
             return Response(serialized_job.data, status=status.HTTP_200_OK)
-        except Job.DoesNotExist:
-            raise NotFound(detail="Job not found")
+        except AssertionError:
+            return Response("Unprocessable entity", status=status.HTTP_422_UNPROCESSABLE_ENTITY)
 
     def delete(self, request, pk):
-        try:
-            job_to_delete = Job.objects.get(pk=pk)
-            job_to_delete.delete()
-            return Response(status=status.HTTP_204_NO_CONTENT)
-        except Job.DoesNotExist:
-            raise NotFound(detail="Job not found")
+        job_to_delete = self.retrieve_job(pk=pk)
+        job_to_delete.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)

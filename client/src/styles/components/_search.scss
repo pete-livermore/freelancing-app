@@ -1,61 +1,18 @@
-@import url("https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap");
-@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
-* {
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
-}
-
-body {
-  font-family: 'Noto Sans', sans-serif;
-  height: 100vh;
-  background-color: #eceff1;
-  margin: 0;
-}
-
-.scroll-arrow {
-  margin: 20px 0;
-  cursor: pointer;
-}
-
-.container {
-  position: relative;
-}
-
-.home-image {
-  -webkit-filter: brightness(70%);
-          filter: brightness(70%);
-  width: 100%;
-}
-
-.client-button {
-  color: #5e35b1;
-}
-
-.client-button:hover {
-  background-color: 'white';
-}
-
-.stepper-input {
-  padding: 16.5px 14px;
-  border: 1px solid lightgray;
-  border-radius: '15px';
-  margin-bottom: '15px';
-  min-width: '100px';
-}
-
 .css-pkv4dj-MuiButtonBase-root-MuiChip-root {
   display: -webkit-inline-box;
+  display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
   display: inline-flex;
+  -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
   -webkit-box-pack: center;
   -ms-flex-pack: center;
+  -webkit-justify-content: center;
   justify-content: center;
   position: relative;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
   -webkit-tap-highlight-color: transparent;
   background-color: transparent;
   outline: 0;
@@ -78,24 +35,26 @@ body {
   font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
   font-size: 0.8125rem;
   display: -webkit-inline-box;
+  display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
   display: inline-flex;
+  -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
   -webkit-box-pack: center;
   -ms-flex-pack: center;
+  -webkit-justify-content: center;
   justify-content: center;
   height: 32px;
   color: rgba(0, 0, 0, 0.87);
   background-color: rgba(0, 0, 0, 0.08);
   border-radius: 16px;
   white-space: nowrap;
-  -webkit-transition: background-color 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-  -webkit-transition: background-color 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, -webkit-box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-  transition: background-color 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, -webkit-box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-  transition: background-color 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-  transition: background-color 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, -webkit-box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  -webkit-transition: background-color 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+    box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition: background-color 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+    box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
   cursor: default;
   outline: 0;
   -webkit-text-decoration: none;
@@ -114,4 +73,3 @@ body {
   margin-top: 5px;
   margin-right: 5px;
 }
-/*# sourceMappingURL=main.css.map */

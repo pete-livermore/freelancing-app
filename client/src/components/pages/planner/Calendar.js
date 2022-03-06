@@ -49,7 +49,7 @@ const Calendar = ({ years, year, setYear, months, month, setMonth, days }) => {
     let inc = 1
     for (let i = new Date(`${month} 1, ${year}`).getDay(); i < new Date(`${month} 1, ${year}`).getDay() + daysInMonth; i++) {
       let idDate = new Date(`${month} ${inc}, ${year}`)
-      arr[i] = <Box id={idDate} sx={{ width: '14%', height: '14%' }}>{inc}</Box>
+      arr[i] = <Box id={idDate} key={idDate} sx={{ width: '14%', height: '14%' }}>{inc}</Box>
       inc++
       idDate.setDate(idDate.getDate() + 1)
     }
@@ -74,7 +74,7 @@ const Calendar = ({ years, year, setYear, months, month, setMonth, days }) => {
       <Box>
         <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
           {days && days.map(day => {
-            return <Box sx={{ width: '14%', pl: 1, fontWeight: 'bold' }}>{day}</Box>
+            return <Box key={day} sx={{ width: '14%', pl: 1, fontWeight: 'bold' }}>{day}</Box>
           })}
         </Box>
         <Box sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between' }}>{CalendarBuild()}</Box>

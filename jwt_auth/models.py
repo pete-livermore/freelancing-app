@@ -22,17 +22,20 @@ class User(AbstractUser):
         related_name="users",
         blank=True
     )
-    experience = models.ForeignKey(
+    experience = models.ManyToManyField(
         "jwt_auth.Experience",
         related_name="experience",
-        on_delete=models.CASCADE,
         blank=True,
-        null=True
+    )
+    applied_jobs = models.ManyToManyField(
+        "jobs.Job",
+        related_name="job_applicants",
+        blank=True,
     )
 
 
 class Skill(models.Model):
-    name = models.CharField(max_length=50, default=None)
+    name = models.CharField(max_length=50, default=None, unique=True)
 
     def __str__(self):
         return self.name
