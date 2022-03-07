@@ -11,10 +11,11 @@ import { ImageUpload } from '../../../helpers/imageUpload'
 import Select from 'react-select'
 
 
-export default function HorizontalStepper({ formValues, handleImageUrl, steps, options, setFormValues, setIsLoading }) {
+export default function HorizontalStepper({ formValues, handleImageUrl, steps, options, setFormValues, setIsLoading, sectors }) {
   const [activeStep, setActiveStep] = useState(0)
   const [skipped, setSkipped] = useState(new Set())
   const [imageUploading, setImageUploading] = useState(false)
+  const [selectedSector, setSelectedSector] = useState({ name: '', id: '' })
 
   const isStepOptional = (step) => {
     return step === 1
@@ -50,6 +51,7 @@ export default function HorizontalStepper({ formValues, handleImageUrl, steps, o
       postData()
     }
   }
+  console.log(formValues)
 
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1)
@@ -70,7 +72,7 @@ export default function HorizontalStepper({ formValues, handleImageUrl, steps, o
     })
   }
 
-  const handleChange = (e) => {
+  const handleInputChange = (e) => {
     setFormValues({ ...formValues, [e.target.name.replace(/\s+/g, '_').toLowerCase()]: e.target.value })
   }
 
@@ -78,6 +80,11 @@ export default function HorizontalStepper({ formValues, handleImageUrl, steps, o
     console.log(selected)
     const selectedItems = selected.map(obj => obj.value)
     setFormValues({ ...formValues, [name]: [...selectedItems] })
+  }
+
+  const handleOptionChange = (selected, name) => {
+    console.log(selected)
+    setFormValues({ ...formValues, [name]: [selected.value] })
   }
 
   const handleReset = () => {
@@ -125,7 +132,7 @@ export default function HorizontalStepper({ formValues, handleImageUrl, steps, o
                   <Grid item key={field.text} display='flex' mb={2}>
                     <Box pt='10px' minWidth='80px' mr={2}><label htmlFor={field.text}><Typography>{field.text}</Typography></label></Box>
                     <Box >
-                      <input onChange={handleChange} className='stepper-input' type={field.type} name={field.text.replace(/\s+/g, '_').toLowerCase()} placeholder={field.text} value={formValues[field.text]}></input>
+                      <input onChange={handleInputChange} className='stepper-input' type={field.type} name={field.text.replace(/\s+/g, '_').toLowerCase()} placeholder={field.text} value={formValues[field.text]}></input>
                     </Box>
                   </Grid>
                 )
@@ -136,8 +143,15 @@ export default function HorizontalStepper({ formValues, handleImageUrl, steps, o
                 handleImageUrl={handleImageUrl}
                 setImageUploading={setImageUploading} />
               }
-              <Box pt='10px' minWidth='80px' mr={2}><label htmlFor='skills'><Typography>Skills</Typography></label></Box>
-              {activeStep === 2 && <Select onChange={(selected) => handleMultiSelectChange(selected, 'skills')} options={options} isMulti />
+              {activeStep === 2 &&
+                <>
+                  <Box pt='10px' minWidth='80px' mr={2}><label htmlFor='skills'><Typography>Sector</Typography></label>
+                    <Select onChange={(selected) => handleOptionChange(selected, 'sector')} options={sectors} />
+                  </Box>
+                  <Box pt='10px' minWidth='80px' mr={2}><label htmlFor='skills'><Typography>Skills</Typography></label>
+                    <Select onChange={(selected) => handleMultiSelectChange(selected, 'skills')} options={options} isMulti />
+                  </Box>
+                </>
               }
             </Grid>
           </form>

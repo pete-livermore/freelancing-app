@@ -43,6 +43,10 @@ body {
   min-width: '100px';
 }
 
+.profile-text-box {
+  cursor: pointer;
+}
+
 .css-pkv4dj-MuiButtonBase-root-MuiChip-root {
   display: -webkit-inline-box;
   display: -ms-inline-flexbox;

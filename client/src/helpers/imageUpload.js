@@ -10,8 +10,6 @@ export const ImageUpload = ({ handleImageUrl, value, setImageUploading }) => {
     const data = new FormData()
     data.append('file', event.target.files[0])
     data.append('upload_preset', uploadPreset)
-    console.log(uploadUrl)
-    console.log(data)
     const res = await axios.post(uploadUrl, data)
     if (res.data) setImageUploading(false)
     handleImageUrl(res.data.url)
@@ -22,7 +20,7 @@ export const ImageUpload = ({ handleImageUrl, value, setImageUploading }) => {
     <>
       {value ?
         <><div>
-          <img id='add-profile-photo' src={value} alt='pp' h='200px' />
+          <img id='add-profile-photo' src={value} alt='pp' height='200px' />
         </div>
           <label width='100%'>Change File: </label>
           <input

@@ -21,7 +21,7 @@ const Finder = () => {
         <>
           <Box display='flex' justifyContent='space-between' backgroundColor='white' p={2} borderRadius={1} mb={4}>
             <Filter />
-            <SearchBox label='Search for a specific job' />
+            {/* <SearchBox label='Search for a specific job' /> */}
           </Box>
           <JobsList />
         </>

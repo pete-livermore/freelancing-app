@@ -6,10 +6,8 @@ import arrowLeft from '../../../assets/images/fast-forward-left.png'
 const Calendar = ({ years, year, setYear, months, month, setMonth, days }) => {
   const [daysInMonth, setDaysInMonth] = useState(0)
   const today = new Date()
-  console.log(today.getDay())
   const currentDate = new Date()
   currentDate.setUTCDate(currentDate.getUTCDate() + 1)
-  console.log(currentDate.getDay())
 
   const handleForwardClick = () => {
     if (month !== 'December') setMonth(months[months.indexOf(month) + 1])
@@ -53,7 +51,6 @@ const Calendar = ({ years, year, setYear, months, month, setMonth, days }) => {
       inc++
       idDate.setDate(idDate.getDate() + 1)
     }
-    console.log(arr)
     return arr
   }
   CalendarBuild()

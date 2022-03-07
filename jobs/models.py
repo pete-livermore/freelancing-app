@@ -6,7 +6,7 @@ from django.db import models
 class Job(models.Model):
     name = models.CharField(max_length=200, default=None)
     sector = models.ManyToManyField(
-        "companies.Sector",
+        "sectors.Sector",
         related_name="jobs",
         blank=True,
     )

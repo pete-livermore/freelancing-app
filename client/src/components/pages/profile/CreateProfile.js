@@ -6,11 +6,16 @@ import Typography from '@mui/material/Typography'
 
 const CreateProfile = ({ formValues, setFormValues, setIsLoading }) => {
   const [skillsData, setSkillsData] = useState([])
+  const [sectors, setSectors] = useState([])
   const newSkillsArr = []
   skillsData.forEach(obj => {
     newSkillsArr.push({ value: obj.id, label: obj.name })
   }
   )
+  const newSectorsArr = []
+  sectors.forEach(obj => {
+    newSectorsArr.push({ value: obj.id, label: obj.name })
+  })
 
   const steps = [{
     text: 'Personal details',
@@ -22,13 +27,13 @@ const CreateProfile = ({ formValues, setFormValues, setIsLoading }) => {
   },
   {
     text: 'About your work',
-    fields: [{ text: 'Sector', type: 'text' }, { text: 'About you', type: 'text' }]
+    fields: [{ text: 'About you', type: 'text' }]
   }]
 
   useEffect(() => {
     const getSkills = async () => {
       try {
-        const { data } = await axios.get('api/profiles/skills/')
+        const { data } = await axios.get('api/skills/')
         setSkillsData(data)
       } catch (error) {
         console.log(error)
@@ -37,16 +42,36 @@ const CreateProfile = ({ formValues, setFormValues, setIsLoading }) => {
     getSkills()
   }, [])
 
+  useEffect(() => {
+    const getSectors = async () => {
+      try {
+        const { data } = await axios.get('api/sectors/')
+        setSectors(data)
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    getSectors()
+  }, [])
+
 
   const handleImageUrl = url => {
-    setFormValues({ ...formValues, profilePicture: url })
+    setFormValues({ ...formValues, profile_image: url })
   }
 
 
   return (
     <Container sx={{ backgroundColor: 'white', borderRadius: '5px', mt: '35px', p: '30px' }}>
       <Typography variant='h5' element='h1' sx={{ mb: '25px' }}>Create your freelancer profile</Typography>
-      <HorizontalStepper steps={steps} options={newSkillsArr} handleImageUrl={handleImageUrl} setFormValues={setFormValues} formValues={formValues} setIsLoading={setIsLoading} />
+      <HorizontalStepper
+        steps={steps}
+        options={newSkillsArr}
+        handleImageUrl={handleImageUrl}
+        setFormValues={setFormValues}
+        formValues={formValues}
+        setIsLoading={setIsLoading}
+        sectors={newSectorsArr}
+      />
     </Container>
   )
 }

@@ -8,6 +8,8 @@ import Typography from '@mui/material/Typography'
 import arrowLogo from '../../../assets/images/arrow.png'
 
 const JobCard = ({ job }) => {
+
+  console.log(job)
   return (
     <Card sx={{ maxWidth: 345, textAlign: 'center' }}>
       <Link to={`/jobs/${job.id}`} style={{ textDecoration: 'none', color: 'black' }}>
@@ -21,7 +23,7 @@ const JobCard = ({ job }) => {
           <CardMedia
             component="img"
             height="194"
-            image={arrowLogo}
+            src={job.company.logo}
             alt="Company logo"
           />
           <Typography gutterBottom variant="h6" component="div">

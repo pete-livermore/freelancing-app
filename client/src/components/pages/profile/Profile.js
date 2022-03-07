@@ -10,7 +10,10 @@ const Profile = () => {
   const [profileData, setProfileData] = useState({})
   const [formValues, setFormValues] = useState({})
   const [isLoading, setIsLoading] = useState(false)
+  const [skillsAdded, setSkillsAdded] = useState(false)
   const token = window.localStorage.getItem('outsourcd-token')
+  const [textInput, setTextInput] = useState({ input: false, text: '' })
+  const [imageUploaded, setImageUploaded] = useState(false)
 
   useEffect(() => {
     const getProfileData = async () => {
@@ -27,14 +30,21 @@ const Profile = () => {
       }
     }
     getProfileData()
-  }, [token])
-
+  }, [token, skillsAdded, textInput, isLoading, imageUploaded])
 
   return (
     <>
       {Object.keys(profileData).length ?
         (profileData.first_name ?
-          <Dashboard profileData={profileData} setProfileData={setProfileData} />
+          <Dashboard
+            profileData={profileData}
+            setProfileData={setProfileData}
+            skillsAdded={skillsAdded}
+            setSkillsAdded={setSkillsAdded}
+            textInput={textInput}
+            setTextInput={setTextInput}
+            setImageUploaded={setImageUploaded}
+          />
           :
           <CreateProfile formValues={formValues} setFormValues={setFormValues} setIsLoading={setIsLoading} />
         )

@@ -1,0 +1,12 @@
+[
+{
+  "model": "experience.experience",
+  "pk": 1,
+  "fields": {
+    "job_title": "Digital Marketing Executive",
+    "start_year": "2018-03-07",
+    "end_year": "2022-03-07",
+    "company_name": 2
+  }
+}
+]

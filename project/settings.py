@@ -43,7 +43,11 @@ INSTALLED_APPS = [
     'jwt_auth',
     'profiles',
     'jobs',
-    'companies'
+    'companies',
+    'skills',
+    'experience',
+    'reviews',
+    'sectors'
 ]
 
 MIDDLEWARE = [

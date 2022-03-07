@@ -17,7 +17,7 @@ class JobListView(APIView):
 
     def get(self, _request):
         jobs = Job.objects.all()
-        serialized_job = JobSerializer(jobs, many=True)
+        serialized_job = PopulatedJobSerializer(jobs, many=True)
         return Response(serialized_job.data, status=status.HTTP_200_OK)
 
     def post(self, request):

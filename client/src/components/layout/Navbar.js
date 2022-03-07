@@ -35,9 +35,9 @@ const ResponsiveAppBar = ({ setSelectedPage }) => {
   }
 
   const handleCloseUserMenu = (e) => {
-    console.log(e.target.id)
+    console.log(e.target)
+    if (e.target.id === 'Log out') localStorage.removeItem('outsourcd-token')
     setAnchorElUser(null)
-    if (e.target.id === 'Log out') window.localStorage.removeItem('outsourcd-token')
   }
 
   return (
@@ -129,10 +129,10 @@ const ResponsiveAppBar = ({ setSelectedPage }) => {
               onClose={handleCloseUserMenu}
             >
               {settings.map(setting => (
-                <MenuItem id={setting} key={setting} onClick={handleCloseUserMenu}>
+                <MenuItem key={setting} onClick={handleCloseUserMenu}>
                   <Link
                     to={setting === 'Log out' ? '/auth' : `/${setting.toLowerCase()}`} style={{ textDecoration: 'none' }}>
-                    <Typography textAlign="center" color='black'>{setting}</Typography>
+                    <Typography id={setting} textAlign="center" color='black'>{setting}</Typography>
                   </Link>
                 </MenuItem>
               ))}
