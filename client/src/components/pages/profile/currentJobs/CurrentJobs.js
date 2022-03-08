@@ -6,8 +6,8 @@ import MenuItem from '@mui/material/MenuItem'
 import Paper from '@mui/material/Paper'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
+import Button from '@mui/material/Button'
 import CheckList from '../checklist/Checklist'
-import JobCard from '../../jobs/JobCard'
 import JobCardMini from '../../jobs/JobCardMini'
 import Calendar from '../planner/Calendar'
 
@@ -59,6 +59,7 @@ export default function CurrentJobs({ profileData }) {
           <Paper sx={{ flexGrow: 1, p: '20px', mr: '10px' }}>
             <Typography>Milestones</Typography>
             <CheckList milestones={selectedJob.milestones} setHoveredDate={setHoveredDate} months={months} setMonth={setMonth} />
+            <Button>Generate invoice</Button>
           </Paper>
           <Paper sx={{ pt: '15px', px: '15px' }}>
             <Calendar profileData={profileData} months={months} month={month} setMonth={setMonth} hoveredDate={hoveredDate} />

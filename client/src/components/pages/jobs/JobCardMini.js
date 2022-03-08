@@ -5,6 +5,7 @@ import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
 import CardMedia from '@mui/material/CardMedia'
 import Typography from '@mui/material/Typography'
+import LinearProgress from '@mui/material/LinearProgress'
 
 export default function JobCardMini({ job }) {
 
@@ -18,6 +19,7 @@ export default function JobCardMini({ job }) {
           <Typography variant="subtitle1" color="text.secondary" component="div">
             {job.company.name}
           </Typography>
+          <LinearProgress variant='determinate' value={70} />
         </CardContent>
       </Box>
       <CardMedia
