@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Box from '@mui/material/Box'
 import OutlinedInput from '@mui/material/OutlinedInput'
 import InputLabel from '@mui/material/InputLabel'
@@ -18,55 +18,41 @@ const MenuProps = {
       width: 250,
     },
   },
-};
+}
 
-const names = [
-  'Accountancy, banking & finance',
-  'Business, consulting & management',
-  'Charity',
-  'Creative arts & design',
-  'Digital',
-  'Engineering',
-  'Healthcare',
-  'Marketing',
-];
+const Filter = ({ options, dataToFilter, setFilteredData }) => {
+  const [selectedOptions, setSelectedOptions] = useState([])
 
-const Filter = () => {
-
-
-  const [personName, setPersonName] = React.useState([]);
-
-  const handleChange = (event) => {
-    const {
-      target: { value },
-    } = event;
-    setPersonName(
-      // On autofill we get a stringified value.
-      typeof value === 'string' ? value.split(',') : value,
-    );
-  };
+  const handleChange = (e) => {
+    console.log(e.target.value)
+    setSelectedOptions(
+      typeof e.target.value === 'string' ? e.target.value.split(',') : e.target.value,
+    )
+    const filtered = dataToFilter.filter(job => e.target.value.includes(job.sector[0].name))
+    setFilteredData(filtered)
+  }
 
   return (
     <Box>
       <Typography>
         Filter by job category
       </Typography>
-      <FormControl sx={{ m: 1, width: 300 }}>
+      <FormControl sx={{ m: 1, width: 400 }}>
         <InputLabel id="demo-multiple-checkbox-label">Tag</InputLabel>
         <Select
           labelId="demo-multiple-checkbox-label"
           id="demo-multiple-checkbox"
           multiple
-          value={personName}
+          value={selectedOptions}
           onChange={handleChange}
           input={<OutlinedInput label="Tag" />}
           renderValue={(selected) => selected.join(', ')}
           MenuProps={MenuProps}
         >
-          {names.map((name) => (
-            <MenuItem key={name} value={name}>
-              <Checkbox checked={personName.indexOf(name) > -1} />
-              <ListItemText disableTypography primary={<Typography type="body2" style={{ color: 'black' }}>{name}</Typography>} />
+          {options.map((option) => (
+            <MenuItem key={option} value={option} sx={{ m: 1, width: 400 }}>
+              <Checkbox checked={selectedOptions.indexOf(option) > -1} />
+              <ListItemText disableTypography primary={<Typography type="body2" style={{ color: 'black' }}>{option}</Typography>} />
             </MenuItem>
           ))}
         </Select>

@@ -8,12 +8,10 @@ from jwt_auth.serializers.common import UserSerializer
 from jwt_auth.serializers.populated import PopulatedUserSerializer
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
-# Create your views here.
 User = get_user_model()
 
 
 class ProfileListView(APIView):
-    # This specifies the permissions classes a view should have
 
     def get(self, _request):
         users = User.objects.all()

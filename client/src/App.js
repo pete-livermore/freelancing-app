@@ -6,9 +6,10 @@ import Profile from './components/pages/profile/Profile'
 import Auth from './components/pages/auth/Auth'
 import Navbar from './components/layout/Navbar'
 import Finder from './components/pages/search/Finder'
-import Planner from './components/pages/planner/Planner'
+import Planner from './components/pages/profile/planner/Planner'
 import CreateProfile from './components/pages/profile/CreateProfile'
 import JobDetail from './components/pages/jobs/JobDetail'
+import CompanyDetail from './components/pages/companies/CompanyDetail'
 
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
         <Route path='/profile' element={<Profile />} />
         <Route path='/auth' element={<Auth selectedPage={selectedPage} setSelectedPage={setSelectedPage} />} />
         <Route path='/jobs/:id' element={<JobDetail />} />
+        <Route path='/companies/:id' element={<CompanyDetail />} />
       </Routes>
     </BrowserRouter>
   )

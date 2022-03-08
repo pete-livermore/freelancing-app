@@ -14,7 +14,7 @@ import MenuItem from '@mui/material/MenuItem'
 import { Link } from 'react-router-dom'
 
 const pages = ['Find', 'Register', 'Log in']
-const settings = ['Profile', 'Workspace', 'Dashboard', 'Planner', 'Log out']
+const settings = ['Profile', 'Log out']
 
 const ResponsiveAppBar = ({ setSelectedPage }) => {
   const [anchorElNav, setAnchorElNav] = useState(null)

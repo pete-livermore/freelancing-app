@@ -5,24 +5,19 @@ import Button from '@mui/material/Button'
 import Modal from '@mui/material/Modal'
 import Stack from '@mui/material/Stack'
 import CircularProgress from '@mui/material/CircularProgress'
-import { ImageUpload } from '../../../helpers/imageUpload'
 
 
-export default function ProfileImageModal({ profileData, avatarClicked, setAvatarClicked, setImageUploaded }) {
+export default function ProfileImageModal({ profileData, iconClicked, setIconClicked }) {
   const [formValues, setFormValues] = useState({
     username: '',
     email: '',
     password: '',
     profile_image: ''
   })
-
-  const handleImageUrl = url => {
-    setFormValues({ username: profileData.username, email: profileData.email, password: profileData.password, profile_image: url })
-  }
-
+  console.log(formValues)
 
   const handleClose = () => {
-    setAvatarClicked(false)
+    setIconClicked(false)
   }
   const [imageUploading, setImageUploading] = useState(false)
 
@@ -39,8 +34,6 @@ export default function ProfileImageModal({ profileData, avatarClicked, setAvata
           }
         )
         handleClose()
-        setImageUploaded(true)
-        setImageUploaded(false)
       } catch (error) {
         console.log(error)
       }
@@ -51,7 +44,7 @@ export default function ProfileImageModal({ profileData, avatarClicked, setAvata
   return (
     <div>
       <Modal
-        open={avatarClicked}
+        open={iconClicked}
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
@@ -59,13 +52,8 @@ export default function ProfileImageModal({ profileData, avatarClicked, setAvata
         <Box display='flex' justifyContent='center' alignItems='center' height='100vh'>
           <form onSubmit={handleFormSubmit}>
             <Box backgroundColor='white' p={6} borderRadius={2} width='600px' boxShadow={24} maxHeight='100vh'>
-              {!imageUploading ?
-                <ImageUpload handleImageUrl={handleImageUrl} value={formValues.profile_image} setImageUploading={setImageUploading} />
-                :
-                <CircularProgress />
-              }
               <Stack direction='row'>
-                <Button type='submit' disabled={imageUploading}>Submit</Button>
+                <Button type='submit' disabled={true}>Submit</Button>
                 <Button onClick={handleClose}>Close</Button>
               </Stack>
             </Box>

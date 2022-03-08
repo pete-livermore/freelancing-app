@@ -3,25 +3,22 @@ import axios from 'axios'
 import { Link } from 'react-router-dom'
 import Container from '@mui/material/Container'
 import Box from '@mui/material/Box'
+import Paper from '@mui/material/Paper'
 import Card from '@mui/material/Card'
 import Button from '@mui/material/Button'
 import Chip from '@mui/material/Chip'
 import Avatar from '@mui/material/Avatar'
-import Calendar from '../planner/Calendar'
 import Rating from '@mui/material/Rating'
 import Typography from '@mui/material/Typography'
-import CheckList from './Checklist'
-import JobCard from '../jobs/JobCard'
 import SkillsModal from './SkillsModal'
 import ProfileImageModal from './ProfileImageModal'
+import Reviews from './reviews/Reviews'
+import CurrentJobs from './currentJobs/CurrentJobs'
+import Calendar from './planner/Calendar'
+
 
 
 const Dashboard = ({ profileData, setProfileData, setSkillsAdded, textInput, setTextInput, setImageUploaded }) => {
-  const years = [2022, 2023, 2024, 2025, 2026, 2027, 2028, 2029, 2030]
-  const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
-  const days = ['Sun', 'Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat']
-  const [year, setYear] = useState(years[years.indexOf(new Date().getFullYear())])
-  const [month, setMonth] = useState(months[new Date().getMonth()])
   const [value, setValue] = useState(4)
   const [avatarClicked, setAvatarClicked] = useState(false)
 
@@ -51,6 +48,10 @@ const Dashboard = ({ profileData, setProfileData, setSkillsAdded, textInput, set
     deleteSkill()
   }
 
+  const userRatings = profileData.received_reviews.map(review => {
+    return review.rating
+  })
+
   const handleAvatarClick = () => {
     if (!avatarClicked) setAvatarClicked(true)
     else setAvatarClicked(false)
@@ -63,6 +64,16 @@ const Dashboard = ({ profileData, setProfileData, setSkillsAdded, textInput, set
   const handleProfileTextInput = (e) => {
     console.log(e.target.value)
     setTextInput({ ...textInput, text: e.target.value })
+  }
+
+
+  const calculateMedianRating = (array) => {
+    const sortedArray = array.sort((a, b) => {
+      return a - b
+    })
+    if (sortedArray.length % 2 === 0) {
+      return (sortedArray[(sortedArray.length / 2) - 1] + sortedArray[sortedArray.length / 2]) / 2
+    } else return sortedArray[Math.floor((sortedArray.length) / 2)]
   }
 
   const handleProfileTextSubmit = (e) => {
@@ -92,14 +103,14 @@ const Dashboard = ({ profileData, setProfileData, setSkillsAdded, textInput, set
   }
 
   return (
-    <Container maxWidth='xl' sx={{ mt: '25px', display: 'flex' }}>
-      <Box backgroundColor='#182b3a' mr={2} width='350px' display='flex' flexDirection='column' alignItems='center' p={2} color='white' borderRadius={2}>
+    <Container maxWidth='xl' sx={{ mt: '30px', mb: '30px', display: 'flex' }}>
+      <Box backgroundColor='#182b3a' mr={5} width='700px' display='flex' flexDirection='column' alignItems='center' p={2} color='white' borderRadius={2}>
         <Box width='133px' height='133px' backgroundColor='#C2185B' borderRadius='50%' pt='3px' pl='3px' >
           <Avatar
             onClick={handleAvatarClick}
             alt="Remy Sharp"
             src={profileData.profile_image}
-            sx={{ width: 126, height: 126, boxShadow: 2 }}
+            sx={{ width: 126, height: 126, boxShadow: 2, cursor: 'pointer' }}
           />
           <ProfileImageModal profileData={profileData} avatarClicked={avatarClicked} setAvatarClicked={setAvatarClicked} setImageUploaded={setImageUploaded} />
         </Box>
@@ -107,7 +118,8 @@ const Dashboard = ({ profileData, setProfileData, setSkillsAdded, textInput, set
         <Typography component="legend">Current rating:</Typography>
         <Rating
           name="simple-controlled"
-          value={value}
+          precision={0.5}
+          value={calculateMedianRating(userRatings)}
           onChange={(event, newValue) => {
             setValue(newValue)
           }}
@@ -153,34 +165,19 @@ const Dashboard = ({ profileData, setProfileData, setSkillsAdded, textInput, set
         })}
       </Box>
       <Box flexGrow={1}>
-        <Box display='flex' justifyContent='space-between' >
-          <Box backgroundColor='white' flexGrow={1} p={4} mr={2} borderRadius={2}>Current jobs:
-            <Box display='flex' mt={2} justifyContent='space-between'>
-              {profileData.jobs.map(job => {
-                return <JobCard key={job.id} job={job} />
-              })
-              }
-              <Box flexGrow='1' p={4}>
-                <CheckList /></Box>
-            </Box>
-          </Box>
-          <Box backgroundColor='white' p={2} borderRadius={2}>
-            Your work planner
-            <Box maxWidth='350px' minHeight='350px'>
-              <Calendar year={year} years={years} setYear={setYear} months={months} month={month} setMonth={setMonth} days={days} />
-              <Link to='/planner' style={{ textDecoration: 'none', color: 'black' }}>Access full planner</Link>
-            </Box>
-          </Box>
-        </Box>
+        <CurrentJobs profileData={profileData} />
         <Box display='flex' justifyContent='space-between' mt={2}>
-          <Box backgroundColor='white' minWidth='400px' p={4}>Job history:
+          <Paper sx={{ p: '20px', mr: '15px', minWidth: '400px', mb: '25px' }}>
+            <Typography variant='h6' component='h2'>
+              Job history
+            </Typography>
             <Card>
               This is a job
             </Card>
-          </Box>
-          <Box backgroundColor='white'>
-            Testimonials/reviews
-          </Box>
+          </Paper>
+          <Paper sx={{ p: '25px', mb: '25px' }}>
+            <Reviews profileData={profileData} />
+          </Paper>
         </Box>
       </Box>
     </Container >

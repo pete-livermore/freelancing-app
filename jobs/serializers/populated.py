@@ -1,4 +1,4 @@
-from companies.serializers.common import CompanySerializer
+from companies.serializers.populated import PopulatedCompanySerializer
 from sectors.serializers.common import SectorSerializer
 from .common import JobSerializer, DeliverableSerializer, MilestoneSerializer
 
@@ -10,5 +10,5 @@ class PopulatedJobSerializer(JobSerializer):
     owner = UserSerializer()
     deliverables = DeliverableSerializer(many=True)
     milestones = MilestoneSerializer(many=True)
-    company = CompanySerializer()
+    company = PopulatedCompanySerializer()
     sector = SectorSerializer(many=True)
