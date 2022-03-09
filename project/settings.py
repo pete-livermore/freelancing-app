@@ -47,7 +47,8 @@ INSTALLED_APPS = [
     'skills',
     'experience',
     'reviews',
-    'sectors'
+    'sectors',
+    'milestones'
 ]
 
 MIDDLEWARE = [

@@ -1,8 +1,8 @@
 from companies.serializers.populated import PopulatedCompanySerializer
 from sectors.serializers.common import SectorSerializer
-from .common import JobSerializer, DeliverableSerializer, MilestoneSerializer
+from .common import JobSerializer, DeliverableSerializer
+from milestones.serializers.common import MilestoneSerializer
 
-# user serializer will be used to populate owner field
 from jwt_auth.serializers.common import UserSerializer
 
 

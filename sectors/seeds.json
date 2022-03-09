@@ -1,0 +1,51 @@
+[
+{
+  "model": "sectors.sector",
+  "pk": 1,
+  "fields": {
+    "name": "Digital marketing"
+  }
+},
+{
+  "model": "sectors.sector",
+  "pk": 2,
+  "fields": {
+    "name": "Software engineering/web development"
+  }
+},
+{
+  "model": "sectors.sector",
+  "pk": 3,
+  "fields": {
+    "name": "Graphic design"
+  }
+},
+{
+  "model": "sectors.sector",
+  "pk": 4,
+  "fields": {
+    "name": "Banking/finance"
+  }
+},
+{
+  "model": "sectors.sector",
+  "pk": 5,
+  "fields": {
+    "name": "Food/restaurants"
+  }
+},
+{
+  "model": "sectors.sector",
+  "pk": 6,
+  "fields": {
+    "name": "Fashion"
+  }
+},
+{
+  "model": "sectors.sector",
+  "pk": 7,
+  "fields": {
+    "name": "Retail"
+  }
+}
+]

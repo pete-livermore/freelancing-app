@@ -64,9 +64,9 @@ export default function ProfileImageModal({ profileData, avatarClicked, setAvata
                 :
                 <CircularProgress />
               }
-              <Stack direction='row'>
-                <Button type='submit' disabled={imageUploading}>Submit</Button>
-                <Button onClick={handleClose}>Close</Button>
+              <Stack direction='row' spacing={2} mt={2}>
+                <Button variant='contained' type='submit' disabled={imageUploading}>Submit</Button>
+                <Button variant='outlined' onClick={handleClose}>Close</Button>
               </Stack>
             </Box>
           </form>

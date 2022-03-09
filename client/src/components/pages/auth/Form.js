@@ -78,7 +78,6 @@ const Form = ({ formType, setIsFlipped, isFlipped, setSelectedPage }) => {
           navigate('/profile')
         }
       } catch (err) {
-        console.log(err.response)
         setFormError({ error: true, detail: err.response.data.detail })
         setTimeout(() => {
           setFormError({ error: false, detail: '' })
@@ -88,12 +87,15 @@ const Form = ({ formType, setIsFlipped, isFlipped, setSelectedPage }) => {
     postData()
   }
 
-  // const handleCheckPasswords = () => {
-  //   if (formValues.password && formValues.passwordConfirmation && formValues.password !== formValues.passwordConfirmation) {
-  //     setFormErrors({ ...formErrors, passwordConfirmation: 'Passwords don\'t match' })
-  //   }
-  // }
-  // handleCheckPasswords()
+  const handleCheckPasswords = () => {
+    if (formValues.password && formValues.password_confirmation && formValues.password !== formValues.password_confirmation) {
+      setFormError({ error: true, detail: 'Passwords don\'t match' })
+    }
+    setTimeout(() => {
+      setFormError({ error: false, detail: '' })
+    }, 3000)
+  }
+
 
   function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
@@ -134,14 +136,14 @@ const Form = ({ formType, setIsFlipped, isFlipped, setSelectedPage }) => {
                 type={field.type}
                 value={formValues[field.name]}
                 onChange={handleInputChange}
+                onBlur={handleCheckPasswords}
                 sx={{ width: '300px' }}
               />
-              {/* {formErrors.passwordConfirmation !== '' && <Alert severity="error">{formErrors.passwordConfirmation}</Alert>} */}
             </Grid>
           )
         })}
         <Grid item>
-          <Button type='submit'>Submit</Button>
+          <Button sx={{ mt: 2 }} variant='contained' type='submit'>Submit</Button>
         </Grid>
       </Grid>
       <Grid item>
@@ -150,7 +152,7 @@ const Form = ({ formType, setIsFlipped, isFlipped, setSelectedPage }) => {
       {formType === 'Register' &&
         <Grid display='flex' flexDirection='column' alignItems='center' mt={4}>
           <Typography align='center'>Already have an account?</Typography>
-          <Button sx={{ textAlign: 'center' }} onClick={handleButtonClick}>Log in instead</Button>
+          <Button variant='outlined' sx={{ textAlign: 'center', mt: 2 }} onClick={handleButtonClick}>Log in instead</Button>
         </Grid>
       }
     </form>

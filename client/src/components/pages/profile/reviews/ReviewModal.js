@@ -14,7 +14,6 @@ export default function ProfileImageModal({ profileData, iconClicked, setIconCli
     password: '',
     profile_image: ''
   })
-  console.log(formValues)
 
   const handleClose = () => {
     setIconClicked(false)

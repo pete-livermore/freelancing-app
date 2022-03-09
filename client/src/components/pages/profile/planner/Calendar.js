@@ -30,10 +30,6 @@ export default function Calendar({ profileData, months, month, setMonth, hovered
     }
   }
 
-  profileData.jobs.length && profileData.jobs.forEach(job => {
-    console.log(job.date_listed, job.completion_date)
-  })
-
   useEffect(() => {
     let numOfDaysInMonth
     if (month === 'February') {
@@ -80,7 +76,7 @@ export default function Calendar({ profileData, months, month, setMonth, hovered
           {year === 2030 && month === 'December' ? '' : <ArrowForwardIosIcon sx={{ cursor: 'pointer' }} onClick={handleForwardClick} />}
         </Box>
       </Box>
-      <Box sx={{ display: 'grid', gridTemplateColumns: '55px 55px 55px 55px 55px 55px 55px', gridGap: '5px' }}>
+      <Box sx={{ display: 'grid', gridTemplateColumns: '50px 50px 50px 50px 50px 50px 50px', gridGap: '5px' }}>
         {days && days.map(day => {
           return <Box key={day} sx={{ pl: 1, fontWeight: 'bold' }}>{day}</Box>
         })}

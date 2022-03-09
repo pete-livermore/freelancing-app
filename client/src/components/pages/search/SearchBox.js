@@ -1,19 +1,23 @@
 import React, { useState } from 'react'
-import axios from 'axios'
-import Paper from '@mui/material/Paper'
 import Box from '@mui/material/Box'
-import Typography from '@mui/material/Typography'
 import TextField from '@mui/material/TextField'
 import Chip from '@mui/material/Chip'
-import SearchIcon from '@mui/icons-material/Search'
 import AddIcon from '@mui/icons-material/Add'
 
 const SearchBox = ({ label, searchedData, searchResults, setSearchResults, setSkill, setDisabledStatus, setSkillsToAdd }) => {
   const [searchString, setSearchString] = useState('')
   const [activeIndices, setActiveIndices] = useState([])
+  const [coloured, setColoured] = useState({
+    backgroundColor: '#C2185B',
+    mt: '5px',
+    mr: '5px',
+  })
 
-  const style1 = { backgroundColor: '#C2185B', mt: '5px', mr: '5px' }
-  const style2 = { backgroundColor: 'grey', mt: '5px', mr: '5px' }
+  const uncoloured = {
+    backgroundColor: 'grey',
+    mt: '5px',
+    mr: '5px',
+  }
 
   const handleSearchInput = (e) => {
     setSearchString(e.target.value)
@@ -31,6 +35,16 @@ const SearchBox = ({ label, searchedData, searchResults, setSearchResults, setSk
   }
 
   const handleChipClick = (id) => {
+    setColoured({
+      ...coloured,
+      cursor: 'pointer',
+      '&:hover, &:focus': {
+        backgroundColor: '#C2185B',
+      },
+      '&:active': {
+        backgroundColor: '#C2185B',
+      }
+    })
     setDisabledStatus(false)
     const arr = [...activeIndices]
     arr.push(id)
@@ -38,6 +52,7 @@ const SearchBox = ({ label, searchedData, searchResults, setSearchResults, setSk
     setSkillsToAdd(skillsForAdding)
     setActiveIndices(arr)
   }
+
 
   return (
     <Box>
@@ -56,7 +71,7 @@ const SearchBox = ({ label, searchedData, searchResults, setSearchResults, setSk
             key={result.id}
             id={result.id}
             label={result.name}
-            sx={activeIndices.includes(result.id) ? style1 : style2}
+            sx={activeIndices.includes(result.id) ? coloured : uncoloured}
             icon={<AddIcon />}
           />
         })}

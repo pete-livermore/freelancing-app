@@ -1,7 +1,5 @@
 from django.db import models
 
-# Create your models here.
-
 
 class Job(models.Model):
     name = models.CharField(max_length=200, default=None)
@@ -26,7 +24,7 @@ class Job(models.Model):
         blank=True,
     )
     milestones = models.ManyToManyField(
-        "jobs.Milestone",
+        "milestones.Milestone",
         related_name="job",
         blank=True
     )
@@ -42,15 +40,6 @@ class Job(models.Model):
 
 class Deliverable(models.Model):
     name = models.CharField(max_length=200, default=None)
-
-    def __str__(self):
-        return self.name
-
-
-class Milestone(models.Model):
-    name = models.CharField(max_length=200, default=None)
-    due_date = models.DateTimeField(default=None)
-    completed = models.BooleanField(default=False)
 
     def __str__(self):
         return self.name

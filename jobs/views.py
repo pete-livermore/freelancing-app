@@ -9,8 +9,6 @@ from .serializers.common import JobSerializer
 from .serializers.populated import PopulatedJobSerializer
 from .models import Job
 
-# Create your views here.
-
 
 class JobListView(APIView):
     permissions_classes = (IsAuthenticatedOrReadOnly,)
@@ -25,7 +23,7 @@ class JobListView(APIView):
         serialized_job = JobSerializer(data=request.data)
         try:
             serialized_job.is_valid()
-            # print(serialized_job.errors)
+            print(serialized_job.errors)
             serialized_job.save()
             return Response(serialized_job.data, status=status.HTTP_201_CREATED)
         except AssertionError as err:
@@ -54,15 +52,14 @@ class JobDetailedView(APIView):
 
     def put(self, request, pk):
         job_to_retrieve = self.retrieve_job(pk=pk)
-        serialized_job = JobSerializer(
+        serialized_job = PopulatedJobSerializer(
             job_to_retrieve, data=request.data)
         try:
             serialized_job.is_valid()
-            print(serialized_job.errors)
             serialized_job.save()
             return Response(serialized_job.data, status=status.HTTP_200_OK)
-        except AssertionError:
-            return Response("Unprocessable entity", status=status.HTTP_422_UNPROCESSABLE_ENTITY)
+        except AssertionError as err:
+            return Response({"detail": str(err)}, status=status.HTTP_422_UNPROCESSABLE_ENTITY)
 
     def delete(self, request, pk):
         job_to_delete = self.retrieve_job(pk=pk)

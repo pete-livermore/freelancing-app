@@ -1,0 +1,107 @@
+[
+{
+  "model": "jwt_auth.user",
+  "pk": 1,
+  "fields": {
+    "password": "pbkdf2_sha256$320000$EKKbOObuzA6EKguwXpe9Ei$8hBZgtTWT57ygXSFDHf3PpkdZUI+73D8MfQsZAEw3xE=",
+    "last_login": "2022-03-07T16:45:02.649Z",
+    "is_superuser": true,
+    "username": "pete",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2022-03-07T16:44:39.676Z",
+    "first_name": "",
+    "last_name": "",
+    "email": "pete@email.com",
+    "profile_image": "",
+    "is_freelancer": false,
+    "is_client": false,
+    "business_name": "",
+    "address": "",
+    "business_website": "",
+    "about_me": "",
+    "groups": [],
+    "user_permissions": [],
+    "sector": [],
+    "skills": [],
+    "experience": [],
+    "applied_jobs": []
+  }
+},
+{
+  "model": "jwt_auth.user",
+  "pk": 2,
+  "fields": {
+    "password": "Passyword1",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "pete1",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2022-03-07T16:51:44Z",
+    "first_name": "Peter",
+    "last_name": "Livermore",
+    "email": "pete1@email.com",
+    "profile_image": "",
+    "is_freelancer": true,
+    "is_client": false,
+    "business_name": "Pete's Digital Agency",
+    "address": "Flat 11, Alstron House",
+    "business_website": "www.wendysdigitalagency.com",
+    "about_me": "",
+    "groups": [],
+    "user_permissions": [],
+    "sector": [
+      2
+    ],
+    "skills": [
+      4,
+      3
+    ],
+    "experience": [],
+    "applied_jobs": []
+  }
+},
+{
+  "model": "jwt_auth.user",
+  "pk": 3,
+  "fields": {
+    "password": "pbkdf2_sha256$320000$tCTcV5zNPm8G22XPDWgnyX$eD8Hunrp5NX9GZQJDsv1MmPV9pyaOGtLqnCnoig+ess=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "pete2",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2022-03-07T17:55:02Z",
+    "first_name": "Pedro",
+    "last_name": "Livermore",
+    "email": "pete2@email.com",
+    "profile_image": "https://res.cloudinary.com/di7ndofao/image/upload/v1646847261/Habit_tracker_app/jurica-koletic-7YVZYZeITc8-unsplash_1_hyehhi.jpg",
+    "is_freelancer": true,
+    "is_client": false,
+    "business_name": "Pete's Digital Agency",
+    "address": "Flat 11, London House, London Road",
+    "business_website": "www.wendysdigitalagency.com",
+    "about_me": "I am an experienced digital marketing professional with demonstrated success in helping both world renowned brands and startups to grow their brands. I bring a deep SEO know-how, but also diverse experience that I can use to help clients succeed in challenging scenarios.",
+    "groups": [],
+    "user_permissions": [],
+    "sector": [
+      1
+    ],
+    "skills": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      13,
+      14,
+      16
+    ],
+    "experience": [
+      1
+    ],
+    "applied_jobs": []
+  }
+}
+]

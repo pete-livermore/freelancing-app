@@ -6,11 +6,11 @@ import CardMedia from '@mui/material/CardMedia'
 import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
 
-export default function JobCard({ job, image }) {
+export default function JobCard({ job, image, widthMax }) {
   console.log(image)
   return (
-    <Card sx={{ maxWidth: 400, textAlign: 'center' }}>
-      <Link to={`/jobs/${job.id}`} style={{ textDecoration: 'none', color: 'black' }}>
+    <Link to={`/jobs/${job.id}`} style={{ textDecoration: 'none', color: 'black' }}>
+      <Card sx={{ maxWidth: widthMax, minHeight: '440px', textAlign: 'center', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
             {job.name}
@@ -34,9 +34,9 @@ export default function JobCard({ job, image }) {
           </Typography>
         </CardContent>
         <CardActions>
-          <Button size="medium">See full job listing</Button>
+          <Button variant="contained" size="medium" sx={{ marginX: 'auto', mb: '10px' }} >See full job listing</Button>
         </CardActions>
-      </Link>
-    </Card>
+      </Card>
+    </Link>
   )
 }

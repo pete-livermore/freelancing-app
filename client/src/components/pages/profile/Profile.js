@@ -14,6 +14,7 @@ const Profile = () => {
   const token = window.localStorage.getItem('outsourcd-token')
   const [textInput, setTextInput] = useState({ input: false, text: '' })
   const [imageUploaded, setImageUploaded] = useState(false)
+  const [milestoneUpdated, setMilestoneUpdated] = useState(false)
 
   useEffect(() => {
     const getProfileData = async () => {
@@ -30,7 +31,8 @@ const Profile = () => {
       }
     }
     getProfileData()
-  }, [token, skillsAdded, textInput, isLoading, imageUploaded])
+  }, [token, skillsAdded, textInput, isLoading, imageUploaded, milestoneUpdated])
+
 
   return (
     <>
@@ -44,6 +46,7 @@ const Profile = () => {
             textInput={textInput}
             setTextInput={setTextInput}
             setImageUploaded={setImageUploaded}
+            setMilestoneUpdated={setMilestoneUpdated}
           />
           :
           <CreateProfile formValues={formValues} setFormValues={setFormValues} setIsLoading={setIsLoading} />

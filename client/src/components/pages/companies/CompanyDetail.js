@@ -17,7 +17,7 @@ export default function CompanyDetail() {
 
   useEffect(() => {
 
-    const getJob = async () => {
+    const getCompanyData = async () => {
       try {
         const { data } = await axios.get(`/api/companies/${id}`)
         console.log(data)
@@ -26,40 +26,38 @@ export default function CompanyDetail() {
         console.log(err)
       }
     }
-    getJob()
+    getCompanyData()
   }, [id])
 
   return (
     Object.keys(companyData).length &&
     <Container sx={{ mt: '30px' }}>
-      <Paper sx={{ p: '20px' }}>
-        <Box display='flex'>
-          <Box>
-            <img
-              component="img"
-              height="194"
-              src={companyData.logo}
-              alt={companyData.name}
-            />
-          </Box>
-          <Box pl={4}>
-            <Typography gutterBottom variant="h3" component="h1">
-              {companyData.name}
-            </Typography>
-            <Typography gutterBottom variant="h6" component="div">
-              Sector: {companyData.sector[0].name}
-            </Typography>
-            <Typography>{companyData.description}</Typography>
-            <Typography>{companyData.website}</Typography>
-            <Typography>{companyData.country}</Typography>
-          </Box>
+      <Paper sx={{ p: '20px', display: 'flex', minWidth: '300px' }}>
+        <Box>
+          <img
+            component="img"
+            height="194"
+            src={companyData.logo}
+            alt={companyData.name}
+          />
+        </Box>
+        <Box pl={4}>
+          <Typography gutterBottom variant="h3" component="h1">
+            {companyData.name}
+          </Typography>
+          <Typography gutterBottom variant="h6" component="div">
+            Sector: {companyData.sector[0].name}
+          </Typography>
+          <Typography>{companyData.description}</Typography>
+          <Typography>{companyData.website}</Typography>
+          <Typography>{companyData.country}</Typography>
         </Box>
       </Paper>
       <Box mt={4} mb={4}>
         Posted jobs:
       </Box>
       {companyData.posted_jobs.length && companyData.posted_jobs.map(job => {
-        return <JobCard key={job.id} job={job} image={false} />
+        return <JobCard widthMax={400} key={job.id} job={job} image={false} />
       })}
     </Container>
   )

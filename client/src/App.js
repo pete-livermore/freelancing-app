@@ -10,6 +10,7 @@ import Planner from './components/pages/profile/planner/Planner'
 import CreateProfile from './components/pages/profile/CreateProfile'
 import JobDetail from './components/pages/jobs/JobDetail'
 import CompanyDetail from './components/pages/companies/CompanyDetail'
+import InvoiceGenerator from './components/pages/invoices/InvoiceCreate'
 
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
         <Route path='/auth' element={<Auth selectedPage={selectedPage} setSelectedPage={setSelectedPage} />} />
         <Route path='/jobs/:id' element={<JobDetail />} />
         <Route path='/companies/:id' element={<CompanyDetail />} />
+        <Route path='/invoicegenerator' element={<InvoiceGenerator />} />
       </Routes>
     </BrowserRouter>
   )

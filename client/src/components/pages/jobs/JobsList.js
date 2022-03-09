@@ -44,10 +44,12 @@ const JobsList = () => {
       <Paper sx={{ p: '20px', mb: '60px' }}>
         <Filter options={sectors} dataToFilter={jobs} filteredData={filteredJobs} setFilteredData={setFilteredJobs} />
       </Paper>
-      {(filteredJobs.length ? filteredJobs : jobs).map(job => {
-        return <JobCard key={job.name} job={job} image={true} />
-      }
-      )}
+      <Box display='flex' justifyContent='space-between'>
+        {(filteredJobs.length ? filteredJobs : jobs).map(job => {
+          return <JobCard widthMax={400} key={job.name} job={job} image={true} />
+        }
+        )}
+      </Box>
     </Container>
   )
 }

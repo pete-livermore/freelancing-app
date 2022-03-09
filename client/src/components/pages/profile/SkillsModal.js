@@ -34,6 +34,7 @@ export default function SkillsModal({ profileData, setSkillsAdded }) {
   const handleClose = () => {
     setOpen(false)
     setSearchResults([])
+    setSkill({ ...skill, found: true, message: '' })
   }
 
   const handleAddSkill = () => {
@@ -96,8 +97,8 @@ export default function SkillsModal({ profileData, setSkillsAdded }) {
   }
 
   return (
-    <div>
-      <Button onClick={handleOpen}>Add skills</Button>
+    <>
+      <Button sx={{ mt: 2 }} variant='contained' onClick={handleOpen}>Add skills</Button>
       <Modal
         open={open}
         onClose={handleClose}
@@ -124,14 +125,14 @@ export default function SkillsModal({ profileData, setSkillsAdded }) {
                 </Box>
               }
               <Stack direction='row' spacing={2} mt={4}>
-                <Button type='submit' disabled={disabledStatus}>Add to profile</Button>
-                <Button onClick={handleClose}>Close</Button>
+                <Button variant='contained' type='submit' disabled={disabledStatus}>Add to profile</Button>
+                <Button variant='outlined' onClick={handleClose}>Close</Button>
               </Stack>
               {isError.error && <Alert severity="error">{isError.message}</Alert>}
             </form>
           </Box>
         </Box>
       </Modal>
-    </div >
+    </>
   )
 }

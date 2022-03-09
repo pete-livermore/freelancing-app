@@ -1,4 +1,4 @@
-from ..models import Job, Deliverable, Milestone
+from ..models import Job, Deliverable
 from rest_framework import serializers
 
 
@@ -11,10 +11,4 @@ class JobSerializer(serializers.ModelSerializer):
 class DeliverableSerializer(serializers.ModelSerializer):
     class Meta:
         model = Deliverable
-        fields = '__all__'
-
-
-class MilestoneSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Milestone
         fields = '__all__'

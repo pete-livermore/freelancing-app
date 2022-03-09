@@ -4,7 +4,6 @@ import Avatar from '@mui/material/Avatar'
 import Typography from '@mui/material/Typography'
 
 export default function ReviewBox({ review }) {
-  console.log(review)
 
   return (
     <Box display='flex' mt={3}>

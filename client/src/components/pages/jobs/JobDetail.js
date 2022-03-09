@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import Container from '@mui/material/Container'
 import Box from '@mui/material/Box'
+import Paper from '@mui/material/Paper'
 import Typography from '@mui/material/Typography'
 import Card from '@mui/material/Card'
 import CardMedia from '@mui/material/CardMedia'
@@ -36,14 +37,14 @@ export default function JobDetail() {
     setModalOpenState(true)
   }
 
-  const handleButtonClick = (id) => {
-    navigate(`/companies/${id}`)
+  const handleButtonClick = (data) => {
+    navigate(`/companies/${data.id}`)
   }
 
   return (
     <Container>
       <Box display='flex'>
-        <Box flexGrow={1} display='flex' flexDirection='column' minHeight='500px' justifyContent='space-between' backgroundColor='white' mt={4} p={4} borderRadius={2}>
+        <Paper sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column', minHeight: '500px', justifyContent: 'space-between', mt: 4, p: 4 }} >
           <Typography variant='h3'>
             {jobData.name}
           </Typography>
@@ -60,10 +61,10 @@ export default function JobDetail() {
           </ul>
           <Button onClick={handleJobApplication}>Apply for job</Button>
           <JobModal modalOpenState={modalOpenState} setModalOpenState={setModalOpenState} jobData={jobData} />
-        </Box>
+        </Paper>
         <Box width='550px' pt='32px' ml={4}>
           {jobData.company &&
-            <Card sx={{ width: '100%' }}>
+            <Card sx={{ width: '250px' }}>
               <CardContent>
                 <Typography gutterBottom variant="h5" component="div">
                   {jobData.company.name}
@@ -79,7 +80,7 @@ export default function JobDetail() {
                 </Typography>
               </CardContent>
               <CardActions>
-                <Button size="medium" onClick={jobData.company.id = () => handleButtonClick(id)}>See full company info</Button>
+                <Button size="medium" onClick={() => handleButtonClick(jobData.company)}>See full company info</Button>
               </CardActions>
             </Card>
           }

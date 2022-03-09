@@ -1,2 +1,115 @@
 [
+{
+  "model": "jobs.job",
+  "pk": 1,
+  "fields": {
+    "name": "Generate a social media campaign",
+    "brief": "We require a digital marketing professional to run social media campaigns - across Twitter, Facebook and LinkedIn that aim to increase our customers. The campaigns will primarily target younger people who are currently using digital banking services.",
+    "date_listed": "2022-03-07T16:49:24.248Z",
+    "completion_date": "2022-05-19T16:48:59Z",
+    "pay": 1000,
+    "owner": 1,
+    "company": 1,
+    "sector": [
+      1
+    ],
+    "deliverables": [
+      1,
+      2,
+      3
+    ],
+    "milestones": [
+      1,
+      2,
+      3,
+      5,
+      4,
+      6
+    ],
+    "assigned_freelancer": [
+      3
+    ]
+  }
+},
+{
+  "model": "jobs.job",
+  "pk": 2,
+  "fields": {
+    "name": "Redesign our company website",
+    "brief": "We are looking to grow our online business by increasing sales and reducing the manual work involved. Specifically we want to increase our traffic, and we need a website that has good SEO rankings and an excellent user experiene through ease of use and few clicks to buy. The site also needs to emphasise the values of our brand, generate interest and excitement, as well as providing reliable and secure customer journeys.",
+    "date_listed": "2022-03-09T17:44:10.867Z",
+    "completion_date": "2022-08-01T17:44:01Z",
+    "pay": 120,
+    "owner": 1,
+    "company": 4,
+    "sector": [
+      2
+    ],
+    "deliverables": [
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "milestones": [],
+    "assigned_freelancer": []
+  }
+},
+{
+  "model": "jobs.deliverable",
+  "pk": 1,
+  "fields": {
+    "name": "Facebook campaign"
+  }
+},
+{
+  "model": "jobs.deliverable",
+  "pk": 2,
+  "fields": {
+    "name": "Twitter campaign"
+  }
+},
+{
+  "model": "jobs.deliverable",
+  "pk": 3,
+  "fields": {
+    "name": "Marketing analytics report"
+  }
+},
+{
+  "model": "jobs.deliverable",
+  "pk": 4,
+  "fields": {
+    "name": "Increase our traffic"
+  }
+},
+{
+  "model": "jobs.deliverable",
+  "pk": 5,
+  "fields": {
+    "name": "Increase SEO rankings"
+  }
+},
+{
+  "model": "jobs.deliverable",
+  "pk": 6,
+  "fields": {
+    "name": "Improve user experience through ease of use and few clicks to buy"
+  }
+},
+{
+  "model": "jobs.deliverable",
+  "pk": 7,
+  "fields": {
+    "name": "Increase our Overseas sales"
+  }
+},
+{
+  "model": "jobs.deliverable",
+  "pk": 8,
+  "fields": {
+    "name": "Increased website load speed"
+  }
+}
 ]

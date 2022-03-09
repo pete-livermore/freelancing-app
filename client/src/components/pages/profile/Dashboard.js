@@ -14,12 +14,10 @@ import SkillsModal from './SkillsModal'
 import ProfileImageModal from './ProfileImageModal'
 import Reviews from './reviews/Reviews'
 import CurrentJobs from './currentJobs/CurrentJobs'
-import Calendar from './planner/Calendar'
 
 
 
-const Dashboard = ({ profileData, setProfileData, setSkillsAdded, textInput, setTextInput, setImageUploaded }) => {
-  const [value, setValue] = useState(4)
+const Dashboard = ({ profileData, setProfileData, setSkillsAdded, textInput, setTextInput, setImageUploaded, setMilestoneUpdated }) => {
   const [avatarClicked, setAvatarClicked] = useState(false)
 
   const handleChipDelete = (label) => () => {
@@ -114,25 +112,22 @@ const Dashboard = ({ profileData, setProfileData, setSkillsAdded, textInput, set
           />
           <ProfileImageModal profileData={profileData} avatarClicked={avatarClicked} setAvatarClicked={setAvatarClicked} setImageUploaded={setImageUploaded} />
         </Box>
-        <p>{profileData.name}</p>
-        <Typography component="legend">Current rating:</Typography>
+        <Typography sx={{ mt: 1 }}>{`${profileData.first_name} ${profileData.last_name}`}</Typography>
+        <Typography sx={{ mt: 3 }} component="legend">Current rating:</Typography>
         <Rating
           name="simple-controlled"
           precision={0.5}
           value={calculateMedianRating(userRatings)}
-          onChange={(event, newValue) => {
-            setValue(newValue)
-          }}
         />
-        <Typography component="legend" sx={{ mt: '15px' }}>About you:</Typography>
+        <Typography component="legend" sx={{ mt: 3 }}>About you:</Typography>
         {!textInput.input ?
-          <Box onClick={handleProfileTextClick} width='100%' backgroundColor='white' borderRadius='5px' minHeight='100px' className='profile-text-box'>
+          <Paper onClick={handleProfileTextClick} sx={{ width: '100%', minHeight: '100px', boxShadow: 3, mt: 2 }} className='profile-text-Paper'>
             <Typography
               component="div"
               sx={{ fontSize: '15px', color: '#1a1a1a', mt: '5px', width: '100%', px: '15px', py: '20px' }}>
               {profileData.about_me ? profileData.about_me : 'Click to add...'}
             </Typography>
-          </Box>
+          </Paper>
           :
           <>
             <Box onClick={handleProfileTextClick} width='100%' borderRadius='5px' minHeight='100px'>
@@ -148,25 +143,38 @@ const Dashboard = ({ profileData, setProfileData, setSkillsAdded, textInput, set
             </Box>
           </>
         }
-        <Typography component="legend" sx={{ mt: '25px' }}>Skills:</Typography>
+        <Typography component="legend" sx={{ mt: 4 }}>Skills:</Typography>
         <Box p={1} width='100%' spacing={1} display='flex' flexWrap='wrap' justifyContent='flex-start'>
           {profileData.skills.map(skill => {
-            return <Chip key={skill.id} id={skill.id} label={skill.name} onDelete={handleChipDelete(skill.id)} sx={{ backgroundColor: '#6b0d32', mt: '5px', mr: '5px' }} />
+            return (<Chip
+              key={skill.id}
+              id={skill.id}
+              label={skill.name}
+              onDelete={handleChipDelete(skill.id)}
+              sx={{ backgroundColor: '#6b0d32', mt: '5px', mr: '5px' }} />
+            )
           })}
         </Box>
         <SkillsModal profileData={profileData} setSkillsAdded={setSkillsAdded} />
-        <Typography component="legend" sx={{ mt: '15px' }}>Professional experience:</Typography>
-        {profileData.experience.map(job => {
-          return (<Box>
-            <Typography component='p'>{job.job_title}</Typography>
-            <p>{job.company_name.name}</p>
-            <p>{`${job.start_year} - ${job.end_year}`}</p>
-          </Box>)
-        })}
+        <Typography component="legend" sx={{ mt: 5 }}>Professional experience:</Typography>
+        <Paper sx={{ p: '10px', width: '100%', mt: '10px' }}>
+          {profileData.experience.map(job => {
+            return (
+              <Box key={job.id} display='flex'>
+                <Box maxWidth='80px' mr={2}><img src={job.company_name.logo} alt={job.company_name.name} width='100%' /></Box>
+                <Box>
+                  <Typography component='p'>{job.job_title}</Typography>
+                  <p>{job.company_name.name}</p>
+                  <p>{`${job.start_year} - ${job.end_year}`}</p>
+                </Box>
+              </Box>
+            )
+          })}
+        </Paper>
       </Box>
       <Box flexGrow={1}>
-        <CurrentJobs profileData={profileData} />
-        <Box display='flex' justifyContent='space-between' mt={2}>
+        <CurrentJobs profileData={profileData} setMilestoneUpdated={setMilestoneUpdated} />
+        <Box display='flex' justifyContent='space-between' mt={6}>
           <Paper sx={{ p: '20px', mr: '15px', minWidth: '400px', mb: '25px' }}>
             <Typography variant='h6' component='h2'>
               Job history

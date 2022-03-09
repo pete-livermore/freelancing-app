@@ -22,15 +22,16 @@ export const ImageUpload = ({ handleImageUrl, value, setImageUploading }) => {
         <><div>
           <img id='add-profile-photo' src={value} alt='pp' height='200px' />
         </div>
-          <label width='100%'>Change File: </label>
+          <label className='file' width='100%'>Change File: </label>
+          <input
+            className='file'
+            type='file'
+            onChange={handleUpload} /></> :
+        <>
           <input
             className='input-pic'
             type='file'
-            onChange={handleUpload} /></> :
-        <><input
-          className='input-pic'
-          type='file'
-          onChange={handleUpload} /></>
+            onChange={handleUpload} /></>
       }
     </>
   )
