@@ -3,6 +3,7 @@ import axios from 'axios'
 import HorizontalStepper from './Stepper'
 import Container from '@mui/material/Container'
 import Typography from '@mui/material/Typography'
+import Paper from '@mui/material/Paper'
 
 const CreateProfile = ({ formValues, setFormValues, setIsLoading }) => {
   const [skillsData, setSkillsData] = useState([])
@@ -61,17 +62,19 @@ const CreateProfile = ({ formValues, setFormValues, setIsLoading }) => {
 
 
   return (
-    <Container sx={{ backgroundColor: 'white', borderRadius: '5px', mt: '35px', p: '30px' }}>
-      <Typography variant='h5' element='h1' sx={{ mb: '25px' }}>Create your freelancer profile</Typography>
-      <HorizontalStepper
-        steps={steps}
-        options={newSkillsArr}
-        handleImageUrl={handleImageUrl}
-        setFormValues={setFormValues}
-        formValues={formValues}
-        setIsLoading={setIsLoading}
-        sectors={newSectorsArr}
-      />
+    <Container>
+      <Paper sx={{ mt: '35px', p: '30px' }}>
+        <Typography variant='h5' element='h1' sx={{ mb: '25px' }}>Create your freelancer profile</Typography>
+        <HorizontalStepper
+          steps={steps}
+          options={newSkillsArr}
+          handleImageUrl={handleImageUrl}
+          setFormValues={setFormValues}
+          formValues={formValues}
+          setIsLoading={setIsLoading}
+          sectors={newSectorsArr}
+        />
+      </Paper>
     </Container>
   )
 }

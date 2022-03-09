@@ -6,6 +6,7 @@ import Step from '@mui/material/Step'
 import StepLabel from '@mui/material/StepLabel'
 import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
+import TextField from '@mui/material/TextField'
 import Grid from '@mui/material/Grid'
 import { ImageUpload } from '../../../helpers/imageUpload'
 import Select from 'react-select'
@@ -132,7 +133,7 @@ export default function HorizontalStepper({ formValues, handleImageUrl, steps, o
                   <Grid item key={field.text} display='flex' mb={2}>
                     <Box pt='10px' minWidth='80px' mr={2}><label htmlFor={field.text}><Typography>{field.text}</Typography></label></Box>
                     <Box >
-                      <input onChange={handleInputChange} className='stepper-input' type={field.type} name={field.text.replace(/\s+/g, '_').toLowerCase()} placeholder={field.text} value={formValues[field.text]}></input>
+                      <TextField onChange={handleInputChange} className='stepper-input' type={field.type} name={field.text.replace(/\s+/g, '_').toLowerCase()} placeholder={field.text} value={formValues[field.text]} />
                     </Box>
                   </Grid>
                 )

@@ -4,6 +4,7 @@ import Box from '@mui/material/Box'
 import CircularProgress from '@mui/material/CircularProgress'
 import CreateProfile from './CreateProfile'
 import Dashboard from './Dashboard'
+import { Typography } from '@mui/material'
 
 
 const Profile = () => {
@@ -49,7 +50,10 @@ const Profile = () => {
             setMilestoneUpdated={setMilestoneUpdated}
           />
           :
-          <CreateProfile formValues={formValues} setFormValues={setFormValues} setIsLoading={setIsLoading} />
+          <>
+            <Typography variant='h4' align='center' sx={{ p: 4 }}>Welcome {profileData.username}! Let's get you started...</Typography>
+            <CreateProfile formValues={formValues} setFormValues={setFormValues} setIsLoading={setIsLoading} />
+          </>
         )
         :
         <CircularProgress />
