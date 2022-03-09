@@ -4,10 +4,8 @@ import { Typography } from '@mui/material'
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos'
 
-export default function Calendar({ profileData, months, month, setMonth, hoveredDate }) {
-  const years = [2022, 2023, 2024, 2025, 2026, 2027, 2028, 2029, 2030]
+export default function Calendar({ months, month, setMonth, hoveredDate, years, year, setYear }) {
   const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
-  const [year, setYear] = useState(years[years.indexOf(new Date().getFullYear())])
   const [daysInMonth, setDaysInMonth] = useState(0)
   const today = new Date()
   const currentDate = new Date()
@@ -64,22 +62,20 @@ export default function Calendar({ profileData, months, month, setMonth, hovered
 
   return (
     <>
-      <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-        <Box width='50px' mb={6}>
-          {year === 2022 && month === 'January' ? '' : <ArrowBackIosIcon sx={{ cursor: 'pointer' }} onClick={handleBackwardClick} />}
-        </Box>
+      <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 2 }}>
+        {year === 2022 && month === 'January' ? <Box mr={2}></Box> : <ArrowBackIosIcon sx={{ cursor: 'pointer' }} onClick={handleBackwardClick} />}
         <Box>
           <Typography variant='h5' align='center' component='h3'>{month}</Typography>
           <Typography variant='h7' align='center' component='h4'>{year}</Typography>
         </Box>
-        <Box width='50px'>
-          {year === 2030 && month === 'December' ? '' : <ArrowForwardIosIcon sx={{ cursor: 'pointer' }} onClick={handleForwardClick} />}
-        </Box>
+        {year === 2030 && month === 'December' ? '' : <ArrowForwardIosIcon sx={{ cursor: 'pointer' }} onClick={handleForwardClick} />}
       </Box>
-      <Box sx={{ display: 'grid', gridTemplateColumns: '50px 50px 50px 50px 50px 50px 50px', gridGap: '5px' }}>
+      <Box sx={{ display: 'grid', gridTemplateColumns: '50px 50px 50px 50px 50px 50px 50px', gridGap: '5px', mb: 2 }}>
         {days && days.map(day => {
           return <Box key={day} sx={{ pl: 1, fontWeight: 'bold' }}>{day}</Box>
         })}
+      </Box>
+      <Box sx={{ display: 'grid', gridTemplateColumns: '50px 50px 50px 50px 50px 50px 50px', gridGap: '5px' }}>
         {CalendarBuild()}
       </Box>
     </>

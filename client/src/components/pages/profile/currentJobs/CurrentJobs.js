@@ -16,6 +16,8 @@ import { useNavigate } from 'react-router-dom'
 
 
 export default function CurrentJobs({ profileData, setMilestoneUpdated }) {
+  const years = [2022, 2023, 2024, 2025, 2026, 2027, 2028, 2029, 2030]
+  const [year, setYear] = useState(years[years.indexOf(new Date().getFullYear())])
   const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
   const [month, setMonth] = useState(months[new Date().getMonth()])
   const [selectedJobData, setSelectedJobData] = useState({})
@@ -26,7 +28,6 @@ export default function CurrentJobs({ profileData, setMilestoneUpdated }) {
     setSelectedJob(matchedJobs[0])
   }
   const [hoveredDate, setHoveredDate] = useState('')
-  const navigate = useNavigate()
 
   useEffect(() => {
     const getJob = async () => {
@@ -95,6 +96,8 @@ export default function CurrentJobs({ profileData, setMilestoneUpdated }) {
                 setMonth={setMonth}
                 setMilestoneUpdated={setMilestoneUpdated}
                 setChecklistUpdated={setChecklistUpdated}
+                year={year}
+                setYear={setYear}
               />
               :
               <CircularProgress />
@@ -102,7 +105,7 @@ export default function CurrentJobs({ profileData, setMilestoneUpdated }) {
             {calcProgress() === 100 && <Button typ='button' onClick={handleButtonClick}>Generate invoice</Button>}
           </Paper>
           <Paper sx={{ pt: '15px', px: '15px', ml: '25px' }}>
-            <Calendar profileData={profileData} months={months} month={month} setMonth={setMonth} hoveredDate={hoveredDate} />
+            <Calendar months={months} month={month} setMonth={setMonth} hoveredDate={hoveredDate} years={years} setYear={setYear} year={year} />
           </Paper>
         </Box>
       </Box>
