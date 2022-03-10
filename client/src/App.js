@@ -4,7 +4,6 @@ import Home from './components/pages/home/Home'
 import Workspace from './components/pages/Workspace/Workspace'
 import Profile from './components/pages/profile/Profile'
 import Auth from './components/pages/auth/Auth'
-import Navbar from './components/layout/Navbar'
 import Finder from './components/pages/search/Finder'
 import Planner from './components/pages/profile/planner/Planner'
 import CreateProfile from './components/pages/profile/CreateProfile'
@@ -17,20 +16,21 @@ import TopNav from './components/layout/TopNav'
 function App() {
   // const [auth, setAuth] = useState({ isAuthenticated: false })
   const [selectedPage, setSelectedPage] = useState('')
+  const [profileData, setProfileData] = useState({})
 
   return (
     <BrowserRouter>
-      <TopNav setSelectedPage={setSelectedPage} />
+      <TopNav setSelectedPage={setSelectedPage} profileData={profileData} />
       <Routes>
         <Route path='/' element={<Home setSelectedPage={setSelectedPage} />} />
         <Route path='/workspace' element={<Workspace />} />
-        <Route path='/find' element={<Finder />} />
+        <Route path='/find' element={<Finder profileData={profileData} />} />
         <Route path='/planner' element={<Planner />} />
         <Route path='/createprofile' element={<CreateProfile />} />
-        <Route path='/profile' element={<Profile />} />
+        <Route path='/profile' element={<Profile profileData={profileData} setProfileData={setProfileData} />} />
         <Route path='/auth' element={<Auth selectedPage={selectedPage} setSelectedPage={setSelectedPage} />} />
-        <Route path='/jobs/:id' element={<JobDetail />} />
-        <Route path='/companies/:id' element={<CompanyDetail />} />
+        <Route path='/jobs/:id' element={<JobDetail profileData={profileData} />} />
+        <Route path='/companies/:id' element={<CompanyDetail profileData={profileData} />} />
         <Route path='/invoicegenerator' element={<InvoiceGenerator />} />
       </Routes>
     </BrowserRouter>

@@ -19,7 +19,7 @@ const Home = ({ setSelectedPage }) => {
 
   return (
     <>
-      <div style={{ width: '100%', minHeight: '400px', backgroundColor: '#182b3a' }}>
+      <Box width='100%' minHeight='400px' backgroundColor='#182b3a' pt={10}>
         <Container>
           <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
             <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'flex-start', flexGrow: 1, marginRight: '10px', mr: '15px' }}>
@@ -30,11 +30,11 @@ const Home = ({ setSelectedPage }) => {
                 Acquire prefiltered candidates using data-driven methods that integrate into your existing recruitment process.
               </Typography>
               <Box display='flex' mt={4}>
-                <Link to={userIsAuthenticated() ? '/find' : `/auth`} state={{ user: 'Client', destinationPage: 'Register' }} style={{ textDecoration: 'none' }}>
+                {/* <Link to={userIsAuthenticated() ? '/find' : `/auth`} state={{ user: 'Client', destinationPage: 'Register' }} style={{ textDecoration: 'none' }}>
                   <Button onClick={handleClick} sx={{ py: '8px', px: '15px', color: '#C2185B', backgroundColor: '#13222E', '&:hover': { backgroundColor: '#eceff1' }, mr: '30px' }}>
                     Find a freelancer
                   </Button>
-                </Link>
+                </Link> */}
                 <Link to={userIsAuthenticated() ? '/find' : `/auth`} state={{ user: 'Freelancer', destinationPage: 'Register' }} style={{ textDecoration: 'none' }}>
                   <Button onClick={handleClick} sx={{ py: '8px', px: '15px', backgroundColor: '#13222E', '&:hover': { backgroundColor: '#eceff1' } }}>
                     Find a job
@@ -47,8 +47,8 @@ const Home = ({ setSelectedPage }) => {
             </Box>
           </Box>
         </Container>
-      </div >
-      <img src={waves} alt='waves' />
+      </Box >
+      <img src='https://res.cloudinary.com/di7ndofao/image/upload/v1646940253/Habit_tracker_app/wave_2_owujty.png' alt='waves' />
     </>
   )
 }

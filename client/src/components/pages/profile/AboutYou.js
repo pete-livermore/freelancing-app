@@ -20,7 +20,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import ExperienceModal from './experience/ExperienceModal'
 
 
-export default function AboutYou({ profileData, setProfileData, textInput, setTextInput, setSkillsAdded }) {
+export default function AboutYou({ profileData, setProfileData, textInput, setTextInput, setSkillsAdded, skillsAdded }) {
   const [experienceModalOpen, setExperienceModalOpen] = useState(false)
 
   const handleChipDelete = (label) => () => {
@@ -96,7 +96,9 @@ export default function AboutYou({ profileData, setProfileData, textInput, setTe
       <Paper elevation={3} sx={{ p: 4, mb: 4 }}>
         <Box display='flex' justifyContent='space-between'>
           <Typography variant='h5' component='h2'>About you</Typography>
-          <EditIcon onClick={handleProfileTextClick} sx={{ cursor: 'pointer', '&:hover': { color: '#C2185B' } }} />
+          <Button onClick={handleProfileTextClick}
+            endIcon={<EditIcon />}>
+            Edit</Button>
         </Box>
         {!textInput.input ?
           <Box className='profile-text-Box'>
@@ -167,12 +169,14 @@ export default function AboutYou({ profileData, setProfileData, textInput, setTe
             )
           })}
         </Box>
-        <SkillsModal profileData={profileData} setSkillsAdded={setSkillsAdded} />
+        <SkillsModal skillsAdded={skillsAdded} profileData={profileData} setSkillsAdded={setSkillsAdded} />
       </Paper>
       <Paper elevation={3} sx={{ p: 4, mb: 4, width: '100%' }}>
         <Box display='flex' justifyContent='space-between'>
           <Typography variant='h5' component='h2'>Professional experience</Typography>
-          <EditIcon onClick={handleExperienceTextClick} sx={{ cursor: 'pointer', '&:hover': { color: '#C2185B' } }} />
+          <Button onClick={handleExperienceTextClick}
+            endIcon={<EditIcon />}>
+            Edit</Button>
         </Box>
         <ExperienceModal experienceModalOpen={experienceModalOpen} setExperienceModalOpen={setExperienceModalOpen} />
         {profileData.experience.length ?

@@ -11,6 +11,11 @@ import CardActions from '@mui/material/CardActions'
 import CardContent from '@mui/material/CardContent'
 import Button from '@mui/material/Button'
 import JobModal from './JobModal'
+import List from '@mui/material/List'
+import ListItem from '@mui/material/ListItem'
+import ListItemIcon from '@mui/material/ListItemIcon'
+import ListItemText from '@mui/material/ListItemText'
+import TaskAltIcon from '@mui/icons-material/TaskAlt';
 
 export default function JobDetail() {
   const [jobData, setJobData] = useState({})
@@ -44,27 +49,41 @@ export default function JobDetail() {
   return (
     <Container sx={{ mt: 8 }}>
       <Box display='flex'>
-        <Paper sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column', minHeight: '500px', justifyContent: 'space-between', mt: 4, p: 4 }} >
-          <Typography variant='h3'>
+        <Paper sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column', minHeight: '500px', justifyContent: 'space-between', mt: 4, p: 6 }} >
+          <Typography variant='h4'>
             {jobData.name}
           </Typography>
           <Typography>{jobData.category}</Typography>
+          <Typography sx={{ mt: 4, fontsize: 14, fontWeight: 600 }}>Brief</Typography>
           <Typography>{jobData.brief}</Typography>
-          <Typography>Listed date: {jobData.date_listed}</Typography>
-          <Typography>Expected completion date: {jobData.completion_date}</Typography>
-          <Typography>Salary for entire job: £{jobData.pay}</Typography>
-          <Typography>Deliverables:</Typography>
+          <Typography sx={{ mt: 4, fontsize: 14, fontWeight: 600 }}>Important dates</Typography>
+          <Typography>Listed date: {new Date(jobData.date_listed).toLocaleDateString()}</Typography>
+          <Typography>Expected completion date: {new Date(jobData.completion_date).toLocaleDateString()}</Typography>
+          <Typography sx={{ mt: 4, fontsize: 14, fontWeight: 600 }}>Pay</Typography>
+          <Typography>Salary per hour: £{jobData.pay}</Typography>
+          <Typography sx={{ mt: 4, fontsize: 14, fontWeight: 600 }}>Deliverables</Typography>
+          <List dense={true}>
+            {Object.keys(jobData).length && jobData.deliverables.map(deliverable => (
+              <ListItem key={deliverable.id}>
+                <ListItemIcon>
+                  <TaskAltIcon />
+                </ListItemIcon>
+                <ListItemText
+                  primary={deliverable.name}
+                />
+              </ListItem>
+            )
+            )}
+          </List>
           <ul>
-            {Object.keys(jobData).length && jobData.deliverables.map(deliverable => {
-              return <li key={deliverable.id}>{deliverable.name}</li>
-            })}
+
           </ul>
           <Button variant='contained' onClick={handleJobApplication}>Apply for job</Button>
           <JobModal modalOpenState={modalOpenState} setModalOpenState={setModalOpenState} jobData={jobData} />
         </Paper>
         <Box width='550px' pt='32px' ml={4}>
           {jobData.company &&
-            <Card sx={{ width: '250px' }}>
+            <Card sx={{ width: '300px', p: 2 }}>
               <CardContent>
                 <Typography gutterBottom variant="h5" component="div">
                   {jobData.company.name}

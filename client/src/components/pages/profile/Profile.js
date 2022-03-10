@@ -7,8 +7,7 @@ import { Typography } from '@mui/material'
 import SideNav from './SideNav'
 
 
-const Profile = () => {
-  const [profileData, setProfileData] = useState({})
+const Profile = ({ profileData, setProfileData }) => {
   const [formValues, setFormValues] = useState({})
   const [isLoading, setIsLoading] = useState(false)
   const [skillsAdded, setSkillsAdded] = useState(false)
@@ -32,7 +31,9 @@ const Profile = () => {
       }
     }
     getProfileData()
-  }, [token, skillsAdded, textInput, isLoading, imageUploaded, milestoneUpdated])
+  }, [token, skillsAdded, textInput, isLoading, imageUploaded, milestoneUpdated, setProfileData])
+
+  console.log(profileData)
 
 
   return (
@@ -47,6 +48,7 @@ const Profile = () => {
             textInput={textInput}
             setTextInput={setTextInput}
             setSkillsAdded={setSkillsAdded}
+            skillsAdded={skillsAdded}
           />
           :
           <>

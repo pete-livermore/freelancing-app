@@ -46,7 +46,7 @@ const JobsList = () => {
       </Paper>
       <Box display='flex' justifyContent='space-between'>
         {(filteredJobs.length ? filteredJobs : jobs).map(job => {
-          return <JobCard widthMax={400} key={job.name} job={job} image={true} />
+          return <JobCard widthMax={400} key={job.name} cardHeight='440px' job={job} image={true} />
         }
         )}
       </Box>

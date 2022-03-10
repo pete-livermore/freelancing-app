@@ -9,10 +9,10 @@ import Stack from '@mui/material/Stack'
 import Alert from '@mui/material/Alert'
 import SearchBox from '../search/SearchBox'
 
-export default function SkillsModal({ profileData, setSkillsAdded }) {
+export default function SkillsModal({ profileData, setSkillsAdded, skillsAdded }) {
   const [skillsData, setSkillsData] = useState([])
   const [open, setOpen] = useState(false)
-  const [skill, setSkill] = useState({ name: '', found: true, message: '' })
+  const [skill, setSkill] = useState({ name: '', found: true, message: '', id: 0 })
   const [isError, setIsError] = useState({ errror: false, message: ' ' })
   const [searchResults, setSearchResults] = useState([])
   const [disabledStatus, setDisabledStatus] = useState(true)
@@ -28,7 +28,7 @@ export default function SkillsModal({ profileData, setSkillsAdded }) {
       }
     }
     getSkills()
-  }, [])
+  }, [skillsAdded])
 
   const handleOpen = () => setOpen(true)
   const handleClose = () => {
@@ -49,7 +49,7 @@ export default function SkillsModal({ profileData, setSkillsAdded }) {
               'Authorization': 'Bearer ' + token
             }
           })
-        setSearchResults([{ name: skill.name }])
+        setSearchResults([{ ...skill }])
         setSkill({ name: '', found: true, message: '' })
       } catch (error) {
         setIsError({
@@ -60,22 +60,25 @@ export default function SkillsModal({ profileData, setSkillsAdded }) {
     }
     addSkill()
   }
+  console.log(searchResults)
+
   const handleFormSubmit = (e) => {
     e.preventDefault()
+    console.log(skillsToAdd)
     const mappedCurrentSkills = profileData.skills.map(obj => obj.id)
+
     skillsToAdd.forEach(skill => {
       if (mappedCurrentSkills.indexOf(skill.id) === - 1) {
         mappedCurrentSkills.push(skill.id)
       }
     })
-    // const mappedSkills = skillsToAdd.map(obj => obj.id)
+    console.log(mappedCurrentSkills)
     const dataToSend = {
       'password': profileData.password,
       'email': profileData.email,
       'username': profileData.username,
       'skills': mappedCurrentSkills
     }
-    console.log(dataToSend)
     const addSkillsToProfile = async () => {
       try {
         const token = localStorage.getItem('outsourcd-token')
@@ -110,7 +113,7 @@ export default function SkillsModal({ profileData, setSkillsAdded }) {
             <form onSubmit={handleFormSubmit}>
               <SearchBox
                 label='Search for a skill'
-                searchedData={skillsData}
+                skillsData={skillsData}
                 searchResults={searchResults}
                 setSearchResults={setSearchResults}
                 setSkill={setSkill}

@@ -4,7 +4,7 @@ import TextField from '@mui/material/TextField'
 import Chip from '@mui/material/Chip'
 import AddIcon from '@mui/icons-material/Add'
 
-const SearchBox = ({ label, searchedData, searchResults, setSearchResults, setSkill, setDisabledStatus, setSkillsToAdd }) => {
+const SearchBox = ({ label, skillsData, searchResults, setSearchResults, setSkill, setDisabledStatus, setSkillsToAdd }) => {
   const [searchString, setSearchString] = useState('')
   const [activeIndices, setActiveIndices] = useState([])
   const [coloured, setColoured] = useState({
@@ -25,8 +25,7 @@ const SearchBox = ({ label, searchedData, searchResults, setSearchResults, setSk
     if (!e.target.value.length) {
       filteredData = []
     } else {
-      filteredData = searchedData.filter(obj => obj.name.replace(/ /g, ";").toLowerCase().includes(e.target.value.toLowerCase()))
-      console.log(filteredData.length)
+      filteredData = skillsData.filter(obj => obj.name.replace(/ /g, ";").toLowerCase().includes(e.target.value.toLowerCase()))
       if (!filteredData.length) {
         setSkill({ found: false, name: e.target.value, message: 'Skill not found' })
       }
@@ -34,7 +33,8 @@ const SearchBox = ({ label, searchedData, searchResults, setSearchResults, setSk
     setSearchResults(filteredData)
   }
 
-  const handleChipClick = (id) => {
+
+  const handleChipClick = (name) => {
     setColoured({
       ...coloured,
       cursor: 'pointer',
@@ -47,9 +47,11 @@ const SearchBox = ({ label, searchedData, searchResults, setSearchResults, setSk
     })
     setDisabledStatus(false)
     const arr = [...activeIndices]
-    arr.push(id)
-    const skillsForAdding = searchedData.filter(obj => arr.includes(obj.id))
-    setSkillsToAdd(skillsForAdding)
+    arr.push(name)
+    console.log(name)
+    const skillsForAdding = skillsData.filter(obj => arr.includes(obj.name))
+    if (skillsForAdding.length === 0) setSkillsToAdd([{ name: name, id: skillsData.length + 1 }])
+    else setSkillsToAdd(skillsForAdding)
     setActiveIndices(arr)
   }
 
@@ -65,16 +67,19 @@ const SearchBox = ({ label, searchedData, searchResults, setSearchResults, setSk
         onChange={handleSearchInput}
       />
       <Box mt={4} p={1} width='100%' spacing={1} display='flex' flexWrap='wrap' justifyContent='flex-start'>
-        {searchResults.map(result => {
-          return <Chip
-            onClick={() => handleChipClick(result.id)}
-            key={result.id}
-            id={result.id}
+        {searchResults.length ? searchResults.map((result, i) => (
+          <Chip
+            onClick={() => handleChipClick(result.name)}
+            key={i}
+            id={result.name}
             label={result.name}
-            sx={activeIndices.includes(result.id) ? coloured : uncoloured}
+            sx={activeIndices.includes(result.name) ? coloured : uncoloured}
             icon={<AddIcon />}
           />
-        })}
+        ))
+          :
+          ''
+        }
       </Box>
     </Box>
   )

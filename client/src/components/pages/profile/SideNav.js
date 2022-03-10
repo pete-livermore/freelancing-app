@@ -22,7 +22,7 @@ import Reviews from './reviews/Reviews'
 
 const drawerWidth = 300;
 
-export default function SideNav({ profileData, setImageUploaded, setMilestoneUpdated, setProfileData, textInput, setTextInput, setSkillsAdded }) {
+export default function SideNav({ profileData, setImageUploaded, setMilestoneUpdated, setProfileData, textInput, setTextInput, setSkillsAdded, skillsAdded }) {
   const [avatarClicked, setAvatarClicked] = useState(false)
   const handleAvatarClick = () => {
     if (!avatarClicked) setAvatarClicked(true)
@@ -101,7 +101,7 @@ export default function SideNav({ profileData, setImageUploaded, setMilestoneUpd
       <Box component="main" backgroundColor='#eceff1' flexGrow={1} py={5} px={8} minHeight='100vh' height='100%' mb={0}>
         <Toolbar />
         {selectedSection === 0 &&
-          <AboutYou profileData={profileData} setProfileData={setProfileData} textInput={textInput} setTextInput={setTextInput} setSkillsAdded={setSkillsAdded} />}
+          <AboutYou profileData={profileData} setProfileData={setProfileData} textInput={textInput} setTextInput={setTextInput} setSkillsAdded={setSkillsAdded} skillsAdded={skillsAdded} />}
         {selectedSection === 1 &&
           <CurrentJobs profileData={profileData} setMilestoneUpdated={setMilestoneUpdated} />}
         {selectedSection === 2 &&
