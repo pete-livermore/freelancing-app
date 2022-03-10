@@ -98,7 +98,7 @@ export default function SkillsModal({ profileData, setSkillsAdded }) {
 
   return (
     <>
-      <Button sx={{ mt: 2 }} variant='contained' onClick={handleOpen}>Add skills</Button>
+      <Button sx={{ mt: 3 }} variant='contained' onClick={handleOpen}>Add skills</Button>
       <Modal
         open={open}
         onClose={handleClose}

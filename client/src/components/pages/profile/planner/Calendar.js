@@ -72,7 +72,7 @@ export default function Calendar({ months, month, setMonth, hoveredDate, years, 
       </Box>
       <Box sx={{ display: 'grid', gridTemplateColumns: '50px 50px 50px 50px 50px 50px 50px', gridGap: '5px', mb: 2 }}>
         {days && days.map(day => {
-          return <Box key={day} sx={{ pl: 1, fontWeight: 'bold' }}>{day}</Box>
+          return <Box key={day} sx={{ pl: 1, fontWeight: 'bold' }}><Typography sx={{ fontWeight: 'bold' }}>{day}</Typography></Box>
         })}
       </Box>
       <Box sx={{ display: 'grid', gridTemplateColumns: '50px 50px 50px 50px 50px 50px 50px', gridGap: '5px' }}>

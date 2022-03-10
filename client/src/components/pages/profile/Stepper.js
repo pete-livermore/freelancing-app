@@ -7,6 +7,7 @@ import StepLabel from '@mui/material/StepLabel'
 import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
 import TextField from '@mui/material/TextField'
+import Alert from '@mui/material/Alert'
 import Grid from '@mui/material/Grid'
 import { ImageUpload } from '../../../helpers/imageUpload'
 import Select from 'react-select'
@@ -17,6 +18,9 @@ export default function HorizontalStepper({ formValues, handleImageUrl, steps, o
   const [skipped, setSkipped] = useState(new Set())
   const [imageUploading, setImageUploading] = useState(false)
   const [selectedSector, setSelectedSector] = useState({ name: '', id: '' })
+  const [formErrors, setFormErrors] = useState()
+  const [error, setError] = useState({ error: false, input: '', message: '' })
+  const [allInputsFilled, setAllInputsField] = useState({})
 
   const isStepOptional = (step) => {
     return step === 1
@@ -92,6 +96,13 @@ export default function HorizontalStepper({ formValues, handleImageUrl, steps, o
     setActiveStep(0)
   }
 
+  const handleBlur = (e) => {
+    if (!e.target.value) {
+      setError({ error: true, input: e.target.name, message: 'input not filled' })
+    }
+  }
+
+
 
   return (
     <Box sx={{ width: '100%' }}>
@@ -127,22 +138,45 @@ export default function HorizontalStepper({ formValues, handleImageUrl, steps, o
       ) : (
         <React.Fragment>
           <form>
-            <Grid container alignItems="flex-start" justify="center" direction="column" marginTop={4}>
+            <Grid container alignItems="flex-start" justify="center" flexWrap='wrap' maxHeight='350px' direction="column" marginTop={4}>
               {steps[activeStep].fields.map(field => {
                 return (
                   <Grid item key={field.text} display='flex' mb={2}>
-                    <Box pt='10px' minWidth='80px' mr={2}><label htmlFor={field.text}><Typography>{field.text}</Typography></label></Box>
+                    <Box pt='10px' minWidth='150px' mr={4} ml={2}>
+                      <label htmlFor={field.text.replace(/\s+/g, '_').toLowerCase()}>
+                        <Typography>{field.text === 'Address' ? `First line of ${field.text.replace(/\s+/g, '_').toLowerCase()}` : field.text.replace(/\s+/g, ' ')}</Typography>
+                      </label>
+                    </Box>
                     <Box >
-                      <TextField onChange={handleInputChange} className='stepper-input' type={field.type} name={field.text.replace(/\s+/g, '_').toLowerCase()} placeholder={field.text} value={formValues[field.text]} />
+                      <TextField
+                        onChange={handleInputChange}
+                        className='stepper-input'
+                        type={field.type}
+                        name={field.text.replace(/\s+/g, '_').toLowerCase()}
+                        placeholder={field.text === 'Address' ? `First line of ${field.text.replace(/\s+/g, '_').toLowerCase()}` : field.text.replace(/\s+/g, ' ')}
+                        value={formValues[field.text]}
+                        onBlur={handleBlur}
+                        required
+                      // focused
+                      />
                     </Box>
                   </Grid>
                 )
               })}
-              {activeStep === 0 && <ImageUpload
-                value={formValues.profile_image}
-                name='profile_image'
-                handleImageUrl={handleImageUrl}
-                setImageUploading={setImageUploading} />
+              {activeStep === 0 &&
+                <Box mt={1} ml={2} mb={2} display='flex'>
+                  <Box mr={2}>
+                    <label htmlFor='profile_image'>
+                      <Typography>Upload a profile picture</Typography>
+                    </label>
+                  </Box>
+                  <ImageUpload
+                    value={formValues.profile_image}
+                    name='profile_image'
+                    handleImageUrl={handleImageUrl}
+                    setImageUploading={setImageUploading}
+                  />
+                </Box>
               }
               {activeStep === 2 &&
                 <>
@@ -153,6 +187,10 @@ export default function HorizontalStepper({ formValues, handleImageUrl, steps, o
                     <Select onChange={(selected) => handleMultiSelectChange(selected, 'skills')} options={options} isMulti />
                   </Box>
                 </>
+              }
+              {error.error && <Alert severity="error" sx={{ mt: 2 }}>
+                {`${error.input} ${error.message}`}
+              </Alert>
               }
             </Grid>
           </form>
@@ -171,7 +209,7 @@ export default function HorizontalStepper({ formValues, handleImageUrl, steps, o
                 Skip
               </Button>
             )}
-            <Button onClick={handleNext}>
+            <Button disabled={error.error} onClick={handleNext}>
               {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
             </Button>
           </Box>

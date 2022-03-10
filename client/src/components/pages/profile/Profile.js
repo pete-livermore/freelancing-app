@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import Box from '@mui/material/Box'
 import CircularProgress from '@mui/material/CircularProgress'
+import Container from '@mui/material/Container'
 import CreateProfile from './CreateProfile'
-import Dashboard from './Dashboard'
 import { Typography } from '@mui/material'
+import SideNav from './SideNav'
 
 
 const Profile = () => {
@@ -39,20 +39,21 @@ const Profile = () => {
     <>
       {Object.keys(profileData).length ?
         (profileData.first_name ?
-          <Dashboard
+          <SideNav
             profileData={profileData}
+            setImageUploaded={setImageUploaded}
             setProfileData={setProfileData}
-            skillsAdded={skillsAdded}
-            setSkillsAdded={setSkillsAdded}
+            setMilestoneUpdated={setMilestoneUpdated}
             textInput={textInput}
             setTextInput={setTextInput}
-            setImageUploaded={setImageUploaded}
-            setMilestoneUpdated={setMilestoneUpdated}
+            setSkillsAdded={setSkillsAdded}
           />
           :
           <>
-            <Typography variant='h4' align='center' sx={{ p: 4 }}>Welcome {profileData.username}! Let's get you started...</Typography>
-            <CreateProfile formValues={formValues} setFormValues={setFormValues} setIsLoading={setIsLoading} />
+            <Container sx={{ mt: 8, pt: 4 }}>
+              <Typography variant='h4' align='center' sx={{ p: 4 }}>Welcome {profileData.username}! Let's get you started...</Typography>
+              <CreateProfile formValues={formValues} setFormValues={setFormValues} setIsLoading={setIsLoading} />
+            </Container>
           </>
         )
         :

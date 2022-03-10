@@ -11,6 +11,7 @@ import CreateProfile from './components/pages/profile/CreateProfile'
 import JobDetail from './components/pages/jobs/JobDetail'
 import CompanyDetail from './components/pages/companies/CompanyDetail'
 import InvoiceGenerator from './components/pages/invoices/InvoiceCreate'
+import TopNav from './components/layout/TopNav'
 
 
 function App() {
@@ -19,7 +20,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      <Navbar setSelectedPage={setSelectedPage} />
+      <TopNav setSelectedPage={setSelectedPage} />
       <Routes>
         <Route path='/' element={<Home setSelectedPage={setSelectedPage} />} />
         <Route path='/workspace' element={<Workspace />} />

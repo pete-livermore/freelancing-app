@@ -4,6 +4,7 @@ import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
 import CreateIcon from '@mui/icons-material/Create'
+import Paper from '@mui/material/Paper'
 import ReviewModal from './ReviewModal'
 
 export default function Reviews({ profileData }) {
@@ -14,7 +15,7 @@ export default function Reviews({ profileData }) {
   }
 
   return (
-    <>
+    <Paper sx={{ p: 4 }}>
       <Box display='flex' justifyContent='space-between'>
         <Typography variant='h6' component='h2'>
           Testimonials/reviews
@@ -28,6 +29,6 @@ export default function Reviews({ profileData }) {
         return <ReviewBox key={review.id} review={review} />
       })}
       <ReviewModal iconClicked={iconClicked} profileData={profileData} setIconClicked={setIconClicked} />
-    </>
+    </Paper>
   )
 }

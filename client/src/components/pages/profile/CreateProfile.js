@@ -20,7 +20,14 @@ const CreateProfile = ({ formValues, setFormValues, setIsLoading }) => {
 
   const steps = [{
     text: 'Personal details',
-    fields: [{ text: 'First name', type: 'text' }, { text: 'Last name', type: 'text' }, { text: 'Address', type: 'text' }]
+    fields: [
+      { text: 'First name', type: 'text' },
+      { text: 'Last name', type: 'text' },
+      { text: 'Address', type: 'text' },
+      { text: 'City', type: 'text' },
+      { text: 'Country', type: 'text' },
+      { text: 'Postcode', type: 'text' }
+    ]
   },
   {
     text: 'Business information',
@@ -62,20 +69,18 @@ const CreateProfile = ({ formValues, setFormValues, setIsLoading }) => {
 
 
   return (
-    <Container>
-      <Paper sx={{ mt: '35px', p: '30px' }}>
-        <Typography variant='h5' element='h1' sx={{ mb: '25px' }}>Create your freelancer profile</Typography>
-        <HorizontalStepper
-          steps={steps}
-          options={newSkillsArr}
-          handleImageUrl={handleImageUrl}
-          setFormValues={setFormValues}
-          formValues={formValues}
-          setIsLoading={setIsLoading}
-          sectors={newSectorsArr}
-        />
-      </Paper>
-    </Container>
+    <Paper sx={{ mt: 2, p: '30px' }}>
+      <Typography variant='h5' element='h1' sx={{ mb: '25px' }}>Create your freelancer profile</Typography>
+      <HorizontalStepper
+        steps={steps}
+        options={newSkillsArr}
+        handleImageUrl={handleImageUrl}
+        setFormValues={setFormValues}
+        formValues={formValues}
+        setIsLoading={setIsLoading}
+        sectors={newSectorsArr}
+      />
+    </Paper>
   )
 }
 

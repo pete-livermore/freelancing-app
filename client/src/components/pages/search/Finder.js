@@ -13,7 +13,7 @@ const Finder = () => {
   }, [navigate])
 
   return (
-    <Container maxWidth='lg' sx={{ marginTop: '30px' }}>
+    <Container maxWidth='lg' sx={{ mt: 8 }}>
       {userIsAuthenticated() &&
         <>
           <JobsList />

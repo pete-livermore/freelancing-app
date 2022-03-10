@@ -21,7 +21,17 @@ export default function JobCardMini({ job, calcProgress }) {
                 <Typography variant="subtitle1" color="text.secondary" component="div">
                   {job.company.name}
                 </Typography>
-                <LinearProgress variant='determinate' value={calcProgress()} />
+                <Box sx={{ display: 'flex', alignItems: 'center', mt: 3 }}>
+                  <Box sx={{ width: '100%', mr: 1 }}>
+                    <LinearProgress variant='determinate' value={calcProgress()} sx={{ height: 10 }} />
+                  </Box>
+                  <Box sx={{ minWidth: 35 }}>
+                    <Typography variant="body2" color="text.secondary">{`${Math.round(
+                      calcProgress(),
+                    )}%`}</Typography>
+                  </Box>
+                </Box>
+
               </CardContent>
             </Box>
             <CardMedia

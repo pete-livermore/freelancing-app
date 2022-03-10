@@ -12,7 +12,6 @@ import JobCardMini from '../../jobs/JobCardMini'
 import Calendar from '../planner/Calendar'
 import axios from 'axios'
 import CircularProgress from '@mui/material/CircularProgress'
-import { useNavigate } from 'react-router-dom'
 
 
 export default function CurrentJobs({ profileData, setMilestoneUpdated }) {
@@ -57,16 +56,16 @@ export default function CurrentJobs({ profileData, setMilestoneUpdated }) {
 
   }
   return (
-    <Paper sx={{ backgroundColor: '#F8F8F8', px: '25px', py: '35px', flexGrow: 1, display: 'flex', justifyContent: 'space-between', boxShadow: 3 }}>
-      <Box display='flex' flexDirection='column'>
-        <Box display='flex' justifyContent='space-between'>
-          <Typography variant='h6' component='h2' width='200px'>
-            Current jobs
-          </Typography>
-          {Object.keys(selectedJobData).length &&
-            <>
-              <JobCardMini job={selectedJobData} image={true} calcProgress={calcProgress} />
-              <FormControl sx={{ width: '250px' }}>
+    <Box display='flex' flexDirection='column'>
+      <Box display='flex' justifyContent='space-between'>
+        <Typography variant='h5' component='h2' width='200px'>
+          Current jobs
+        </Typography>
+        {Object.keys(selectedJobData).length &&
+          <>
+            <JobCardMini job={selectedJobData} image={true} calcProgress={calcProgress} />
+            <FormControl sx={{ mr: 6 }}>
+              <Paper>
                 <InputLabel id="job-select">Select job</InputLabel>
                 <Select
                   labelId="job-select"
@@ -80,37 +79,39 @@ export default function CurrentJobs({ profileData, setMilestoneUpdated }) {
                   })
                   }
                 </Select>
-              </FormControl>
-            </>
-          }
-        </Box>
-        <Box display='flex' mt={6} justifyContent='space-between'>
-          <Paper sx={{ flexGrow: 1, p: '20px', mr: '10px' }}>
-            <Typography>Milestones</Typography>
-            {Object.keys(selectedJobData).length ?
-              <CheckList
-                selectedJob={selectedJobData}
-                setSelectedJob={setSelectedJob}
-                setHoveredDate={setHoveredDate}
-                months={months}
-                setMonth={setMonth}
-                setMilestoneUpdated={setMilestoneUpdated}
-                setChecklistUpdated={setChecklistUpdated}
-                year={year}
-                setYear={setYear}
-              />
-              :
-              <CircularProgress />
-            }
-            {calcProgress() === 100 && <Button typ='button' onClick={handleButtonClick}>Generate invoice</Button>}
-          </Paper>
-          <Paper sx={{ pt: '15px', px: '15px', ml: '25px' }}>
-            <Calendar months={months} month={month} setMonth={setMonth} hoveredDate={hoveredDate} years={years} setYear={setYear} year={year} />
-          </Paper>
-        </Box>
+              </Paper>
+            </FormControl>
+          </>
+        }
       </Box>
-    </Paper>
-
+      <Box display='flex' mt={6} justifyContent='space-between'>
+        <Paper sx={{ flexGrow: 1, p: '20px', mr: 6 }}>
+          <Typography>Milestones</Typography>
+          {Object.keys(selectedJobData).length ?
+            <CheckList
+              selectedJob={selectedJobData}
+              setSelectedJob={setSelectedJob}
+              setHoveredDate={setHoveredDate}
+              months={months}
+              setMonth={setMonth}
+              setMilestoneUpdated={setMilestoneUpdated}
+              setChecklistUpdated={setChecklistUpdated}
+              year={year}
+              setYear={setYear}
+            />
+            :
+            <CircularProgress />
+          }
+          {calcProgress() === 100 &&
+            <Box display='flex' justifyContent='center' mt={2}>
+              <Button typ='button' variant='contained' onClick={handleButtonClick}>Generate invoice</Button>
+            </Box>}
+        </Paper>
+        <Paper sx={{ pt: 4, px: 4, ml: 5 }}>
+          <Calendar months={months} month={month} setMonth={setMonth} hoveredDate={hoveredDate} years={years} setYear={setYear} year={year} />
+        </Paper>
+      </Box>
+    </Box>
   )
 
 }

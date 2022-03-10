@@ -12,6 +12,7 @@ import Button from '@mui/material/Button'
 import Tooltip from '@mui/material/Tooltip'
 import MenuItem from '@mui/material/MenuItem'
 import { Link } from 'react-router-dom'
+import AppBar from '@mui/material/AppBar'
 
 const pages = ['Find', 'Register', 'Log in']
 const settings = ['Profile', 'Log out']
@@ -41,7 +42,7 @@ const ResponsiveAppBar = ({ setSelectedPage }) => {
   }
 
   return (
-    <nav style={{ width: '100%', backgroundColor: '#182b3a' }}>
+    <AppBar sx={{ width: '100%', backgroundColor: '#182b3a', position: "fixed" }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Link to='/'>
@@ -140,7 +141,7 @@ const ResponsiveAppBar = ({ setSelectedPage }) => {
           </Box>
         </Toolbar>
       </Container>
-    </nav>
+    </AppBar>
   )
 }
 export default ResponsiveAppBar

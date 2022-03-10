@@ -66,7 +66,7 @@ export default function CheckList({ selectedJob, setHoveredDate, months, setMont
   }
 
   return (
-    <List sx={{ width: '100%', bgcolor: 'background.paper' }}>
+    <List onMouseLeave={handleChecklistLeave} sx={{ width: '100%', bgcolor: 'background.paper' }}>
       {Object.keys(selectedJob).length && milestones.length && milestones.map(milestone => {
         const labelId = `checkbox-list-label-${milestone.name}`
         return (
@@ -78,7 +78,6 @@ export default function CheckList({ selectedJob, setHoveredDate, months, setMont
               <ListItemText
                 id={labelId}
                 onMouseEnter={() => handleChecklistEnter(milestone.due_date)}
-                onMouseLeave={handleChecklistLeave}
                 primary={`${milestone.name} (${new Date(milestone.due_date).toLocaleDateString()})`}
               />
               <ListItemIcon>

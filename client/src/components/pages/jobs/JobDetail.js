@@ -42,7 +42,7 @@ export default function JobDetail() {
   }
 
   return (
-    <Container>
+    <Container sx={{ mt: 8 }}>
       <Box display='flex'>
         <Paper sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column', minHeight: '500px', justifyContent: 'space-between', mt: 4, p: 4 }} >
           <Typography variant='h3'>
@@ -59,7 +59,7 @@ export default function JobDetail() {
               return <li key={deliverable.id}>{deliverable.name}</li>
             })}
           </ul>
-          <Button onClick={handleJobApplication}>Apply for job</Button>
+          <Button variant='contained' onClick={handleJobApplication}>Apply for job</Button>
           <JobModal modalOpenState={modalOpenState} setModalOpenState={setModalOpenState} jobData={jobData} />
         </Paper>
         <Box width='550px' pt='32px' ml={4}>
@@ -79,8 +79,8 @@ export default function JobDetail() {
                   Sector: {jobData.company.sector[0].name}
                 </Typography>
               </CardContent>
-              <CardActions>
-                <Button size="medium" onClick={() => handleButtonClick(jobData.company)}>See full company info</Button>
+              <CardActions sx={{ display: 'flex', justifyContent: 'center' }}>
+                <Button size="medium" variant='outlined' onClick={() => handleButtonClick(jobData.company)}>See full company info</Button>
               </CardActions>
             </Card>
           }
