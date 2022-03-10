@@ -49,6 +49,7 @@ class OwnProfileDetailView(APIView):
             user_to_update, data=request.data)
         try:
             serialized_user.is_valid()
+            print(serialized_user.errors)
             serialized_user.save()
             return Response(serialized_user.data, status=status.HTTP_200_OK)
         except IntegrityError:

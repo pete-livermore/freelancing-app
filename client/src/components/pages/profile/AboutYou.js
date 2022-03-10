@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import axios from 'axios'
 import Box from '@mui/material/Box'
 import Paper from '@mui/material/Paper'
@@ -11,12 +11,17 @@ import List from '@mui/material/List'
 import ListItemAvatar from '@mui/material/ListItemAvatar'
 import ListItem from '@mui/material/ListItem'
 import ListItemText from '@mui/material/ListItemText'
+import TextField from '@mui/material/TextField'
+import Stack from '@mui/material/Stack'
 import SkillsModal from './SkillsModal'
 import WebIcon from '@mui/icons-material/Web'
 import LinkedInIcon from '@mui/icons-material/LinkedIn'
+import EditIcon from '@mui/icons-material/Edit';
+import ExperienceModal from './experience/ExperienceModal'
 
 
 export default function AboutYou({ profileData, setProfileData, textInput, setTextInput, setSkillsAdded }) {
+  const [experienceModalOpen, setExperienceModalOpen] = useState(false)
 
   const handleChipDelete = (label) => () => {
     const filteredSkills = profileData.skills.filter(skill => skill.id !== label)
@@ -49,7 +54,6 @@ export default function AboutYou({ profileData, setProfileData, textInput, setTe
   }
 
   const handleProfileTextInput = (e) => {
-    console.log(e.target.value)
     setTextInput({ ...textInput, text: e.target.value })
   }
 
@@ -79,12 +83,23 @@ export default function AboutYou({ profileData, setProfileData, textInput, setTe
     postData()
   }
 
+  const handleCancelClick = (e) => {
+    setTextInput({ input: false, text: '' })
+  }
+
+  const handleExperienceTextClick = () => {
+    setExperienceModalOpen(true)
+  }
+
   return (
     <>
       <Paper elevation={3} sx={{ p: 4, mb: 4 }}>
-        <Typography variant='h5' component='h2'>About you</Typography>
+        <Box display='flex' justifyContent='space-between'>
+          <Typography variant='h5' component='h2'>About you</Typography>
+          <EditIcon onClick={handleProfileTextClick} sx={{ cursor: 'pointer', '&:hover': { color: '#C2185B' } }} />
+        </Box>
         {!textInput.input ?
-          <Box onClick={handleProfileTextClick} className='profile-text-Box'>
+          <Box className='profile-text-Box'>
             {profileData.about_me ?
               <>
                 <Typography
@@ -92,46 +107,52 @@ export default function AboutYou({ profileData, setProfileData, textInput, setTe
                   sx={{ fontSize: '15px', color: '#1a1a1a', mt: '5px', width: '100%', px: '15px', py: '20px' }}>
                   {profileData.about_me}
                 </Typography>
-                <List>
-                  <ListItem>
-                    <ListItemAvatar>
-                      <Link to={`${profileData.business_website}`} sx={{ textDecoration: 'none' }}>
-                        <Avatar>
-                          <WebIcon />
-                        </Avatar>
-                      </Link>
-                    </ListItemAvatar>
-                    <ListItemText primary='Personal website' />
-                  </ListItem>
-                  <ListItem>
-                    <ListItemAvatar>
-                      <Link to={`${profileData.linkedin_url}`} sx={{ color: 'white' }}>
-                        <Avatar>
-                          <LinkedInIcon />
-                        </Avatar>
-                      </Link>
-                    </ListItemAvatar>
-                    <ListItemText primary='LinkedIn' />
-                  </ListItem>
-                </List>
               </>
               : 'Click to add...'}
           </Box>
           :
           <>
-            <Box onClick={handleProfileTextClick} width='100%' borderRadius='5px' minHeight='100px'>
+            <Box width='100%' borderRadius='5px' minHeight='100px'>
               <form onSubmit={handleProfileTextSubmit} style={{ height: '100%' }}>
-                <input
+                <TextField
                   onChange={handleProfileTextInput}
                   style={{ fontSize: '15px', color: '#1a1a1a', backgroundColor: 'white', borderRadius: '5px', width: '100%', height: '100%', border: 'none' }}
                   type='text'
                   value={textInput.text}
+                  sx={{ mt: 2, mb: 2 }}
+                  multiline
+                  rows={4}
                 />
-                <Button type='input'>Submit</Button>
+                <Stack spacing={2} direction='row' mb={2}>
+                  <Button variant='contained' type='input'>Submit</Button>
+                  <Button variant='outlined' onClick={handleCancelClick}>Cancel</Button>
+                </Stack>
               </form>
             </Box>
           </>
         }
+        <List>
+          <ListItem>
+            <ListItemAvatar>
+              <Link to={`${profileData.business_website}`} sx={{ textDecoration: 'none' }}>
+                <Avatar>
+                  <WebIcon />
+                </Avatar>
+              </Link>
+            </ListItemAvatar>
+            <ListItemText primary='Personal website' />
+          </ListItem>
+          <ListItem>
+            <ListItemAvatar>
+              <Link to={`${profileData.linkedin_url}`} sx={{ color: 'white' }}>
+                <Avatar>
+                  <LinkedInIcon />
+                </Avatar>
+              </Link>
+            </ListItemAvatar>
+            <ListItemText primary='LinkedIn' />
+          </ListItem>
+        </List>
       </Paper>
       <Paper elevation={3} sx={{ p: 4, mb: 4 }}>
         <Typography variant='h5' component='h2'>Skills</Typography>
@@ -149,22 +170,30 @@ export default function AboutYou({ profileData, setProfileData, textInput, setTe
         <SkillsModal profileData={profileData} setSkillsAdded={setSkillsAdded} />
       </Paper>
       <Paper elevation={3} sx={{ p: 4, mb: 4, width: '100%' }}>
-        <Typography variant='h5' component='h2'>Professional experience</Typography>
-        <List sx={{ width: '100%', maxWidth: 450, bgcolor: 'background.paper' }}>
-          {profileData.experience.map(job => {
-            return (
-              <ListItem key={job.id}>
-                <ListItemAvatar>
-                  <Avatar>
-                    <img src={job.company_name.logo} alt={job.company_name.name} />
-                  </Avatar>
-                </ListItemAvatar>
-                <ListItemText primary={job.job_title} secondary={job.company_name.name} />
-                <p>{`${job.start_year} - ${job.end_year}`}</p>
-              </ListItem>
-            )
-          })}
-        </List>
+        <Box display='flex' justifyContent='space-between'>
+          <Typography variant='h5' component='h2'>Professional experience</Typography>
+          <EditIcon onClick={handleExperienceTextClick} sx={{ cursor: 'pointer', '&:hover': { color: '#C2185B' } }} />
+        </Box>
+        <ExperienceModal experienceModalOpen={experienceModalOpen} setExperienceModalOpen={setExperienceModalOpen} />
+        {profileData.experience.length ?
+          <List sx={{ width: '100%', maxWidth: 450, bgcolor: 'background.paper' }}>
+            {profileData.experience.map(job => {
+              return (
+                <ListItem key={job.id}>
+                  <ListItemAvatar>
+                    <Avatar>
+                      <img src={job.company_name.logo} alt={job.company_name.name} />
+                    </Avatar>
+                  </ListItemAvatar>
+                  <ListItemText primary={job.job_title} secondary={job.company_name.name} />
+                  <p>{`${job.start_year} - ${job.end_year}`}</p>
+                </ListItem>
+              )
+            })}
+          </List>
+          :
+          <Typography sx={{ mt: 4 }}>Adding your professional experience will better showcase your skills to clients</Typography>
+        }
       </Paper>
     </>
   )

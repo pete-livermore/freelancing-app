@@ -6,18 +6,8 @@ import Typography from '@mui/material/Typography'
 import Paper from '@mui/material/Paper'
 
 const CreateProfile = ({ formValues, setFormValues, setIsLoading }) => {
-  const [skillsData, setSkillsData] = useState([])
+  const [skills, setSkills] = useState([])
   const [sectors, setSectors] = useState([])
-  const newSkillsArr = []
-  skillsData.forEach(obj => {
-    newSkillsArr.push({ value: obj.id, label: obj.name })
-  }
-  )
-  const newSectorsArr = []
-  sectors.forEach(obj => {
-    newSectorsArr.push({ value: obj.id, label: obj.name })
-  })
-
   const steps = [{
     text: 'Personal details',
     fields: [
@@ -35,14 +25,14 @@ const CreateProfile = ({ formValues, setFormValues, setIsLoading }) => {
   },
   {
     text: 'About your work',
-    fields: [{ text: 'About you', type: 'text' }]
+    fields: [{ text: 'About you', type: 'text' }, { text: 'Job title', type: 'text' }, { text: 'Personal website', type: 'url' }, { text: 'LinkedIn profile', type: 'url' }]
   }]
 
   useEffect(() => {
     const getSkills = async () => {
       try {
         const { data } = await axios.get('api/skills/')
-        setSkillsData(data)
+        setSkills(data)
       } catch (error) {
         console.log(error)
       }
@@ -73,12 +63,12 @@ const CreateProfile = ({ formValues, setFormValues, setIsLoading }) => {
       <Typography variant='h5' element='h1' sx={{ mb: '25px' }}>Create your freelancer profile</Typography>
       <HorizontalStepper
         steps={steps}
-        options={newSkillsArr}
+        skills={skills}
         handleImageUrl={handleImageUrl}
         setFormValues={setFormValues}
         formValues={formValues}
         setIsLoading={setIsLoading}
-        sectors={newSectorsArr}
+        sectors={sectors}
       />
     </Paper>
   )

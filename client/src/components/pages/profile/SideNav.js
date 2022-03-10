@@ -38,15 +38,6 @@ export default function SideNav({ profileData, setImageUploaded, setMilestoneUpd
     if (index === 3) return <ReviewsIcon />
   }
 
-  // const handleProfileTextClick = () => {
-  //   setTextInput({ ...textInput, input: true })
-  // }
-
-  // const handleProfileTextInput = (e) => {
-  //   console.log(e.target.value)
-  //   setTextInput({ ...textInput, text: e.target.value })
-  // }
-
   const handleListClick = (index) => {
     setSelectedSection(index)
   }
@@ -85,7 +76,7 @@ export default function SideNav({ profileData, setImageUploaded, setMilestoneUpd
             />
             <ProfileImageModal profileData={profileData} avatarClicked={avatarClicked} setAvatarClicked={setAvatarClicked} setImageUploaded={setImageUploaded} />
           </Box>
-          <Typography component='h7' variant='h6' sx={{ mt: 1 }}>{`${profileData.first_name} ${profileData.last_name}`}</Typography>
+          <Typography component='h6' variant='h6' sx={{ mt: 1 }}>{`${profileData.first_name} ${profileData.last_name}`}</Typography>
           <Typography sx={{ fontWeight: 600, mt: 1 }}>{profileData.job_title}</Typography>
           <Typography sx={{ mt: 3, mb: 2 }} component="legend">Current rating:</Typography>
           <Rating

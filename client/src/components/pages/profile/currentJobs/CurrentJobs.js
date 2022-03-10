@@ -61,7 +61,7 @@ export default function CurrentJobs({ profileData, setMilestoneUpdated }) {
         <Typography variant='h5' component='h2' width='200px'>
           Current jobs
         </Typography>
-        {Object.keys(selectedJobData).length &&
+        {Object.keys(selectedJobData).length ?
           <>
             <JobCardMini job={selectedJobData} image={true} calcProgress={calcProgress} />
             <FormControl sx={{ mr: 6 }}>
@@ -82,25 +82,31 @@ export default function CurrentJobs({ profileData, setMilestoneUpdated }) {
               </Paper>
             </FormControl>
           </>
+          :
+          ''
         }
       </Box>
       <Box display='flex' mt={6} justifyContent='space-between'>
         <Paper sx={{ flexGrow: 1, p: '20px', mr: 6 }}>
-          <Typography>Milestones</Typography>
           {Object.keys(selectedJobData).length ?
-            <CheckList
-              selectedJob={selectedJobData}
-              setSelectedJob={setSelectedJob}
-              setHoveredDate={setHoveredDate}
-              months={months}
-              setMonth={setMonth}
-              setMilestoneUpdated={setMilestoneUpdated}
-              setChecklistUpdated={setChecklistUpdated}
-              year={year}
-              setYear={setYear}
-            />
+            <>
+              <Typography>Milestones</Typography>
+              <CheckList
+                selectedJob={selectedJobData}
+                setSelectedJob={setSelectedJob}
+                setHoveredDate={setHoveredDate}
+                months={months}
+                setMonth={setMonth}
+                setMilestoneUpdated={setMilestoneUpdated}
+                setChecklistUpdated={setChecklistUpdated}
+                year={year}
+                setYear={setYear}
+              />
+            </>
             :
-            <CircularProgress />
+            <Box width='100%' display='flex' justifyContent='center' pt={4}>
+              <CircularProgress />
+            </Box>
           }
           {calcProgress() === 100 &&
             <Box display='flex' justifyContent='center' mt={2}>

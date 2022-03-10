@@ -5,22 +5,28 @@ import Stepper from '@mui/material/Stepper'
 import Step from '@mui/material/Step'
 import StepLabel from '@mui/material/StepLabel'
 import Button from '@mui/material/Button'
+import FormControl from '@mui/material/FormControl'
+import MenuItem from '@mui/material/MenuItem'
+import InputLabel from '@mui/material/InputLabel'
 import Typography from '@mui/material/Typography'
 import TextField from '@mui/material/TextField'
 import Alert from '@mui/material/Alert'
+import CircularProgress from '@mui/material/CircularProgress'
+import Select from '@mui/material/Select'
 import Grid from '@mui/material/Grid'
 import { ImageUpload } from '../../../helpers/imageUpload'
-import Select from 'react-select'
+import MultiSelect from './createProfile/MultiSelector'
 
 
-export default function HorizontalStepper({ formValues, handleImageUrl, steps, options, setFormValues, setIsLoading, sectors }) {
+export default function HorizontalStepper({ formValues, handleImageUrl, steps, skills, setFormValues, setIsLoading, sectors }) {
   const [activeStep, setActiveStep] = useState(0)
   const [skipped, setSkipped] = useState(new Set())
   const [imageUploading, setImageUploading] = useState(false)
   const [selectedSector, setSelectedSector] = useState({ name: '', id: '' })
   const [formErrors, setFormErrors] = useState()
   const [error, setError] = useState({ error: false, input: '', message: '' })
-  const [allInputsFilled, setAllInputsField] = useState({})
+  const [imageUploaded, setImageUploaded] = useState(false)
+
 
   const isStepOptional = (step) => {
     return step === 1
@@ -56,7 +62,6 @@ export default function HorizontalStepper({ formValues, handleImageUrl, steps, o
       postData()
     }
   }
-  console.log(formValues)
 
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1)
@@ -78,31 +83,26 @@ export default function HorizontalStepper({ formValues, handleImageUrl, steps, o
   }
 
   const handleInputChange = (e) => {
-    setFormValues({ ...formValues, [e.target.name.replace(/\s+/g, '_').toLowerCase()]: e.target.value })
+    if (e.target.name === 'about_you') setFormValues({ ...formValues, about_me: e.target.value })
+    else if (e.target.name === 'linkedIn_profile') setFormValues({ ...formValues, linkedin_url: e.target.value })
+    else setFormValues({ ...formValues, [e.target.name]: e.target.value })
   }
 
-  const handleMultiSelectChange = (selected, name) => {
-    console.log(selected)
-    const selectedItems = selected.map(obj => obj.value)
-    setFormValues({ ...formValues, [name]: [...selectedItems] })
-  }
-
-  const handleOptionChange = (selected, name) => {
-    console.log(selected)
-    setFormValues({ ...formValues, [name]: [selected.value] })
+  const handleOptionChange = (e) => {
+    console.log(e)
+    const newSectors = [...sectors]
+    const filteredSectors = newSectors.filter(sector => e.target.value === sector.name).map(sector => sector.id)
+    setFormValues({ ...formValues, sector: filteredSectors })
   }
 
   const handleReset = () => {
     setActiveStep(0)
   }
 
-  const handleBlur = (e) => {
-    if (!e.target.value) {
-      setError({ error: true, input: e.target.name, message: 'input not filled' })
-    }
-  }
-
-
+  let filledInputs
+  if (activeStep === 2 && steps.fields.length) filledInputs = steps[activeStep].fields.map(field => field.text.replace(/\s+/g, '_').toLowerCase()).map(input => formValues[input]).some(str => !str)
+  else if (steps.fields.length) filledInputs = steps[activeStep].fields.map(field => field.text.replace(/\s+/g, '_').toLowerCase()).map(input => formValues[input]).every(str => str)
+  console.log(filledInputs)
 
   return (
     <Box sx={{ width: '100%' }}>
@@ -138,24 +138,24 @@ export default function HorizontalStepper({ formValues, handleImageUrl, steps, o
       ) : (
         <React.Fragment>
           <form>
-            <Grid container alignItems="flex-start" justify="center" flexWrap='wrap' maxHeight='350px' direction="column" marginTop={4}>
+            <Grid container alignItems="stretch" justify="center" flexWrap='wrap' maxHeight='350px' direction="column" marginTop={4} width='50%'>
               {steps[activeStep].fields.map(field => {
                 return (
-                  <Grid item key={field.text} display='flex' mb={2}>
-                    <Box pt='10px' minWidth='150px' mr={4} ml={2}>
+                  <Grid item key={field.text} display='flex' mb={3} width='100%' pl={2} pr={4}>
+                    <Box pt='10px' minWidth='150px'>
                       <label htmlFor={field.text.replace(/\s+/g, '_').toLowerCase()}>
                         <Typography>{field.text === 'Address' ? `First line of ${field.text.replace(/\s+/g, '_').toLowerCase()}` : field.text.replace(/\s+/g, ' ')}</Typography>
                       </label>
                     </Box>
-                    <Box >
+                    <Box flexGrow={1} >
                       <TextField
+                        sx={{ width: '100%' }}
                         onChange={handleInputChange}
                         className='stepper-input'
                         type={field.type}
                         name={field.text.replace(/\s+/g, '_').toLowerCase()}
-                        placeholder={field.text === 'Address' ? `First line of ${field.text.replace(/\s+/g, '_').toLowerCase()}` : field.text.replace(/\s+/g, ' ')}
+                        placeholder={field.text.replace(/\s+/g, ' ')}
                         value={formValues[field.text]}
-                        onBlur={handleBlur}
                         required
                       // focused
                       />
@@ -164,28 +164,45 @@ export default function HorizontalStepper({ formValues, handleImageUrl, steps, o
                 )
               })}
               {activeStep === 0 &&
-                <Box mt={1} ml={2} mb={2} display='flex'>
-                  <Box mr={2}>
-                    <label htmlFor='profile_image'>
-                      <Typography>Upload a profile picture</Typography>
-                    </label>
-                  </Box>
-                  <ImageUpload
-                    value={formValues.profile_image}
-                    name='profile_image'
-                    handleImageUrl={handleImageUrl}
-                    setImageUploading={setImageUploading}
-                  />
-                </Box>
+                <>
+                  <Grid item mt={1} ml={2} mb={2} display='flex'>
+                    <Box mr={2}>
+                      <label htmlFor='profile_image'>
+                        <Typography>Upload a profile picture</Typography>
+                      </label>
+                    </Box>
+                    {imageUploading ?
+                      <CircularProgress sx={{ ml: 2 }} />
+                      :
+                      imageUploaded ?
+                        <Alert sx={{ width: '195px' }} severity="success">Image uploaded!</Alert>
+                        :
+                        <ImageUpload
+                          value={formValues.profile_image}
+                          name='profile_image'
+                          handleImageUrl={handleImageUrl}
+                          setImageUploading={setImageUploading}
+                          setImageUploaded={setImageUploaded}
+                        />
+                    }
+                  </Grid>
+                </>
               }
               {activeStep === 2 &&
                 <>
-                  <Box pt='10px' minWidth='80px' mr={2}><label htmlFor='skills'><Typography>Sector</Typography></label>
-                    <Select onChange={(selected) => handleOptionChange(selected, 'sector')} options={sectors} />
-                  </Box>
-                  <Box pt='10px' minWidth='80px' mr={2}><label htmlFor='skills'><Typography>Skills</Typography></label>
-                    <Select onChange={(selected) => handleMultiSelectChange(selected, 'skills')} options={options} isMulti />
-                  </Box>
+                  <FormControl fullWidth>
+                    <InputLabel id="sector">Sector</InputLabel>
+                    <Select
+                      labelId="sector"
+                      id="sector-selecter"
+                      value={formValues.sectors}
+                      label="Sector"
+                      onChange={handleOptionChange}
+                    >
+                      {sectors.map(sector => <MenuItem key={sector.id} value={sector.name}>{sector.name}</MenuItem>)}
+                    </Select>
+                  </FormControl>
+                  <MultiSelect skills={skills} formValues={formValues} setFormValues={setFormValues} />
                 </>
               }
               {error.error && <Alert severity="error" sx={{ mt: 2 }}>
@@ -209,7 +226,7 @@ export default function HorizontalStepper({ formValues, handleImageUrl, steps, o
                 Skip
               </Button>
             )}
-            <Button disabled={error.error} onClick={handleNext}>
+            <Button disabled={filledInputs && imageUploaded ? false : true} onClick={handleNext}>
               {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
             </Button>
           </Box>

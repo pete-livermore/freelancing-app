@@ -1,9 +1,11 @@
 import axios from 'axios'
+import Alert from '@mui/material/Alert'
+import Typography from '@mui/material/Typography'
 
 const uploadUrl = process.env.REACT_APP_CLOUDINARY_URL
 const uploadPreset = process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET
 
-export const ImageUpload = ({ handleImageUrl, value, setImageUploading }) => {
+export const ImageUpload = ({ handleImageUrl, value, setImageUploading, setImageUploaded }) => {
 
   const handleUpload = async event => {
     setImageUploading(true)
@@ -13,16 +15,14 @@ export const ImageUpload = ({ handleImageUrl, value, setImageUploading }) => {
     const res = await axios.post(uploadUrl, data)
     if (res.data) setImageUploading(false)
     handleImageUrl(res.data.url)
-    console.log(res.data.url)
+    setImageUploaded(true)
   }
 
   return (
     <>
       {value ?
-        <><div>
-          <img id='add-profile-photo' src={value} alt='pp' height='200px' />
-        </div>
-          <label className='file' width='100%'>Change File: </label>
+        <>
+          <label className='file' width='100%'><Typography>Change File:</Typography> </label>
           <input
             className='file'
             type='file'

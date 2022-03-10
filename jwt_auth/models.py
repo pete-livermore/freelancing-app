@@ -15,6 +15,7 @@ class User(AbstractUser):
     country = models.TextField(max_length=100, blank=True)
     postcode = models.TextField(max_length=7, blank=True)
     business_website = models.CharField(max_length=100, blank=True)
+    personal_website = models.CharField(max_length=100, blank=True)
     linkedin_url = models.CharField(max_length=100, blank=True)
     job_title = models.CharField(max_length=100, blank=True)
     sector = models.ManyToManyField(
