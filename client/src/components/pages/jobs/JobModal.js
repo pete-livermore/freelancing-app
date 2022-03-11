@@ -35,9 +35,7 @@ export default function JobModal({ jobData, modalOpenState, setModalOpenState })
   }
 
   const handleSubmit = () => {
-    const dataToSend = {
-      assigned_freelancer: [profileData.id]
-    }
+    const dataToSend = { ...jobData, assigned_freelancer: [profileData.id] }
     console.log(dataToSend)
     const addJobToProfile = async () => {
       try {

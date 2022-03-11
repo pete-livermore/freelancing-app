@@ -178,7 +178,7 @@ export default function AboutYou({ profileData, setProfileData, textInput, setTe
             endIcon={<EditIcon />}>
             Edit</Button>
         </Box>
-        <ExperienceModal experienceModalOpen={experienceModalOpen} setExperienceModalOpen={setExperienceModalOpen} />
+        <ExperienceModal experienceModalOpen={experienceModalOpen} setExperienceModalOpen={setExperienceModalOpen} profileData={profileData} />
         {profileData.experience.length ?
           <List sx={{ width: '100%', maxWidth: 450, bgcolor: 'background.paper' }}>
             {profileData.experience.map(job => {

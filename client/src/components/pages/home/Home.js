@@ -23,6 +23,7 @@ const Home = ({ setSelectedPage }) => {
         <Container>
           <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
             <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'flex-start', flexGrow: 1, marginRight: '10px', mr: '15px' }}>
+              <img src='https://res.cloudinary.com/di7ndofao/image/upload/v1646990753/Habit_tracker_app/Outsourcd-logos_pink_vtdtmo.png' alt='outsourcd-logo' width='200px' />
               <Typography variant="h3" component="h1" color='white' sx={{ fontWeight: '600' }}>
                 Freelancer-client connections made easier
               </Typography>

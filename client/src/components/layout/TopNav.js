@@ -16,7 +16,7 @@ import { Link } from 'react-router-dom'
 const pages = ['Register', 'Log in', 'Find']
 const settings = ['Profile', 'Log out']
 
-export default function TopNav({ setSelectedPage, profileData }) {
+export default function TopNav({ setSelectedPage, profileData, setProfileData }) {
 
   const [anchorElNav, setAnchorElNav] = useState(null)
   const [anchorElUser, setAnchorElUser] = useState(null)
@@ -29,6 +29,9 @@ export default function TopNav({ setSelectedPage, profileData }) {
     setAnchorElUser(event.currentTarget)
   }
 
+  console.log(anchorElNav)
+  console.log(anchorElUser)
+
   const handleCloseNavMenu = (e) => {
     console.log(e.target.name)
     setAnchorElNav(null)
@@ -38,6 +41,7 @@ export default function TopNav({ setSelectedPage, profileData }) {
   const handleCloseUserMenu = (e) => {
     console.log(e.target)
     if (e.target.id === 'Log out') localStorage.removeItem('outsourcd-token')
+    setProfileData({})
     setAnchorElUser(null)
   }
 
@@ -45,7 +49,7 @@ export default function TopNav({ setSelectedPage, profileData }) {
     <AppBar position="fixed" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1, backgroundColor: '#182b3a' }}>
       <Toolbar>
         <Link to='/'>
-          <HomeIcon sx={{ color: '#C2185B', mr: 2 }} />
+          <HomeIcon sx={{ color: '#C2185B', mr: 4 }} />
         </Link>
         <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
           <IconButton
@@ -79,7 +83,7 @@ export default function TopNav({ setSelectedPage, profileData }) {
             {pages.map((page, i) => (
               <MenuItem key={page}
                 onClick={handleCloseNavMenu}
-                sx={{ mr: 2 }}
+                sx={{ mr: 1 }}
               >
                 <Link to={page === 'Register' || page === 'Log in' ? `/auth` : `/${page.toLowerCase()}`}>
                   <Typography textAlign="center">{i === 2 ? 'Find a job' : page}</Typography>
@@ -93,7 +97,7 @@ export default function TopNav({ setSelectedPage, profileData }) {
             <Link key={page} to={page === 'Register' || page === 'Log in' ? `/auth` : `/${page.toLowerCase()}`} state={{ destinationPage: page }} style={{ textDecoration: 'none' }} >
               <Button
                 onClick={handleCloseNavMenu}
-                sx={{ mr: 3, color: 'white', display: 'block' }}
+                sx={{ mr: 2, color: 'white', display: 'block' }}
                 name={page}
               >
                 {page}

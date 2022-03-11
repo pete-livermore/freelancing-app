@@ -18,7 +18,7 @@ import { ImageUpload } from '../../../helpers/imageUpload'
 import MultiSelect from './createProfile/MultiSelector'
 
 
-export default function HorizontalStepper({ formValues, handleImageUrl, steps, skills, setFormValues, setIsLoading, sectors }) {
+export default function HorizontalStepper({ formValues, handleImageUrl, skills, setFormValues, setIsLoading, sectors }) {
   const [activeStep, setActiveStep] = useState(0)
   const [skipped, setSkipped] = useState(new Set())
   const [imageUploading, setImageUploading] = useState(false)
@@ -26,6 +26,25 @@ export default function HorizontalStepper({ formValues, handleImageUrl, steps, s
   const [formErrors, setFormErrors] = useState()
   const [error, setError] = useState({ error: false, input: '', message: '' })
   const [imageUploaded, setImageUploaded] = useState(false)
+  const steps = [{
+    text: 'Personal details',
+    fields: [
+      { text: 'First name', type: 'text' },
+      { text: 'Last name', type: 'text' },
+      { text: 'Address', type: 'text' },
+      { text: 'City', type: 'text' },
+      { text: 'Country', type: 'text' },
+      { text: 'Postcode', type: 'text' }
+    ]
+  },
+  {
+    text: 'Business information',
+    fields: [{ text: 'Business name', type: 'text' }, { text: 'Business website', type: 'url' },]
+  },
+  {
+    text: 'About your work',
+    fields: [{ text: 'About you', type: 'text' }, { text: 'Job title', type: 'text' }, { text: 'Personal website', type: 'url' }, { text: 'LinkedIn profile', type: 'url' }]
+  }]
 
 
   const isStepOptional = (step) => {
@@ -44,6 +63,7 @@ export default function HorizontalStepper({ formValues, handleImageUrl, steps, s
     }
     setActiveStep((prevActiveStep) => prevActiveStep + 1)
     setSkipped(newSkipped)
+    console.log(formValues)
     if (activeStep === steps.length - 1) {
       const postData = async () => {
         try {
@@ -100,9 +120,8 @@ export default function HorizontalStepper({ formValues, handleImageUrl, steps, s
   }
 
   let filledInputs
-  if (activeStep === 2 && steps.fields.length) filledInputs = steps[activeStep].fields.map(field => field.text.replace(/\s+/g, '_').toLowerCase()).map(input => formValues[input]).some(str => !str)
-  else if (steps.fields.length) filledInputs = steps[activeStep].fields.map(field => field.text.replace(/\s+/g, '_').toLowerCase()).map(input => formValues[input]).every(str => str)
-  console.log(filledInputs)
+  if (steps && steps.length && activeStep === 2) filledInputs = steps[activeStep].fields.map(field => field.text.replace(/\s+/g, '_').toLowerCase()).map(input => formValues[input]).some(str => !str)
+  else if (activeStep === 0 || activeStep === 1) filledInputs = steps[activeStep].fields.map(field => field.text.replace(/\s+/g, '_').toLowerCase()).map(input => formValues[input]).every(str => str)
 
   return (
     <Box sx={{ width: '100%' }}>
@@ -132,6 +151,7 @@ export default function HorizontalStepper({ formValues, handleImageUrl, steps, s
           </Typography>
           <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
             <Box sx={{ flex: '1 1 auto' }} />
+            {/* <Button variant='contained' onClick={handleNavigate}>Reset</Button> */}
             <Button onClick={handleReset}>Reset</Button>
           </Box>
         </React.Fragment>
@@ -157,6 +177,7 @@ export default function HorizontalStepper({ formValues, handleImageUrl, steps, s
                         placeholder={field.text.replace(/\s+/g, ' ')}
                         value={formValues[field.text]}
                         required
+                        inputProps={{ maxLength: 500 }}
                       // focused
                       />
                     </Box>

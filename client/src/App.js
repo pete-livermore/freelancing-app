@@ -20,7 +20,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      <TopNav setSelectedPage={setSelectedPage} profileData={profileData} />
+      <TopNav setSelectedPage={setSelectedPage} profileData={profileData} setProfileData={setProfileData} />
       <Routes>
         <Route path='/' element={<Home setSelectedPage={setSelectedPage} />} />
         <Route path='/workspace' element={<Workspace />} />

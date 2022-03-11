@@ -83,6 +83,7 @@ export default function SideNav({ profileData, setImageUploaded, setMilestoneUpd
             name="simple-controlled"
             precision={0.5}
             value={calculateMedianRating(userRatings)}
+            readOnly
           />
         </Box>
         <Box sx={{ overflow: 'auto' }}>

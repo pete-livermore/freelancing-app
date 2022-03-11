@@ -10,10 +10,11 @@ class Company(models.Model):
         related_name="company",
         blank=True,
     )
-    description = models.TextField(max_length=500, default=None)
-    logo = models.TextField(max_length=500, default=None)
-    website = models.CharField(max_length=200, default=None)
-    country = models.CharField(max_length=200, default=None)
+    description = models.TextField(
+        max_length=500, default=None, blank=True, null=True)
+    logo = models.TextField(max_length=500, default=None, blank=True)
+    website = models.CharField(max_length=200, default=None, blank=True)
+    country = models.CharField(max_length=200, default=None, blank=True)
 
     def __str__(self):
         return self.name

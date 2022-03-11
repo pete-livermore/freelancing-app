@@ -23,7 +23,7 @@ class User(AbstractUser):
         related_name="users",
         blank=True,
     )
-    about_me = models.TextField(max_length=500, blank=True)
+    about_me = models.TextField(max_length=800, blank=True)
     skills = models.ManyToManyField(
         "skills.Skill",
         related_name="users",

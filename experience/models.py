@@ -3,8 +3,8 @@ from django.db import models
 
 class Experience(models.Model):
     job_title = models.CharField(max_length=50, default=None)
-    start_year = models.DateField(default=None)
-    end_year = models.DateField(default=None)
+    start_date = models.DateField(default=None)
+    end_date = models.DateField(default=None)
     company_name = models.ForeignKey(
         "companies.Company",
         related_name="past_employees",
