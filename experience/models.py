@@ -11,6 +11,13 @@ class Experience(models.Model):
         on_delete=models.CASCADE,
         blank=True
     )
+    user = models.ForeignKey(
+        "jwt_auth.User",
+        related_name="experience",
+        on_delete=models.CASCADE,
+        blank=True,
+        default=None
+    )
 
     def __str__(self):
         return self.job_title

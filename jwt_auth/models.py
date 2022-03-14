@@ -29,11 +29,6 @@ class User(AbstractUser):
         related_name="users",
         blank=True
     )
-    experience = models.ManyToManyField(
-        "experience.Experience",
-        related_name="experience",
-        blank=True,
-    )
     applied_jobs = models.ManyToManyField(
         "jobs.Job",
         related_name="job_applicants",

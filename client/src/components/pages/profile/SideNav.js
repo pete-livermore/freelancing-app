@@ -12,7 +12,8 @@ import Avatar from '@mui/material/Avatar'
 import WorkHistoryIcon from '@mui/icons-material/WorkHistory'
 import ProfileImageModal from './ProfileImageModal'
 import FaceIcon from '@mui/icons-material/Face'
-import ReviewsIcon from '@mui/icons-material/Reviews';
+import ReviewsIcon from '@mui/icons-material/Reviews'
+import EditIcon from '@mui/icons-material/Edit'
 import WorkIcon from '@mui/icons-material/Work'
 import CurrentJobs from './currentJobs/CurrentJobs'
 import AboutYou from './AboutYou'
@@ -29,8 +30,9 @@ export default function SideNav({ profileData, setImageUploaded, setMilestoneUpd
     else setAvatarClicked(false)
   }
   const [selectedSection, setSelectedSection] = useState(0)
+  const [editable, setEditable] = useState(false)
 
-  const sections = ['About you', 'Current jobs', 'Work history', 'Reviews']
+  const sections = ['About you', 'Current jobs', 'Job history', 'Reviews']
   const iconSelector = (index) => {
     if (index === 0) return <FaceIcon />
     if (index === 1) return <WorkIcon />
@@ -54,6 +56,14 @@ export default function SideNav({ profileData, setImageUploaded, setMilestoneUpd
     } else return sortedArray[Math.floor((sortedArray.length) / 2)]
   }
 
+  const handleAvatarHover = () => {
+    setEditable(true)
+  }
+
+  const handleAvatarLeave = () => {
+    setEditable(false)
+  }
+
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
@@ -66,10 +76,13 @@ export default function SideNav({ profileData, setImageUploaded, setMilestoneUpd
         }}
       >
         <Toolbar />
-        <Box display='flex' flexDirection='column' alignItems='center' p={3} mt={3} backgroundColor='#182b3a' color='white'>
+        <Box display='flex' flexDirection='column' alignItems='center' p={3} mt={3} backgroundColor='#182b3a' color='white' position='relative'>
+          {editable && <EditIcon fontSize='small' sx={{ position: 'absolute', right: 55, top: 25, color: '#C2185B' }} />}
           <Box width='133px' height='133px' backgroundColor='#C2185B' borderRadius='50%' pt='3px' pl='3px' >
             <Avatar
               onClick={handleAvatarClick}
+              onMouseEnter={handleAvatarHover}
+              onMouseLeave={handleAvatarLeave}
               alt="Remy Sharp"
               src={profileData.profile_image}
               sx={{ width: 126, height: 126, boxShadow: 2, cursor: 'pointer' }}

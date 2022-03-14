@@ -52,10 +52,11 @@ class JobDetailedView(APIView):
 
     def put(self, request, pk):
         job_to_retrieve = self.retrieve_job(pk=pk)
-        serialized_job = PopulatedJobSerializer(
+        serialized_job = JobSerializer(
             job_to_retrieve, data=request.data)
         try:
             serialized_job.is_valid()
+            print(serialized_job.errors)
             serialized_job.save()
             return Response(serialized_job.data, status=status.HTTP_200_OK)
         except AssertionError as err:

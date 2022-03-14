@@ -179,7 +179,7 @@ export default function AboutYou({ profileData, setProfileData, textInput, setTe
             Edit</Button>
         </Box>
         <ExperienceModal experienceModalOpen={experienceModalOpen} setExperienceModalOpen={setExperienceModalOpen} profileData={profileData} />
-        {profileData.experience.length ?
+        {profileData.experience ?
           <List sx={{ width: '100%', maxWidth: 450, bgcolor: 'background.paper' }}>
             {profileData.experience.map(job => {
               return (
@@ -190,7 +190,7 @@ export default function AboutYou({ profileData, setProfileData, textInput, setTe
                     </Avatar>
                   </ListItemAvatar>
                   <ListItemText primary={job.job_title} secondary={job.company_name.name} />
-                  <p>{`${job.start_year} - ${job.end_year}`}</p>
+                  <p>{`${job.start_date} - ${job.end_date}`}</p>
                 </ListItem>
               )
             })}

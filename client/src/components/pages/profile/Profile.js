@@ -26,6 +26,7 @@ const Profile = ({ profileData, setProfileData }) => {
         })
         setProfileData(data)
         setFormValues(data)
+        localStorage.setItem('outsourcd-profile-image', JSON.stringify(data.profile_image))
       } catch (error) {
         console.log(error)
       }

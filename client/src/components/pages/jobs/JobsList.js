@@ -3,7 +3,7 @@ import axios from 'axios'
 import Container from '@mui/material/Container'
 import JobCard from './JobCard'
 import Filter from '../search/Filter'
-import Box from '@mui/material/Box'
+import Stack from '@mui/material/Stack'
 import Paper from '@mui/material/Paper'
 
 const JobsList = () => {
@@ -44,12 +44,12 @@ const JobsList = () => {
       <Paper sx={{ p: '20px', mb: '60px' }}>
         <Filter options={sectors} dataToFilter={jobs} filteredData={filteredJobs} setFilteredData={setFilteredJobs} />
       </Paper>
-      <Box display='flex' justifyContent='space-between'>
+      <Stack direction='row' spacing={2}>
         {(filteredJobs.length ? filteredJobs : jobs).map(job => {
           return <JobCard widthMax={400} key={job.name} cardHeight='440px' job={job} image={true} />
         }
         )}
-      </Box>
+      </Stack>
     </Container>
   )
 }

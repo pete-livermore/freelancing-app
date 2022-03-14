@@ -17,6 +17,8 @@ const pages = ['Register', 'Log in', 'Find']
 const settings = ['Profile', 'Log out']
 
 export default function TopNav({ setSelectedPage, profileData, setProfileData }) {
+  const profileImage = JSON.parse(localStorage.getItem('outsourcd-profile-image'))
+  console.log(profileImage)
 
   const [anchorElNav, setAnchorElNav] = useState(null)
   const [anchorElUser, setAnchorElUser] = useState(null)
@@ -40,7 +42,10 @@ export default function TopNav({ setSelectedPage, profileData, setProfileData })
 
   const handleCloseUserMenu = (e) => {
     console.log(e.target)
-    if (e.target.id === 'Log out') localStorage.removeItem('outsourcd-token')
+    if (e.target.id === 'Log out') {
+      localStorage.removeItem('outsourcd-token')
+      localStorage.removeItem('outsourcd-profile-image')
+    }
     setProfileData({})
     setAnchorElUser(null)
   }
@@ -108,7 +113,7 @@ export default function TopNav({ setSelectedPage, profileData, setProfileData })
         <Box sx={{ flexGrow: 0 }}>
           <Tooltip title="Open settings">
             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-              <Avatar alt={Object.keys(profileData).length ? profileData.name : ''} src={Object.keys(profileData).length ? profileData.profile_image : ''} />
+              <Avatar alt={Object.keys(profileData).length ? profileData.name : ''} src={profileImage ? profileImage : profileData.profile_image} />
             </IconButton>
           </Tooltip>
           <Menu

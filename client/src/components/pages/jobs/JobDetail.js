@@ -25,7 +25,6 @@ export default function JobDetail() {
   const navigate = useNavigate()
 
   useEffect(() => {
-
     const getJob = async () => {
       try {
         const { data } = await axios.get(`/api/jobs/${id}`)
@@ -47,7 +46,7 @@ export default function JobDetail() {
   }
 
   return (
-    <Container sx={{ mt: 8 }}>
+    <Container maxWidth='xl' sx={{ mt: 8 }}>
       <Box display='flex'>
         <Paper sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column', minHeight: '500px', justifyContent: 'space-between', mt: 4, p: 6 }} >
           <Typography variant='h4'>
@@ -75,13 +74,10 @@ export default function JobDetail() {
             )
             )}
           </List>
-          <ul>
-
-          </ul>
           <Button variant='contained' onClick={handleJobApplication}>Apply for job</Button>
           <JobModal modalOpenState={modalOpenState} setModalOpenState={setModalOpenState} jobData={jobData} />
         </Paper>
-        <Box width='550px' pt='32px' ml={4}>
+        <Box width='500px' pt='32px' ml={4}>
           {jobData.company &&
             <Card sx={{ width: '300px', p: 2 }}>
               <CardContent>

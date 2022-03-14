@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import axios from 'axios'
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
@@ -11,8 +11,8 @@ import CircularProgress from '@mui/material/CircularProgress'
 export default function JobModal({ jobData, modalOpenState, setModalOpenState }) {
   const token = window.localStorage.getItem('outsourcd-token')
   const { id } = useParams()
-  console.log(id)
   const [profileData, setProfileData] = useState({})
+  const navigate = useNavigate()
 
   useEffect(() => {
     const getProfileData = async () => {
@@ -35,7 +35,7 @@ export default function JobModal({ jobData, modalOpenState, setModalOpenState })
   }
 
   const handleSubmit = () => {
-    const dataToSend = { ...jobData, assigned_freelancer: [profileData.id] }
+    const dataToSend = { assigned_freelancer: [profileData.id] }
     console.log(dataToSend)
     const addJobToProfile = async () => {
       try {
@@ -46,6 +46,7 @@ export default function JobModal({ jobData, modalOpenState, setModalOpenState })
             }
           }
         )
+        navigate('/profile')
         handleClose()
       } catch (error) {
         console.log(error)

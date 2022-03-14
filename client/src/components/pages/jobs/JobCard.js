@@ -30,7 +30,7 @@ export default function JobCard({ job, image, widthMax, cardHeight }) {
             {job.company.name}
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            {`${job.brief.substring(0, 97)}...`}
+            {`${job.brief.substring(0, 90)}...`}
           </Typography>
         </CardContent>
         <CardActions>
