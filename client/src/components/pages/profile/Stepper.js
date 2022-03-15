@@ -16,6 +16,8 @@ import Select from '@mui/material/Select'
 import Grid from '@mui/material/Grid'
 import { ImageUpload } from '../../../helpers/imageUpload'
 import MultiSelect from './createProfile/MultiSelector'
+import CountrySelector from './createProfile/CountrySelector'
+import InputAdornment from '@mui/material/InputAdornment'
 
 
 export default function HorizontalStepper({ formValues, handleImageUrl, skills, setFormValues, setIsLoading, sectors }) {
@@ -33,7 +35,6 @@ export default function HorizontalStepper({ formValues, handleImageUrl, skills, 
       { text: 'Last name', type: 'text' },
       { text: 'Address', type: 'text' },
       { text: 'City', type: 'text' },
-      { text: 'Country', type: 'text' },
       { text: 'Postcode', type: 'text' }
     ]
   },
@@ -104,12 +105,12 @@ export default function HorizontalStepper({ formValues, handleImageUrl, skills, 
 
   const handleInputChange = (e) => {
     if (e.target.name === 'about_you') setFormValues({ ...formValues, about_me: e.target.value })
-    else if (e.target.name === 'linkedIn_profile') setFormValues({ ...formValues, linkedin_url: e.target.value })
+    else if (e.target.name === 'linkedin_profile') setFormValues({ ...formValues, linkedin_url: `https://${e.target.value}` })
+    else if (e.target.name === 'business_website' || e.target.name === 'personal_website') setFormValues({ ...formValues, [e.target.name]: `https://${e.target.value}` })
     else setFormValues({ ...formValues, [e.target.name]: e.target.value })
   }
 
   const handleOptionChange = (e) => {
-    console.log(e)
     const newSectors = [...sectors]
     const filteredSectors = newSectors.filter(sector => e.target.value === sector.name).map(sector => sector.id)
     setFormValues({ ...formValues, sector: filteredSectors })
@@ -162,7 +163,7 @@ export default function HorizontalStepper({ formValues, handleImageUrl, skills, 
               {steps[activeStep].fields.map(field => {
                 return (
                   <Grid item key={field.text} display='flex' mb={3} width='100%' pl={2} pr={4}>
-                    <Box pt='10px' minWidth='150px'>
+                    <Box pt='10px' minWidth='170px'>
                       <label htmlFor={field.text.replace(/\s+/g, '_').toLowerCase()}>
                         <Typography>{field.text === 'Address' ? `First line of ${field.text.replace(/\s+/g, '_').toLowerCase()}` : field.text.replace(/\s+/g, ' ')}</Typography>
                       </label>
@@ -174,10 +175,11 @@ export default function HorizontalStepper({ formValues, handleImageUrl, skills, 
                         className='stepper-input'
                         type={field.type}
                         name={field.text.replace(/\s+/g, '_').toLowerCase()}
-                        placeholder={field.text.replace(/\s+/g, ' ')}
+                        placeholder={field.type === 'url' ? 'examplewebsite.com' : field.text.replace(/\s+/g, ' ')}
                         value={formValues[field.text]}
                         required
-                        inputProps={{ maxLength: 500 }}
+                        inputProps={{ maxLength: 500, }}
+                        InputProps={{ startAdornment: field.type === 'url' ? <InputAdornment position="start">https://</InputAdornment> : '' }}
                       // focused
                       />
                     </Box>
@@ -186,6 +188,7 @@ export default function HorizontalStepper({ formValues, handleImageUrl, skills, 
               })}
               {activeStep === 0 &&
                 <>
+                  <CountrySelector formValues={formValues} setFormValues={setFormValues} />
                   <Grid item mt={1} ml={2} mb={2} display='flex'>
                     <Box mr={2}>
                       <label htmlFor='profile_image'>

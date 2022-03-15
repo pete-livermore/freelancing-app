@@ -50,8 +50,8 @@ export default function Calendar({ months, month, setMonth, hoveredDate, years, 
     for (let i = new Date(`${month} 1, ${year}`).getDay(); i < new Date(`${month} 1, ${year}`).getDay() + daysInMonth; i++) {
       let idDate = new Date(`${month} ${inc}, ${year}`)
       if (idDate.toLocaleDateString() === today.toLocaleDateString())
-        arr[i] = <Box id={idDate} key={idDate} sx={{ backgroundColor: '#33c9dc', pl: '8px', mr: '8px', height: '35px' }}>{inc}</Box>
-      else if (idDate.toLocaleDateString() === new Date(hoveredDate).toLocaleDateString()) arr[i] = <Box id={idDate} key={idDate} sx={{ backgroundColor: '#8e24aa', pl: '8px', mr: '8px', height: '35px' }}>{inc}</Box>
+        arr[i] = <Box id={idDate} key={idDate} sx={{ backgroundColor: '#eceff1', pl: '8px', mr: '8px', height: '35px' }}>{inc}</Box>
+      else if (idDate.toLocaleDateString() === new Date(hoveredDate).toLocaleDateString()) arr[i] = <Box id={idDate} key={idDate} sx={{ backgroundColor: '#d81b60', pl: '8px', mr: '8px', height: '35px' }}>{inc}</Box>
       else arr[i] = <Box id={idDate} key={idDate} sx={{ pl: '8px', mr: '8px', height: '35px' }}>{inc}</Box>
       inc++
       idDate.setDate(idDate.getDate() + 1)

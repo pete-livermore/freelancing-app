@@ -136,21 +136,21 @@ export default function AboutYou({ profileData, setProfileData, textInput, setTe
         <List>
           <ListItem>
             <ListItemAvatar>
-              <Link to={`${profileData.business_website}`} sx={{ textDecoration: 'none' }}>
+              <a href={`${profileData.business_website}`} rel='noreferrer' target='_blank'>
                 <Avatar>
                   <WebIcon />
                 </Avatar>
-              </Link>
+              </a>
             </ListItemAvatar>
             <ListItemText primary='Personal website' />
           </ListItem>
           <ListItem>
             <ListItemAvatar>
-              <Link to={`${profileData.linkedin_url}`} sx={{ color: 'white' }}>
+              <a href={`${profileData.linkedin_url}`} rel='noreferrer' target='_blank'>
                 <Avatar>
                   <LinkedInIcon />
                 </Avatar>
-              </Link>
+              </a>
             </ListItemAvatar>
             <ListItemText primary='LinkedIn' />
           </ListItem>

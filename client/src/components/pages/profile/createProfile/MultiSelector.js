@@ -60,9 +60,9 @@ function MultiSelect({ skills, formValues, setFormValues }) {
 
   return (
     <FormControl sx={{ mt: 3 }}>
-      <InputLabel id="mutiple-select-label">Multiple Select</InputLabel>
+      <InputLabel id="skills-select">Skills</InputLabel>
       <Select
-        labelId="mutiple-select-label"
+        labelId="skills-select"
         multiple
         value={selected}
         onChange={handleChange}

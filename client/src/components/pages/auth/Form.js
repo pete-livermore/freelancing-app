@@ -1,16 +1,20 @@
 import React, { useState } from 'react'
 import axios from 'axios'
-import Box from '@mui/material/Box'
+import FormControlLabel from '@mui/material/FormControlLabel'
+import Switch from '@mui/material/Switch'
 import Grid from '@mui/material/Grid'
 import Alert from '@mui/material/Alert'
 import Typography from '@mui/material/Typography'
 import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
 import { useNavigate } from 'react-router-dom'
+import { pink } from '@mui/material/colors'
+import { alpha, styled } from '@mui/material/styles'
 
 const Form = ({ formType, setIsFlipped, isFlipped, setSelectedPage }) => {
   const [isFreelancer, setIsFreelancer] = useState(true)
   const [isClient, setIsClient] = useState(false)
+
 
   // Setting form fields
   const availablefields = [{
@@ -114,6 +118,22 @@ const Form = ({ formType, setIsFlipped, isFlipped, setSelectedPage }) => {
     setIsFlipped(true)
   }
 
+  // const handleSwitchChange = (e) => {
+  //   setIsClient(e.target.checked)
+  // }
+
+  // const PinkSwitch = styled(Switch)(({ theme }) => ({
+  //   '& .MuiSwitch-switchBase.Mui-checked': {
+  //     color: pink[600],
+  //     '&:hover': {
+  //       backgroundColor: alpha(pink[600], theme.palette.action.hoverOpacity),
+  //     },
+  //   },
+  //   '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
+  //     backgroundColor: pink[600],
+  //   },
+  // }))
+
 
   return (
     <form onSubmit={handleFormSubmit}>
@@ -142,6 +162,13 @@ const Form = ({ formType, setIsFlipped, isFlipped, setSelectedPage }) => {
             </Grid>
           )
         })}
+        {/* <Grid item>
+          {formType === 'Register' &&
+            <FormControlLabel
+              control={<PinkSwitch checked={isClient} onChange={handleSwitchChange} />}
+              label={`${isClient ? "I'm looking for jobs" : "I'm looking for a freelancer"}`} />
+          }
+        </Grid> */}
         <Grid item>
           <Button sx={{ mt: 2 }} variant='contained' type='submit'>Submit</Button>
         </Grid>

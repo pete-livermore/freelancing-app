@@ -17,7 +17,8 @@ const JobsList = () => {
     const getAllJobs = async () => {
       try {
         const { data } = await axios.get('/api/jobs/')
-        setJobs(data)
+        const availableJobs = data.filter(job => !job.assigned_freelancer.length)
+        setJobs(availableJobs)
       } catch (err) {
         console.log(err)
       }
@@ -44,7 +45,7 @@ const JobsList = () => {
       <Paper sx={{ p: '20px', mb: '60px' }}>
         <Filter options={sectors} dataToFilter={jobs} filteredData={filteredJobs} setFilteredData={setFilteredJobs} />
       </Paper>
-      <Stack direction='row' spacing={2}>
+      <Stack direction='row' spacing={3}>
         {(filteredJobs.length ? filteredJobs : jobs).map(job => {
           return <JobCard widthMax={400} key={job.name} cardHeight='440px' job={job} image={true} />
         }
