@@ -47,8 +47,8 @@ export default function JobDetail() {
 
   return (
     <Container maxWidth='xl' sx={{ mt: 8 }}>
-      <Box display='flex'>
-        <Paper sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column', minHeight: '500px', justifyContent: 'space-between', mt: 4, p: 6 }} >
+      <Box display='flex' flexDirection={{ xs: 'column', md: 'row' }}>
+        <Paper sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column', minHeight: '500px', justifyContent: 'space-between', mt: 4, p: 6, order: { xs: 2, md: 1 } }} >
           <Typography variant='h4'>
             {jobData.name}
           </Typography>
@@ -77,7 +77,7 @@ export default function JobDetail() {
           <Button variant='contained' onClick={handleJobApplication}>Apply for job</Button>
           <JobModal modalOpenState={modalOpenState} setModalOpenState={setModalOpenState} jobData={jobData} />
         </Paper>
-        <Box width='500px' pt='32px' ml={4}>
+        <Box width='500px' pt='32px' ml={4} order={{ xs: 1, md: 2 }} >
           {jobData.company &&
             <Card sx={{ width: '300px', p: 2 }}>
               <CardContent>

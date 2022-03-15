@@ -4,7 +4,7 @@ import CircularProgress from '@mui/material/CircularProgress'
 import Container from '@mui/material/Container'
 import CreateProfile from './CreateProfile'
 import { Typography } from '@mui/material'
-import SideNav from './SideNav'
+import ResponsiveSideNav from './ResponsiveSideNav'
 
 
 const Profile = ({ profileData, setProfileData }) => {
@@ -41,7 +41,7 @@ const Profile = ({ profileData, setProfileData }) => {
     <>
       {Object.keys(profileData).length ?
         (profileData.first_name ?
-          <SideNav
+          <ResponsiveSideNav
             profileData={profileData}
             setImageUploaded={setImageUploaded}
             setProfileData={setProfileData}

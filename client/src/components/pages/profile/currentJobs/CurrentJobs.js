@@ -57,7 +57,7 @@ export default function CurrentJobs({ profileData, setMilestoneUpdated }) {
   }
   return (
     <Box display='flex' flexDirection='column'>
-      <Box display='flex' justifyContent='space-between'>
+      <Box display='flex' justifyContent='space-between' flexDirection={{ sm: 'column', md: 'row' }}>
         <Typography variant='h5' component='h2' width='200px'>
           Current jobs
         </Typography>
@@ -86,8 +86,8 @@ export default function CurrentJobs({ profileData, setMilestoneUpdated }) {
           ''
         }
       </Box>
-      <Box display='flex' mt={6} justifyContent='space-between'>
-        <Paper sx={{ flexGrow: 1, p: '20px', mr: 6 }}>
+      <Box display='flex' mt={6} justifyContent='space-between' flexDirection={{ md: 'column', lg: 'row' }}>
+        <Paper sx={{ flexGrow: 1, p: '20px', mr: 6, minWidth: 400 }}>
           {Object.keys(selectedJobData).length ?
             <>
               <Typography>Milestones</Typography>
@@ -113,11 +113,11 @@ export default function CurrentJobs({ profileData, setMilestoneUpdated }) {
               <Button typ='button' variant='contained' onClick={handleButtonClick}>Generate invoice</Button>
             </Box>}
         </Paper>
-        <Paper sx={{ pt: 4, px: 4, ml: 5 }}>
+        <Paper sx={{ pt: 4, px: 4, ml: { xs: 0, sm: 0, md: 0, lg: 5 }, maxWidth: 400 }} >
           <Calendar months={months} month={month} setMonth={setMonth} hoveredDate={hoveredDate} years={years} setYear={setYear} year={year} />
         </Paper>
       </Box>
-    </Box>
+    </Box >
   )
 
 }

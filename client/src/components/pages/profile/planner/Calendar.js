@@ -62,7 +62,7 @@ export default function Calendar({ months, month, setMonth, hoveredDate, years, 
 
   return (
     <>
-      <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 2 }}>
+      <Box display='flex' justifyContent='space-between' mb={2} maxWidth={400} >
         {year === 2022 && month === 'January' ? <Box mr={2}></Box> : <ArrowBackIosIcon sx={{ cursor: 'pointer' }} onClick={handleBackwardClick} />}
         <Box>
           <Typography variant='h5' align='center' component='h3'>{month}</Typography>

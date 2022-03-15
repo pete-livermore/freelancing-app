@@ -159,10 +159,10 @@ export default function HorizontalStepper({ formValues, handleImageUrl, skills, 
       ) : (
         <React.Fragment>
           <form>
-            <Grid container alignItems="stretch" justify="center" flexWrap='wrap' maxHeight='350px' direction="column" marginTop={4} width='50%'>
+            <Grid container alignItems="stretch" justify="center" flexWrap='wrap' maxHeight={{ xs: '600px', md: '350px' }} direction="column" marginTop={4} width={{ xs: '100%', md: '50%' }}>
               {steps[activeStep].fields.map(field => {
                 return (
-                  <Grid item key={field.text} display='flex' mb={3} width='100%' pl={2} pr={4}>
+                  <Grid item key={field.text} display='flex' mb={3} width='100%' pl={2} pr={4} md={4}>
                     <Box pt='10px' minWidth='170px'>
                       <label htmlFor={field.text.replace(/\s+/g, '_').toLowerCase()}>
                         <Typography>{field.text === 'Address' ? `First line of ${field.text.replace(/\s+/g, '_').toLowerCase()}` : field.text.replace(/\s+/g, ' ')}</Typography>

@@ -24,7 +24,6 @@ const Filter = ({ options, dataToFilter, setFilteredData }) => {
   const [selectedOptions, setSelectedOptions] = useState([])
 
   const handleChange = (e) => {
-    console.log(e.target.value)
     setSelectedOptions(
       typeof e.target.value === 'string' ? e.target.value.split(',') : e.target.value,
     )

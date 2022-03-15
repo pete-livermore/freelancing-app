@@ -45,9 +45,9 @@ const JobsList = () => {
       <Paper sx={{ p: '20px', mb: '60px' }}>
         <Filter options={sectors} dataToFilter={jobs} filteredData={filteredJobs} setFilteredData={setFilteredJobs} />
       </Paper>
-      <Stack direction='row' spacing={3}>
+      <Stack direction={{ xs: 'column', md: 'row' }} spacing={3} justifyContent='space-between' alignItems='center'>
         {(filteredJobs.length ? filteredJobs : jobs).map(job => {
-          return <JobCard widthMax={400} key={job.name} cardHeight='440px' job={job} image={true} />
+          return <JobCard widthMax={{ xs: '400px', md: '500px' }} key={job.name} cardHeight='440px' job={job} image={true} />
         }
         )}
       </Stack>
