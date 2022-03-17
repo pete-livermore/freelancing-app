@@ -19,7 +19,6 @@ const settings = ['Profile', 'Log out']
 
 export default function TopNav({ setSelectedPage, profileData, setProfileData }) {
   const profileImage = JSON.parse(localStorage.getItem('outsourcd-profile-image'))
-  console.log(profileImage)
 
   const [anchorElNav, setAnchorElNav] = useState(null)
   const [anchorElUser, setAnchorElUser] = useState(null)
@@ -106,7 +105,7 @@ export default function TopNav({ setSelectedPage, profileData, setProfileData })
             </Link>
           ))}
         </Box>
-        {userIsAuthenticated &&
+        {userIsAuthenticated() &&
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
