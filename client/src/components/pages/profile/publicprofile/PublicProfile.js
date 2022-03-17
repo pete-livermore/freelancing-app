@@ -110,7 +110,7 @@ export default function PublicProfile() {
               <Typography variant='h6'>About me</Typography>
               <Typography>{profileData.about_me}</Typography>
             </Paper>
-            {profileData.experience.length &&
+            {profileData.experience.length ?
               <>
                 <Paper sx={{ width: '100%', maxWidth: 450, ml: 3, p: 4 }}>
                   <List>
@@ -130,6 +130,8 @@ export default function PublicProfile() {
                   </List>
                 </Paper>
               </>
+              :
+              ''
             }
           </Box>
           <Paper sx={{ p: 4, mt: 6 }}>
