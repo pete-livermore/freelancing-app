@@ -110,6 +110,9 @@ export default function PublicProfile() {
               <Typography variant='h6'>About me</Typography>
               <Typography>{profileData.about_me}</Typography>
             </Paper>
+            <Paper sx={{ p: 4 }}>
+              {profileData.skills.length && profileData.skills.map(skill => <p key={skill.id}>{skill.name}</p>)}
+            </Paper>
             {profileData.experience.length ?
               <>
                 <Paper sx={{ width: '100%', maxWidth: 450, ml: 3, p: 4 }}>
