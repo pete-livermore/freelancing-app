@@ -4,10 +4,11 @@
   "pk": 1,
   "fields": {
     "name": "Generate a social media campaign",
+    "complete": false,
     "brief": "We require a digital marketing professional to run social media campaigns - across Twitter, Facebook and LinkedIn that aim to increase our customers. The campaigns will primarily target younger people who are currently using digital banking services.",
     "date_listed": "2022-03-07T16:49:24.248Z",
     "completion_date": "2022-05-19T16:48:59Z",
-    "pay": 1000,
+    "pay": 100,
     "owner": 1,
     "company": 1,
     "sector": [
@@ -22,12 +23,13 @@
       1,
       2,
       3,
+      7,
       5,
       4,
       6
     ],
     "assigned_freelancer": [
-      3
+      8
     ]
   }
 },
@@ -36,6 +38,7 @@
   "pk": 2,
   "fields": {
     "name": "Redesign our company website",
+    "complete": false,
     "brief": "We are looking to grow our online business by increasing sales and reducing the manual work involved. Specifically we want to increase our traffic, and we need a website that has good SEO rankings and an excellent user experiene through ease of use and few clicks to buy. The site also needs to emphasise the values of our brand, generate interest and excitement, as well as providing reliable and secure customer journeys.",
     "date_listed": "2022-03-09T17:44:10.867Z",
     "completion_date": "2022-08-01T17:44:01Z",
@@ -53,6 +56,33 @@
       8
     ],
     "milestones": [],
+    "assigned_freelancer": []
+  }
+},
+{
+  "model": "jobs.job",
+  "pk": 3,
+  "fields": {
+    "name": "Produce a new company logo",
+    "complete": false,
+    "brief": "We are looking to modernise our brand and attract new customers so we need a new logo. The logo needs to attract the attention of younger customers and work well across digital channels, whilst still reflecting our history and brand values.",
+    "date_listed": "2022-03-11T10:41:05.907Z",
+    "completion_date": "2022-09-01T10:41:01Z",
+    "pay": 105,
+    "owner": 1,
+    "company": 3,
+    "sector": [
+      3
+    ],
+    "deliverables": [
+      9,
+      10
+    ],
+    "milestones": [
+      9,
+      6,
+      10
+    ],
     "assigned_freelancer": []
   }
 },
@@ -110,6 +140,20 @@
   "pk": 8,
   "fields": {
     "name": "Increased website load speed"
+  }
+},
+{
+  "model": "jobs.deliverable",
+  "pk": 9,
+  "fields": {
+    "name": "Logo in multiple dimensions and file types"
+  }
+},
+{
+  "model": "jobs.deliverable",
+  "pk": 10,
+  "fields": {
+    "name": "Branding document"
   }
 }
 ]

@@ -36,3 +36,27 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = '__all__'
+
+
+class PublicProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = (
+            'first_name',
+            'last_name',
+            'profile_image',
+            'business_name',
+            'country',
+            'business_website',
+            'personal_website',
+            'linkedin_url',
+            'job_title',
+            'sector',
+            'about_me',
+            'jobs',
+            'created_jobs',
+            'skills',
+            'experience',
+            'jobs',
+            'received_reviews'
+        )

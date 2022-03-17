@@ -10,6 +10,8 @@ psycopg2-binary = "*"
 autopep8 = "*"
 djangorestframework = "*"
 pyjwt = "*"
+django-on-heroku = "*"
+python-dotenv = "*"
 
 [dev-packages]
 

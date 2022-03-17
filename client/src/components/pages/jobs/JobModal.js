@@ -13,6 +13,7 @@ export default function JobModal({ jobData, modalOpenState, setModalOpenState })
   const { id } = useParams()
   const [profileData, setProfileData] = useState({})
   const navigate = useNavigate()
+  const [hasError, setHasError] = useState({ error: false, message: '' })
 
   useEffect(() => {
     const getProfileData = async () => {
@@ -23,8 +24,8 @@ export default function JobModal({ jobData, modalOpenState, setModalOpenState })
           }
         })
         setProfileData(data)
-      } catch (error) {
-        console.log(error)
+      } catch (err) {
+        setHasError({ error: true, message: err.message })
       }
     }
     getProfileData()
@@ -48,8 +49,8 @@ export default function JobModal({ jobData, modalOpenState, setModalOpenState })
         )
         navigate('/profile')
         handleClose()
-      } catch (error) {
-        console.log(error)
+      } catch (err) {
+        setHasError({ error: true, message: err.message })
       }
     }
     addJobToProfile()

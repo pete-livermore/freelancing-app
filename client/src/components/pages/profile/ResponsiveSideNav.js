@@ -21,7 +21,7 @@ import WorkIcon from '@mui/icons-material/Work'
 import CurrentJobs from './currentJobs/CurrentJobs'
 import AboutYou from './AboutYou'
 import Rating from '@mui/material/Rating'
-import WorkHistory from './WorkHistory'
+import JobHistory from './jobHistory/JobHistory'
 import Reviews from './reviews/Reviews'
 
 const drawerWidth = 280
@@ -83,7 +83,7 @@ function ResponsiveSideNav({ profileData, setImageUploaded, setMilestoneUpdated,
             onClick={handleAvatarClick}
             onMouseEnter={handleAvatarHover}
             onMouseLeave={handleAvatarLeave}
-            alt="Remy Sharp"
+            alt={`${profileData.first_name} ${profileData.last_name}`}
             src={profileData.profile_image}
             sx={{ width: 126, height: 126, boxShadow: 2, cursor: 'pointer' }}
           />
@@ -93,7 +93,7 @@ function ResponsiveSideNav({ profileData, setImageUploaded, setMilestoneUpdated,
         <Typography sx={{ fontWeight: 600, mt: 1 }}>{profileData.job_title}</Typography>
         <Typography sx={{ mt: 3, mb: 2 }} component="legend">Current rating:</Typography>
         <Rating
-          name="simple-controlled"
+          name="user-rating"
           precision={0.5}
           value={calculateMedianRating(userRatings)}
           readOnly
@@ -168,7 +168,7 @@ function ResponsiveSideNav({ profileData, setImageUploaded, setMilestoneUpdated,
         {selectedSection === 1 &&
           <CurrentJobs profileData={profileData} setMilestoneUpdated={setMilestoneUpdated} />}
         {selectedSection === 2 &&
-          <WorkHistory />
+          <JobHistory profileData={profileData} />
         }
         {selectedSection === 3 &&
           <Reviews profileData={profileData} />

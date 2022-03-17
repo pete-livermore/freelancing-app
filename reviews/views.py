@@ -13,7 +13,6 @@ class ReviewListView(APIView):
 
     def post(self, request):
         request.data["owner"] = request.user.id
-        # request.user["owner"] = request.user.id
         serialized_review = ReviewSerializer(data=request.data)
         try:
             serialized_review.is_valid()

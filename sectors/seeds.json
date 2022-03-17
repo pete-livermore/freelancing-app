@@ -47,5 +47,33 @@
   "fields": {
     "name": "Retail"
   }
+},
+{
+  "model": "sectors.sector",
+  "pk": 8,
+  "fields": {
+    "name": "UX design"
+  }
+},
+{
+  "model": "sectors.sector",
+  "pk": 9,
+  "fields": {
+    "name": "Languages/translation"
+  }
+},
+{
+  "model": "sectors.sector",
+  "pk": 10,
+  "fields": {
+    "name": "Editing"
+  }
+},
+{
+  "model": "sectors.sector",
+  "pk": 11,
+  "fields": {
+    "name": "Health/fitness"
+  }
 }
 ]

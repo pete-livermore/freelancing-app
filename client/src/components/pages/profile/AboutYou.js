@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import axios from 'axios'
 import Box from '@mui/material/Box'
 import Paper from '@mui/material/Paper'
-import { Link } from 'react-router-dom'
 import Button from '@mui/material/Button'
 import Chip from '@mui/material/Chip'
 import Avatar from '@mui/material/Avatar'
@@ -91,6 +90,14 @@ export default function AboutYou({ profileData, setProfileData, textInput, setTe
     setExperienceModalOpen(true)
   }
 
+  const formattedMonth = (date) => {
+    return new Date(date).toLocaleString('default', { month: 'short' })
+  }
+
+  const formattedYear = (date) => {
+    return new Date(date).getFullYear()
+  }
+
   return (
     <>
       <Paper elevation={3} sx={{ p: 4, mb: 4 }}>
@@ -176,7 +183,7 @@ export default function AboutYou({ profileData, setProfileData, textInput, setTe
           <Typography variant='h5' component='h2'>Professional experience</Typography>
           <Button onClick={handleExperienceTextClick}
             endIcon={<EditIcon />}>
-            Edit</Button>
+            Add</Button>
         </Box>
         <ExperienceModal experienceModalOpen={experienceModalOpen} setExperienceModalOpen={setExperienceModalOpen} profileData={profileData} />
         {profileData.experience ?
@@ -190,7 +197,7 @@ export default function AboutYou({ profileData, setProfileData, textInput, setTe
                     </Avatar>
                   </ListItemAvatar>
                   <ListItemText primary={job.job_title} secondary={job.company_name.name} />
-                  <p>{`${job.start_date} - ${job.end_date}`}</p>
+                  <p>{`${formattedMonth(job.start_date)} ${formattedYear(job.start_date)} ${String.fromCharCode(8211)} ${formattedMonth(job.end_date)} ${formattedYear(job.end_date)}`}</p>
                 </ListItem>
               )
             })}

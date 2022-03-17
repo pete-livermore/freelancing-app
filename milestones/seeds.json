@@ -1,0 +1,92 @@
+[
+{
+  "model": "milestones.milestone",
+  "pk": 1,
+  "fields": {
+    "name": "Determine target audience",
+    "due_date": "2022-03-18T10:42:10Z",
+    "completed": false
+  }
+},
+{
+  "model": "milestones.milestone",
+  "pk": 2,
+  "fields": {
+    "name": "Identify hashtags and influencers",
+    "due_date": "2022-03-25T10:42:26Z",
+    "completed": false
+  }
+},
+{
+  "model": "milestones.milestone",
+  "pk": 3,
+  "fields": {
+    "name": "Draft copy for campaign posts and send to stakeholders for approval",
+    "due_date": "2022-04-08T10:42:41Z",
+    "completed": false
+  }
+},
+{
+  "model": "milestones.milestone",
+  "pk": 4,
+  "fields": {
+    "name": "Send Facebook campaign",
+    "due_date": "2022-05-01T10:43:02Z",
+    "completed": false
+  }
+},
+{
+  "model": "milestones.milestone",
+  "pk": 5,
+  "fields": {
+    "name": "Send Twitter campaign",
+    "due_date": "2022-04-29T10:44:13Z",
+    "completed": false
+  }
+},
+{
+  "model": "milestones.milestone",
+  "pk": 6,
+  "fields": {
+    "name": "Report on campaign analytics to key stakeholders",
+    "due_date": "2022-05-13T10:44:35Z",
+    "completed": true
+  }
+},
+{
+  "model": "milestones.milestone",
+  "pk": 7,
+  "fields": {
+    "name": "Generate a brand overview document",
+    "due_date": "2022-04-12T10:43:13Z",
+    "completed": false
+  }
+},
+{
+  "model": "milestones.milestone",
+  "pk": 8,
+  "fields": {
+    "name": "Send draft logo to stakeholders",
+    "due_date": "2022-04-01T10:43:40Z",
+    "completed": false
+  }
+},
+{
+  "model": "milestones.milestone",
+  "pk": 9,
+  "fields": {
+    "name": "Generate branding guidance document",
+    "due_date": "2022-05-11T10:44:02Z",
+    "completed": false
+  }
+},
+{
+  "model": "milestones.milestone",
+  "pk": 10,
+  "fields": {
+    "name": "Send logo files to client",
+    "due_date": "2022-05-24T10:44:15Z",
+    "completed": false
+  }
+}
+]

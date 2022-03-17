@@ -2,7 +2,7 @@ from jobs.serializers.populated import PopulatedJobSerializer
 from skills.serializers.common import SkillSerializer
 from experience.serializers.populated import PopulatedExperienceSerializer
 from reviews.serializers.populated import PopulatedReviewSerializer
-from .common import UserSerializer
+from .common import UserSerializer, PublicProfileSerializer
 
 
 class PopulatedUserSerializer(UserSerializer):
@@ -21,3 +21,11 @@ class PopulatedAuthUserSerializer(PopulatedUserSerializer):
     experience = PopulatedExperienceSerializer(many=True)
     received_reviews = PopulatedReviewSerializer(many=True)
     given_reviews = PopulatedReviewSerializer(many=True)
+
+
+class PopulatedPublicProfileSerializer(PublicProfileSerializer):
+    created_jobs = PopulatedJobSerializer(many=True)
+    jobs = PopulatedJobSerializer(many=True)
+    skills = SkillSerializer(many=True)
+    experience = PopulatedExperienceSerializer(many=True)
+    received_reviews = PopulatedReviewSerializer(many=True)

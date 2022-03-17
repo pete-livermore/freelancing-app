@@ -5,6 +5,7 @@ import Select from '@mui/material/Select'
 import MenuItem from '@mui/material/MenuItem'
 import Paper from '@mui/material/Paper'
 import Box from '@mui/material/Box'
+import Stack from '@mui/material/Stack'
 import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
 import CheckList from '../checklist/Checklist'
@@ -15,29 +16,34 @@ import CircularProgress from '@mui/material/CircularProgress'
 
 
 export default function CurrentJobs({ profileData, setMilestoneUpdated }) {
+  const token = window.localStorage.getItem('outsourcd-token')
   const years = [2022, 2023, 2024, 2025, 2026, 2027, 2028, 2029, 2030]
   const [year, setYear] = useState(years[years.indexOf(new Date().getFullYear())])
   const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
   const [month, setMonth] = useState(months[new Date().getMonth()])
   const [selectedJobData, setSelectedJobData] = useState({})
   const [checklistUpdated, setChecklistUpdated] = useState(false)
-  const [selectedJob, setSelectedJob] = useState({ ...profileData.jobs[0] })
+  const activeJobs = profileData.jobs.filter(job => !job.complete)
+  const [selectedJob, setSelectedJob] = useState(activeJobs.length ? { ...activeJobs[0] } : {})
   const handleChange = (e) => {
     const matchedJobs = profileData.jobs.filter(job => job.name === e.target.value)
     setSelectedJob(matchedJobs[0])
   }
   const [hoveredDate, setHoveredDate] = useState('')
+  const [hasError, setHasError] = useState({ error: false, message: '' })
 
   useEffect(() => {
-    const getJob = async () => {
-      try {
-        const { data } = await axios.get(`/api/jobs/${selectedJob.id}`)
-        setSelectedJobData(data)
-      } catch (err) {
-        console.log(err)
+    if (Object.keys(selectedJob).length) {
+      const getJob = async () => {
+        try {
+          const { data } = await axios.get(`/api/jobs/${selectedJob.id}`)
+          setSelectedJobData(data)
+        } catch (err) {
+          setHasError({ error: true, message: err.message })
+        }
       }
+      getJob()
     }
-    getJob()
   }, [selectedJob, checklistUpdated])
 
   const calcProgress = () => {
@@ -48,13 +54,33 @@ export default function CurrentJobs({ profileData, setMilestoneUpdated }) {
   }
   calcProgress()
 
-  const handleButtonClick = (e) => {
+  const handleGenerateInvoice = (e) => {
     e.preventDefault()
     const dataToStore = { freelancerInfo: profileData, jobData: selectedJobData }
     localStorage.setItem('jobDetails', JSON.stringify(dataToStore))
     window.open('/invoicegenerator', '_blank')
-
   }
+
+  const handleComplete = (e) => {
+    e.preventDefault()
+    const dataToSend = { complete: true }
+    const updateJobStatus = async () => {
+      try {
+        await axios.put(`/api/jobs/${selectedJobData.id}/`, dataToSend,
+          {
+            'headers': {
+              'Authorization': `Bearer ${token}`
+            }
+          }
+        )
+      } catch (err) {
+        setHasError({ error: true, message: err.message })
+      }
+    }
+    updateJobStatus()
+  }
+
+
   return (
     <Box display='flex' flexDirection='column'>
       <Box display='flex' justifyContent='space-between' flexDirection={{ sm: 'column', md: 'row' }}>
@@ -109,11 +135,12 @@ export default function CurrentJobs({ profileData, setMilestoneUpdated }) {
             </Box>
           }
           {calcProgress() === 100 &&
-            <Box display='flex' justifyContent='center' mt={2}>
-              <Button typ='button' variant='contained' onClick={handleButtonClick}>Generate invoice</Button>
-            </Box>}
+            <Stack direction='row' spacing={4} sx={{ justifyContent: 'center', mt: 1 }}>
+              <Button type='button' variant='contained' onClick={handleGenerateInvoice}>Generate invoice</Button>
+              <Button type='button' variant='contained' sx={{ backgroundColor: '#C2185B', '&:hover': { backgroundColor: '#ad1457' } }} onClick={handleComplete}>Mark job as complete</Button>
+            </Stack>}
         </Paper>
-        <Paper sx={{ pt: 4, px: 4, ml: { xs: 0, sm: 0, md: 0, lg: 5 }, maxWidth: 400 }} >
+        <Paper sx={{ pt: 4, px: 4, ml: { xs: 0, sm: 0, md: 0, lg: 5 }, maxWidth: 420 }} >
           <Calendar months={months} month={month} setMonth={setMonth} hoveredDate={hoveredDate} years={years} setYear={setYear} year={year} />
         </Paper>
       </Box>

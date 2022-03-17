@@ -1,12 +1,24 @@
 [
 {
   "model": "experience.experience",
-  "pk": 1,
+  "pk": 3,
   "fields": {
-    "job_title": "Digital Marketing Executive",
-    "start_year": "2018-03-07",
-    "end_year": "2022-03-07",
-    "company_name": 2
+    "job_title": "Digital marketing executive",
+    "start_date": "2017-03-11",
+    "end_date": "2022-03-11",
+    "company_name": 2,
+    "user": 1
+  }
+},
+{
+  "model": "experience.experience",
+  "pk": 4,
+  "fields": {
+    "job_title": "Marketing intern",
+    "start_date": "2014-03-15",
+    "end_date": "2015-03-04",
+    "company_name": 12,
+    "user": 8
   }
 }
 ]

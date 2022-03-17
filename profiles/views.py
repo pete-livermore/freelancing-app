@@ -4,8 +4,8 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.exceptions import NotFound
 from django.contrib.auth import get_user_model
-from jwt_auth.serializers.common import UserSerializer
-from jwt_auth.serializers.populated import PopulatedUserSerializer
+from jwt_auth.serializers.common import UserSerializer, PublicProfileSerializer
+from jwt_auth.serializers.populated import PopulatedPublicProfileSerializer, PopulatedUserSerializer
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
 User = get_user_model()
@@ -20,6 +20,8 @@ class ProfileListView(APIView):
 
 
 class ProfileDetailView(APIView):
+    permissions_classes = (IsAuthenticatedOrReadOnly,)
+
     def retrieve_user(self, pk):
         try:
             return User.objects.get(pk=pk)
@@ -28,11 +30,24 @@ class ProfileDetailView(APIView):
 
     def get(self, _request, pk):
         user_to_retrieve = self.retrieve_user(pk=pk)
-        serialized_user = PopulatedUserSerializer(user_to_retrieve)
+        serialized_user = PopulatedPublicProfileSerializer(user_to_retrieve)
         return Response(serialized_user.data, status=status.HTTP_200_OK)
+
+    def put(self, request, pk):
+        user_to_update = self.retrieve_user(pk=pk)
+        serialized_user = PublicProfileSerializer(
+            user_to_update, data=request.data)
+        try:
+            serialized_user.is_valid()
+            print(serialized_user.errors)
+            serialized_user.save()
+            return Response(serialized_user.data, status=status.HTTP_200_OK)
+        except IntegrityError:
+            return Response("Unprocessable entity", status=status.HTTP_422_UNPROCESSABLE_ENTITY)
 
 
 class OwnProfileDetailView(APIView):
+    permissions_classes = (IsAuthenticatedOrReadOnly,)
 
     def get(self, request):
         print(request.user.id)

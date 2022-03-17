@@ -28,7 +28,6 @@ export default function JobDetail() {
     const getJob = async () => {
       try {
         const { data } = await axios.get(`/api/jobs/${id}`)
-        console.log(data)
         setJobData(data)
       } catch (err) {
         console.log(err)
@@ -48,58 +47,62 @@ export default function JobDetail() {
   return (
     <Container maxWidth='xl' sx={{ mt: 8 }}>
       <Box display='flex' flexDirection={{ xs: 'column', md: 'row' }}>
-        <Paper sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column', minHeight: '500px', justifyContent: 'space-between', mt: 4, p: 6, order: { xs: 2, md: 1 } }} >
-          <Typography variant='h4'>
-            {jobData.name}
-          </Typography>
-          <Typography>{jobData.category}</Typography>
-          <Typography sx={{ mt: 4, fontsize: 14, fontWeight: 600 }}>Brief</Typography>
-          <Typography>{jobData.brief}</Typography>
-          <Typography sx={{ mt: 4, fontsize: 14, fontWeight: 600 }}>Important dates</Typography>
-          <Typography>Listed date: {new Date(jobData.date_listed).toLocaleDateString()}</Typography>
-          <Typography>Expected completion date: {new Date(jobData.completion_date).toLocaleDateString()}</Typography>
-          <Typography sx={{ mt: 4, fontsize: 14, fontWeight: 600 }}>Pay</Typography>
-          <Typography>Salary per hour: £{jobData.pay}</Typography>
-          <Typography sx={{ mt: 4, fontsize: 14, fontWeight: 600 }}>Deliverables</Typography>
-          <List dense={true}>
-            {Object.keys(jobData).length && jobData.deliverables.map(deliverable => (
-              <ListItem key={deliverable.id}>
-                <ListItemIcon>
-                  <TaskAltIcon />
-                </ListItemIcon>
-                <ListItemText
-                  primary={deliverable.name}
-                />
-              </ListItem>
-            )
-            )}
-          </List>
-          <Button variant='contained' onClick={handleJobApplication}>Apply for job</Button>
-          <JobModal modalOpenState={modalOpenState} setModalOpenState={setModalOpenState} jobData={jobData} />
-        </Paper>
-        <Box width='500px' pt='32px' ml={4} order={{ xs: 1, md: 2 }} >
-          {jobData.company &&
-            <Card sx={{ width: '300px', p: 2 }}>
-              <CardContent>
-                <Typography gutterBottom variant="h5" component="div">
-                  {jobData.company.name}
-                </Typography>
-                <CardMedia
-                  component="img"
-                  height="194"
-                  src={jobData.company.logo}
-                  alt={jobData.company.name}
-                />
-                <Typography gutterBottom variant="h6" component="div">
-                  Sector: {jobData.company.sector[0].name}
-                </Typography>
-              </CardContent>
-              <CardActions sx={{ display: 'flex', justifyContent: 'center' }}>
-                <Button size="medium" variant='outlined' onClick={() => handleButtonClick(jobData.company)}>See full company info</Button>
-              </CardActions>
-            </Card>
-          }
-        </Box>
+        {Object.keys(jobData).length &&
+          <>
+            <Paper sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column', minHeight: '500px', justifyContent: 'space-between', mt: 4, p: 6, order: { xs: 2, md: 1 } }} >
+              <Typography variant='h4'>
+                {jobData.name}
+              </Typography>
+              <Typography>{jobData.category}</Typography>
+              <Typography sx={{ mt: 4, fontsize: 14, fontWeight: 600 }}>Brief</Typography>
+              <Typography>{jobData.brief}</Typography>
+              <Typography sx={{ mt: 4, fontsize: 14, fontWeight: 600 }}>Important dates</Typography>
+              <Typography>Listed date: {new Date(jobData.date_listed).toLocaleDateString()}</Typography>
+              <Typography>Expected completion date: {new Date(jobData.completion_date).toLocaleDateString()}</Typography>
+              <Typography sx={{ mt: 4, fontsize: 14, fontWeight: 600 }}>Pay</Typography>
+              <Typography>Salary per hour: £{jobData.pay}</Typography>
+              <Typography sx={{ mt: 4, fontsize: 14, fontWeight: 600 }}>Deliverables</Typography>
+              <List dense={true}>
+                {jobData.deliverables.map(deliverable => (
+                  <ListItem key={deliverable.id}>
+                    <ListItemIcon>
+                      <TaskAltIcon />
+                    </ListItemIcon>
+                    <ListItemText
+                      primary={deliverable.name}
+                    />
+                  </ListItem>
+                )
+                )}
+              </List>
+              {!jobData.assigned_freelancer.length && <Button variant='contained' onClick={handleJobApplication}>Apply for job</Button>}
+              <JobModal modalOpenState={modalOpenState} setModalOpenState={setModalOpenState} jobData={jobData} />
+            </Paper>
+            <Box width='500px' pt='32px' ml={4} order={{ xs: 1, md: 2 }} >
+              {jobData.company &&
+                <Card sx={{ width: '300px', p: 2 }}>
+                  <CardContent>
+                    <Typography gutterBottom variant="h5" component="div">
+                      {jobData.company.name}
+                    </Typography>
+                    <CardMedia
+                      component="img"
+                      height="194"
+                      src={jobData.company.logo}
+                      alt={jobData.company.name}
+                    />
+                    <Typography gutterBottom variant="h6" component="div">
+                      Sector: {jobData.company.sector[0].name}
+                    </Typography>
+                  </CardContent>
+                  <CardActions sx={{ display: 'flex', justifyContent: 'center' }}>
+                    <Button size="medium" variant='outlined' onClick={() => handleButtonClick(jobData.company)}>See full company info</Button>
+                  </CardActions>
+                </Card>
+              }
+            </Box>
+          </>
+        }
       </Box>
     </Container >
   )

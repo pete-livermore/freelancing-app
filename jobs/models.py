@@ -8,6 +8,7 @@ class Job(models.Model):
         related_name="jobs",
         blank=True,
     )
+    complete = models.BooleanField(default=False)
     brief = models.TextField(max_length=500, default=None)
     date_listed = models.DateTimeField(auto_now_add=True)
     completion_date = models.DateTimeField(default=None)

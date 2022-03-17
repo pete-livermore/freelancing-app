@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import CircularProgress from '@mui/material/CircularProgress'
 import Container from '@mui/material/Container'
-import CreateProfile from './CreateProfile'
+import CreateProfile from './createProfile/CreateProfile'
 import { Typography } from '@mui/material'
 import ResponsiveSideNav from './ResponsiveSideNav'
 
@@ -15,11 +15,12 @@ const Profile = ({ profileData, setProfileData }) => {
   const [textInput, setTextInput] = useState({ input: false, text: '' })
   const [imageUploaded, setImageUploaded] = useState(false)
   const [milestoneUpdated, setMilestoneUpdated] = useState(false)
+  const [hasErrors, setHasErrors] = useState({ error: true, message: '' })
 
   useEffect(() => {
     const getProfileData = async () => {
       try {
-        const { data } = await axios.get('api/profiles/profile/', {
+        const { data } = await axios.get('/api/profiles/profile/', {
           headers: {
             Authorization: `Bearer ${token}`
           }
@@ -27,8 +28,8 @@ const Profile = ({ profileData, setProfileData }) => {
         setProfileData(data)
         setFormValues(data)
         localStorage.setItem('outsourcd-profile-image', JSON.stringify(data.profile_image))
-      } catch (error) {
-        console.log(error)
+      } catch (err) {
+        setHasErrors({ error: true, message: err.message })
       }
     }
     getProfileData()

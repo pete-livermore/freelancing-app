@@ -54,5 +54,19 @@
       6
     ]
   }
+},
+{
+  "model": "companies.company",
+  "pk": 12,
+  "fields": {
+    "name": "Creative Buzz",
+    "description": "",
+    "logo": "",
+    "website": "",
+    "country": "",
+    "sector": [
+      1
+    ]
+  }
 }
 ]

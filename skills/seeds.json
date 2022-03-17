@@ -103,5 +103,40 @@
   "fields": {
     "name": "Web design"
   }
+},
+{
+  "model": "skills.skill",
+  "pk": 46,
+  "fields": {
+    "name": "Logo creation"
+  }
+},
+{
+  "model": "skills.skill",
+  "pk": 47,
+  "fields": {
+    "name": "PHP"
+  }
+},
+{
+  "model": "skills.skill",
+  "pk": 48,
+  "fields": {
+    "name": "Java"
+  }
+},
+{
+  "model": "skills.skill",
+  "pk": 49,
+  "fields": {
+    "name": "eating cheese"
+  }
+},
+{
+  "model": "skills.skill",
+  "pk": 50,
+  "fields": {
+    "name": "eating hit"
+  }
 }
 ]
