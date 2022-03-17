@@ -12,6 +12,7 @@ import Button from '@mui/material/Button'
 import Tooltip from '@mui/material/Tooltip'
 import MenuItem from '@mui/material/MenuItem'
 import { Link } from 'react-router-dom'
+import { userIsAuthenticated } from '../../helpers/auth'
 
 const pages = ['Register', 'Log in', 'Find']
 const settings = ['Profile', 'Log out']
@@ -31,17 +32,12 @@ export default function TopNav({ setSelectedPage, profileData, setProfileData })
     setAnchorElUser(event.currentTarget)
   }
 
-  console.log(anchorElNav)
-  console.log(anchorElUser)
-
   const handleCloseNavMenu = (e) => {
-    console.log(e.target.name)
     setAnchorElNav(null)
     if (e.target.name === 'Register' || e.target.name === 'Log in') setSelectedPage(e.target.name)
   }
 
   const handleCloseUserMenu = (e) => {
-    console.log(e.target)
     if (e.target.id === 'Log out') {
       localStorage.removeItem('outsourcd-token')
       localStorage.removeItem('outsourcd-profile-image')
@@ -110,38 +106,40 @@ export default function TopNav({ setSelectedPage, profileData, setProfileData })
             </Link>
           ))}
         </Box>
-        <Box sx={{ flexGrow: 0 }}>
-          <Tooltip title="Open settings">
-            <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-              <Avatar alt={Object.keys(profileData).length ? profileData.name : ''} src={profileImage ? profileImage : profileData.profile_image} />
-            </IconButton>
-          </Tooltip>
-          <Menu
-            sx={{ mt: '45px' }}
-            id="menu-appbar"
-            anchorEl={anchorElUser}
-            anchorOrigin={{
-              vertical: 'top',
-              horizontal: 'right',
-            }}
-            keepMounted
-            transformOrigin={{
-              vertical: 'top',
-              horizontal: 'right',
-            }}
-            open={Boolean(anchorElUser)}
-            onClose={handleCloseUserMenu}
-          >
-            {settings.map(setting => (
-              <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                <Link
-                  to={setting === 'Log out' ? '/auth' : `/${setting.toLowerCase()}`} style={{ textDecoration: 'none' }}>
-                  <Typography id={setting} textAlign="center" color='black'>{setting}</Typography>
-                </Link>
-              </MenuItem>
-            ))}
-          </Menu>
-        </Box>
+        {userIsAuthenticated &&
+          <Box sx={{ flexGrow: 0 }}>
+            <Tooltip title="Open settings">
+              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                <Avatar alt={Object.keys(profileData).length ? profileData.name : ''} src={profileImage ? profileImage : profileData.profile_image} />
+              </IconButton>
+            </Tooltip>
+            <Menu
+              sx={{ mt: '45px' }}
+              id="menu-appbar"
+              anchorEl={anchorElUser}
+              anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              open={Boolean(anchorElUser)}
+              onClose={handleCloseUserMenu}
+            >
+              {settings.map(setting => (
+                <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                  <Link
+                    to={setting === 'Log out' ? '/auth' : `/${setting.toLowerCase()}`} style={{ textDecoration: 'none' }}>
+                    <Typography id={setting} textAlign="center" color='black'>{setting}</Typography>
+                  </Link>
+                </MenuItem>
+              ))}
+            </Menu>
+          </Box>
+        }
       </Toolbar>
     </AppBar >
   )

@@ -100,8 +100,8 @@ export default function PublicProfile() {
                 />
               </Box>
               <Stack direction='row' spacing={1}>
-                <a href={profileData.linkedin_url}><LinkedInIcon fontSize='large' sx={{ color: 'white' }} /></a>
-                <a href={profileData.personal_website}>{IconSelector()}</a>
+                <a href={profileData.linkedin_url} target='_blank' rel='noreferrer'><LinkedInIcon fontSize='large' sx={{ color: 'white' }} /></a>
+                <a href={profileData.personal_website} target='_blank' rel='noreferrer'>{IconSelector()}</a>
               </Stack>
             </Box>
           </Paper>

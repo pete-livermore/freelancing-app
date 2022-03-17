@@ -3,6 +3,7 @@ from django.contrib.auth import get_user_model
 import jwt
 from rest_framework.exceptions import PermissionDenied
 from django.conf import settings
+import os
 
 User = get_user_model()
 
@@ -10,6 +11,7 @@ User = get_user_model()
 class JWTAuthentication(BasicAuthentication):
     def authenticate(self, request):
         header = request.headers.get("Authorization")
+        print(header)
         if not header:
             return None
         if not header.startswith("Bearer"):
