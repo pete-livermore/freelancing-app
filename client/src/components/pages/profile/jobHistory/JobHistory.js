@@ -6,7 +6,7 @@ import JobCard from '../../jobs/JobCard'
 export default function JobHistory({ profileData }) {
   const completedJobs = profileData.jobs.filter(job => job.complete)
   return (
-    <Paper sx={{ p: '20px', mr: '15px', minWidth: '400px', mb: '25px' }}>
+    <Paper sx={{ p: 4, mr: 2, minWidth: '400px', mb: 4 }}>
       <Typography variant='h6' component='h2'>
         Job history
       </Typography>

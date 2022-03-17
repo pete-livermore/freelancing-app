@@ -102,7 +102,7 @@ export default function AboutYou({ profileData, setProfileData, textInput, setTe
     <>
       <Paper elevation={3} sx={{ p: 4, mb: 4 }}>
         <Box display='flex' justifyContent='space-between'>
-          <Typography variant='h5' component='h2'>About you</Typography>
+          <Typography variant='h6' component='h2'>About you</Typography>
           <Button onClick={handleProfileTextClick}
             endIcon={<EditIcon />}>
             Edit</Button>
@@ -164,7 +164,7 @@ export default function AboutYou({ profileData, setProfileData, textInput, setTe
         </List>
       </Paper>
       <Paper elevation={3} sx={{ p: 4, mb: 4 }}>
-        <Typography variant='h5' component='h2'>Skills</Typography>
+        <Typography variant='h6' component='h2'>Skills</Typography>
         <Box p={1} mt={2} width='100%' spacing={1} display='flex' flexWrap='wrap' justifyContent='flex-start'>
           {profileData.skills.map(skill => {
             return (<Chip
@@ -180,7 +180,7 @@ export default function AboutYou({ profileData, setProfileData, textInput, setTe
       </Paper>
       <Paper elevation={3} sx={{ p: 4, mb: 4, width: '100%' }}>
         <Box display='flex' justifyContent='space-between'>
-          <Typography variant='h5' component='h2'>Professional experience</Typography>
+          <Typography variant='h6' component='h2'>Professional experience</Typography>
           <Button onClick={handleExperienceTextClick}
             endIcon={<EditIcon />}>
             Add</Button>

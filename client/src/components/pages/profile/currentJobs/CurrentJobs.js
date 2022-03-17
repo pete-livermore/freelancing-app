@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import FormControl from '@mui/material/FormControl'
 import InputLabel from '@mui/material/InputLabel'
 import Select from '@mui/material/Select'
@@ -84,9 +85,6 @@ export default function CurrentJobs({ profileData, setMilestoneUpdated }) {
   return (
     <Box display='flex' flexDirection='column'>
       <Box display='flex' justifyContent='space-between' flexDirection={{ sm: 'column', md: 'row' }}>
-        <Typography variant='h5' component='h2' width='200px'>
-          Current jobs
-        </Typography>
         {Object.keys(selectedJobData).length ?
           <>
             <JobCardMini job={selectedJobData} image={true} calcProgress={calcProgress} />
@@ -109,36 +107,50 @@ export default function CurrentJobs({ profileData, setMilestoneUpdated }) {
             </FormControl>
           </>
           :
-          ''
+          hasError.error ?
+            <Typography>{hasError.message}</Typography>
+            :
+            ''
         }
       </Box>
       <Box display='flex' mt={6} justifyContent='space-between' flexDirection={{ md: 'column', lg: 'row' }}>
         <Paper sx={{ flexGrow: 1, p: '20px', mr: 6, minWidth: 400 }}>
-          {Object.keys(selectedJobData).length ?
-            <>
-              <Typography>Milestones</Typography>
-              <CheckList
-                selectedJob={selectedJobData}
-                setSelectedJob={setSelectedJob}
-                setHoveredDate={setHoveredDate}
-                months={months}
-                setMonth={setMonth}
-                setMilestoneUpdated={setMilestoneUpdated}
-                setChecklistUpdated={setChecklistUpdated}
-                year={year}
-                setYear={setYear}
-              />
-            </>
+          {Object.keys(selectedJob).length ?
+            Object.keys(selectedJobData).length ?
+              <>
+                <Typography variant='h6'>Milestones</Typography>
+                <CheckList
+                  selectedJob={selectedJobData}
+                  setSelectedJob={setSelectedJob}
+                  setHoveredDate={setHoveredDate}
+                  months={months}
+                  setMonth={setMonth}
+                  setMilestoneUpdated={setMilestoneUpdated}
+                  setChecklistUpdated={setChecklistUpdated}
+                  year={year}
+                  setYear={setYear}
+                />
+                {calcProgress() === 100 &&
+                  <Stack direction='row' spacing={4} sx={{ justifyContent: 'center', mt: 1 }}>
+                    <Button type='button' variant='contained' onClick={handleGenerateInvoice}>Generate invoice</Button>
+                    <Button type='button' variant='contained' sx={{ backgroundColor: '#C2185B', '&:hover': { backgroundColor: '#ad1457' } }} onClick={handleComplete}>Mark job as complete</Button>
+                  </Stack>}
+              </>
+              :
+              hasError.error ?
+                <Typography>{hasError.message}</Typography>
+                :
+                <Box width='100%' display='flex' justifyContent='center' pt={4}>
+                  <CircularProgress />
+                </Box>
             :
             <Box width='100%' display='flex' justifyContent='center' pt={4}>
-              <CircularProgress />
+              <Box display='flex' flexDirection='column'>
+                <Typography variant='h6'>No jobs yet</Typography>
+                <Button variant='contained' sx={{ mt: 4 }}><Link to='/find' style={{ textDecoration: 'none' }}><Typography color='white'>Find a job</Typography></Link></Button>
+              </Box>
             </Box>
           }
-          {calcProgress() === 100 &&
-            <Stack direction='row' spacing={4} sx={{ justifyContent: 'center', mt: 1 }}>
-              <Button type='button' variant='contained' onClick={handleGenerateInvoice}>Generate invoice</Button>
-              <Button type='button' variant='contained' sx={{ backgroundColor: '#C2185B', '&:hover': { backgroundColor: '#ad1457' } }} onClick={handleComplete}>Mark job as complete</Button>
-            </Stack>}
         </Paper>
         <Paper sx={{ pt: 4, px: 4, ml: { xs: 0, sm: 0, md: 0, lg: 5 }, maxWidth: 420 }} >
           <Calendar months={months} month={month} setMonth={setMonth} hoveredDate={hoveredDate} years={years} setYear={setYear} year={year} />

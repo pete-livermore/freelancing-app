@@ -18,7 +18,7 @@ export default function Reviews({ profileData }) {
           return <ReviewBox key={review.id} review={review} />
         })
         :
-        <Typography>No reviews received yet</Typography>
+        <Typography sx={{ mt: 2 }}>No reviews received yet</Typography>
       }
     </Paper>
   )
