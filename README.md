@@ -65,7 +65,7 @@ Back on the job detail page, users can sign up for a job by clicking app (this o
 Clicking submit will add the job to the user's "current jobs" section:
 ![alt text](https://res.cloudinary.com/di7ndofao/image/upload/v1647875209/Habit_tracker_app/Screenshot_2022-03-21_at_15.00.22_z4url7.png "Current jobs")
 User can then access features that will be demonstrated in the logged-in route below:
-### New user
+### Returning user
 After logging in, the user returns to their profile "About me section"
 ![alt text](https://res.cloudinary.com/di7ndofao/image/upload/v1647874132/Habit_tracker_app/Screenshot_2022-03-21_at_14.44.37_vqz15q.png "About me")
 
