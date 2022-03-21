@@ -16,7 +16,7 @@ import axios from 'axios'
 import CircularProgress from '@mui/material/CircularProgress'
 
 
-export default function CurrentJobs({ profileData, setMilestoneUpdated }) {
+export default function CurrentJobs({ profileData, setMilestoneUpdated, setJobCompleted, jobCompleted }) {
   const token = window.localStorage.getItem('outsourcd-token')
   const years = [2022, 2023, 2024, 2025, 2026, 2027, 2028, 2029, 2030]
   const [year, setYear] = useState(years[years.indexOf(new Date().getFullYear())])
@@ -25,7 +25,9 @@ export default function CurrentJobs({ profileData, setMilestoneUpdated }) {
   const [selectedJobData, setSelectedJobData] = useState({})
   const [checklistUpdated, setChecklistUpdated] = useState(false)
   const activeJobs = Object.keys(profileData).length ? profileData.jobs.filter(job => !job.complete) : []
+  console.log(activeJobs)
   const [selectedJob, setSelectedJob] = useState(activeJobs.length ? { ...activeJobs[0] } : {})
+  console.log(selectedJob)
   const handleChange = (e) => {
     const matchedJobs = profileData.jobs.filter(job => job.name === e.target.value)
     setSelectedJob(matchedJobs[0])
@@ -74,6 +76,13 @@ export default function CurrentJobs({ profileData, setMilestoneUpdated }) {
             }
           }
         )
+        if (!jobCompleted) setJobCompleted(true)
+        else setJobCompleted(false)
+        if (activeJobs.length > 1) setSelectedJob(activeJobs[activeJobs.indexOf(selectedJob) + 1])
+        else {
+          setSelectedJob({})
+          setSelectedJobData({})
+        }
       } catch (err) {
         setHasError({ error: true, message: err.message })
       }
@@ -132,8 +141,21 @@ export default function CurrentJobs({ profileData, setMilestoneUpdated }) {
                 />
                 {calcProgress() === 100 &&
                   <Stack direction='row' spacing={4} sx={{ justifyContent: 'center', mt: 1 }}>
-                    <Button type='button' variant='contained' onClick={handleGenerateInvoice}>Generate invoice</Button>
-                    <Button type='button' variant='contained' sx={{ backgroundColor: '#C2185B', '&:hover': { backgroundColor: '#ad1457' } }} onClick={handleComplete}>Mark job as complete</Button>
+                    <Button
+                      type='button'
+                      variant='contained'
+                      onClick={handleGenerateInvoice}
+                    >
+                      Generate invoice
+                    </Button>
+                    <Button
+                      type='button'
+                      variant='contained'
+                      sx={{ backgroundColor: '#C2185B', '&:hover': { backgroundColor: '#ad1457' } }}
+                      onClick={handleComplete}
+                    >
+                      Mark job as complete
+                    </Button>
                   </Stack>}
               </>
               :

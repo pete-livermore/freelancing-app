@@ -26,7 +26,7 @@ import Reviews from './reviews/Reviews'
 
 const drawerWidth = 280
 
-function ResponsiveSideNav({ profileData, setImageUploaded, setMilestoneUpdated, setProfileData, textInput, setTextInput, setSkillsAdded, skillsAdded, window }) {
+function ResponsiveSideNav({ profileData, setImageUploaded, setMilestoneUpdated, setProfileData, textInput, setTextInput, setSkillsAdded, skillsAdded, window, setJobCompleted, jobCompleted }) {
   const [mobileOpen, setMobileOpen] = useState(false)
   const [avatarClicked, setAvatarClicked] = useState(false)
 
@@ -166,7 +166,7 @@ function ResponsiveSideNav({ profileData, setImageUploaded, setMilestoneUpdated,
         {selectedSection === 0 &&
           <AboutYou profileData={profileData} setProfileData={setProfileData} textInput={textInput} setTextInput={setTextInput} setSkillsAdded={setSkillsAdded} skillsAdded={skillsAdded} />}
         {selectedSection === 1 &&
-          <CurrentJobs profileData={profileData} setMilestoneUpdated={setMilestoneUpdated} />}
+          <CurrentJobs profileData={profileData} setMilestoneUpdated={setMilestoneUpdated} setJobCompleted={setJobCompleted} jobCompleted={jobCompleted} />}
         {selectedSection === 2 &&
           <JobHistory profileData={profileData} />
         }

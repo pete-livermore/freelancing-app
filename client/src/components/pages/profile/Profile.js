@@ -16,6 +16,8 @@ const Profile = ({ profileData, setProfileData }) => {
   const [imageUploaded, setImageUploaded] = useState(false)
   const [milestoneUpdated, setMilestoneUpdated] = useState(false)
   const [hasErrors, setHasErrors] = useState({ error: true, message: '' })
+  const [jobCompleted, setJobCompleted] = useState(false)
+
 
   useEffect(() => {
     const getProfileData = async () => {
@@ -33,7 +35,7 @@ const Profile = ({ profileData, setProfileData }) => {
       }
     }
     getProfileData()
-  }, [token, skillsAdded, textInput, isLoading, imageUploaded, milestoneUpdated, setProfileData])
+  }, [token, skillsAdded, textInput, isLoading, imageUploaded, milestoneUpdated, setProfileData, jobCompleted])
 
 
   return (
@@ -49,6 +51,8 @@ const Profile = ({ profileData, setProfileData }) => {
             setTextInput={setTextInput}
             setSkillsAdded={setSkillsAdded}
             skillsAdded={skillsAdded}
+            setJobCompleted={setJobCompleted}
+            jobCompleted={jobCompleted}
           />
           :
           <>

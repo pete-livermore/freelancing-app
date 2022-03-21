@@ -11,7 +11,7 @@ export default function JobHistory({ profileData }) {
         Job history
       </Typography>
       {completedJobs.length ?
-        completedJobs.map(job => <JobCard job={job} image='true' widthMax={{ xs: '400px', md: '500px' }} cardHeight='440px' />)
+        completedJobs.map(job => <JobCard key={job.id} job={job} image='true' widthMax={{ xs: '400px', md: '500px' }} cardHeight='440px' />)
         :
         <p>No completed jobs yet</p>
       }

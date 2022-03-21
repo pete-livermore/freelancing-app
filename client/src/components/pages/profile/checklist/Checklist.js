@@ -7,7 +7,7 @@ import ListItemIcon from '@mui/material/ListItemIcon'
 import ListItemText from '@mui/material/ListItemText'
 import Checkbox from '@mui/material/Checkbox'
 
-export default function CheckList({ selectedJob, setHoveredDate, months, setMonth, setChecklistUpdated, years, setYear, year }) {
+export default function CheckList({ selectedJob, setHoveredDate, months, setMonth, setChecklistUpdated, setYear }) {
   const { milestones } = selectedJob
   const [checked, setChecked] = useState([0])
   const token = localStorage.getItem('outsourcd-token')
