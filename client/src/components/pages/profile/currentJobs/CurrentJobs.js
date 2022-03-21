@@ -25,9 +25,7 @@ export default function CurrentJobs({ profileData, setMilestoneUpdated, setJobCo
   const [selectedJobData, setSelectedJobData] = useState({})
   const [checklistUpdated, setChecklistUpdated] = useState(false)
   const activeJobs = Object.keys(profileData).length ? profileData.jobs.filter(job => !job.complete) : []
-  console.log(activeJobs)
   const [selectedJob, setSelectedJob] = useState(activeJobs.length ? { ...activeJobs[0] } : {})
-  console.log(selectedJob)
   const handleChange = (e) => {
     const matchedJobs = profileData.jobs.filter(job => job.name === e.target.value)
     setSelectedJob(matchedJobs[0])
@@ -39,7 +37,7 @@ export default function CurrentJobs({ profileData, setMilestoneUpdated, setJobCo
     if (Object.keys(selectedJob).length) {
       const getJob = async () => {
         try {
-          const { data } = await axios.get(`/api/jobs/${selectedJob.id}`)
+          const { data } = await axios.get(`/api/jobs/${selectedJob.id}/`)
           setSelectedJobData(data)
         } catch (err) {
           setHasError({ error: true, message: err.message })

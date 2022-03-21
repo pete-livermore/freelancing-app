@@ -22,7 +22,7 @@ export default function CompanyDetail() {
 
     const getCompanyData = async () => {
       try {
-        const { data } = await axios.get(`/api/companies/${id}`)
+        const { data } = await axios.get(`/api/companies/${id}/`)
         console.log(data)
         setCompanyData(data)
       } catch (err) {
