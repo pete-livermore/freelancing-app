@@ -28,7 +28,7 @@ export default function JobDetail() {
   useEffect(() => {
     const getJob = async () => {
       try {
-        const { data } = await axios.get(`/api/jobs/${id}`)
+        const { data } = await axios.get(`/api/jobs/${id}/`)
         setJobData(data)
       } catch (err) {
         setError({ error: true, message: err.message })
