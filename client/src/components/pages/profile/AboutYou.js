@@ -192,9 +192,7 @@ export default function AboutYou({ profileData, setProfileData, textInput, setTe
               return (
                 <ListItem key={job.id}>
                   <ListItemAvatar>
-                    <Avatar>
-                      <img src={job.company_name.logo} alt={job.company_name.name} />
-                    </Avatar>
+                    <Avatar src={job.company_name.logo} alt={job.company_name.name} />
                   </ListItemAvatar>
                   <ListItemText primary={job.job_title} secondary={job.company_name.name} />
                   <p>{`${formattedMonth(job.start_date)} ${formattedYear(job.start_date)} ${String.fromCharCode(8211)} ${formattedMonth(job.end_date)} ${formattedYear(job.end_date)}`}</p>

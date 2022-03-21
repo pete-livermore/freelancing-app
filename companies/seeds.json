@@ -1,72 +1,62 @@
 [
-{
-  "model": "companies.company",
-  "pk": 1,
-  "fields": {
-    "name": "FlexiCapital",
-    "description": "We are the UK's largest growing bank providing mortgages, current accounts and credit cards, with now over 20,000 customers across the country. We specialise in providing the best digital banking services.",
-    "logo": "https://res.cloudinary.com/di7ndofao/image/upload/v1646668102/Habit_tracker_app/FlexiCapital-logos_rehch8.jpg",
-    "website": "www.flexicapital.bank",
-    "country": "United Kingdom",
-    "sector": [
-      4
-    ]
+  {
+    "model": "companies.company",
+    "pk": 1,
+    "fields": {
+      "name": "FlexiCapital",
+      "description": "We are the UK's largest growing bank providing mortgages, current accounts and credit cards, with now over 20,000 customers across the country. We specialise in providing the best digital banking services.",
+      "logo": "https://res.cloudinary.com/di7ndofao/image/upload/v1646668102/Habit_tracker_app/FlexiCapital-logos_rehch8.jpg",
+      "website": "www.flexicapital.bank",
+      "country": "United Kingdom",
+      "sector": [4]
+    }
+  },
+  {
+    "model": "companies.company",
+    "pk": 2,
+    "fields": {
+      "name": "Blabbermouth Media",
+      "description": "Our award-winning digital marketing services will get your ideal customers to your website. A London-based marketing agency that delivers innovative, remarkable, unique work.",
+      "logo": "https://res.cloudinary.com/di7ndofao/image/upload/v1646847073/Habit_tracker_app/9b523bc08d6e4fb485d53cba9e1dca3e_loggw4.png",
+      "website": "www.blabbermouthmedia.com",
+      "country": "United Kingdom",
+      "sector": [1]
+    }
+  },
+  {
+    "model": "companies.company",
+    "pk": 3,
+    "fields": {
+      "name": "Yummy Noodles",
+      "description": "We are an independent family business since 2003 started with a passion for Pan Asian food having travelled the Far East. I spotted a gap and knew I could do it better because of our backgrounds. We are foodies so we set out putting together our favourite dishes that we both enjoy. Banishing the traits of some traditional restaurants, I wanted to give a contemporary twist to everything where East meets West, quality home cooked food and friendly atmosphere.",
+      "logo": "https://res.cloudinary.com/di7ndofao/image/upload/v1646847092/Habit_tracker_app/Yummy_Noodles-logos_omwkjj.jpg",
+      "website": "www.yummunoodles.com",
+      "country": "United Kingdom",
+      "sector": [5]
+    }
+  },
+  {
+    "model": "companies.company",
+    "pk": 4,
+    "fields": {
+      "name": "G&N",
+      "description": "G & N is is a contemporary clothing brand known for its trend-driven styles with affordable prices. Drawing inspiration from the latest trends, from street style to runway, About Us clothing brand offers an array of styles that is fit for the fashion loving girl. From workwear to street style, night out, About Us label can keep you going from day-to-night. Shop the latest collection from About Us clothing line, ranging in dresses to tops, sweater knits, rompers, pants and outerwear.",
+      "logo": "https://res.cloudinary.com/di7ndofao/image/upload/v1646847410/Habit_tracker_app/G_N-logos_fryfpj.jpg",
+      "website": "www.gandnfashion.com",
+      "country": "United Kingdom",
+      "sector": [6]
+    }
+  },
+  {
+    "model": "companies.company",
+    "pk": 12,
+    "fields": {
+      "name": "Creative Buzz",
+      "description": "",
+      "logo": "https://res.cloudinary.com/di7ndofao/image/upload/v1647872787/Habit_tracker_app/Creative_Buzz-logos_rs2p3i.jpg",
+      "website": "",
+      "country": "",
+      "sector": [1]
+    }
   }
-},
-{
-  "model": "companies.company",
-  "pk": 2,
-  "fields": {
-    "name": "Blabbermouth Media",
-    "description": "Our award-winning digital marketing services will get your ideal customers to your website. A London-based marketing agency that delivers innovative, remarkable, unique work.",
-    "logo": "https://res.cloudinary.com/di7ndofao/image/upload/v1646847073/Habit_tracker_app/9b523bc08d6e4fb485d53cba9e1dca3e_loggw4.png",
-    "website": "www.blabbermouthmedia.com",
-    "country": "United Kingdom",
-    "sector": [
-      1
-    ]
-  }
-},
-{
-  "model": "companies.company",
-  "pk": 3,
-  "fields": {
-    "name": "Yummy Noodles",
-    "description": "We are an independent family business since 2003 started with a passion for Pan Asian food having travelled the Far East. I spotted a gap and knew I could do it better because of our backgrounds. We are foodies so we set out putting together our favourite dishes that we both enjoy. Banishing the traits of some traditional restaurants, I wanted to give a contemporary twist to everything where East meets West, quality home cooked food and friendly atmosphere.",
-    "logo": "https://res.cloudinary.com/di7ndofao/image/upload/v1646847092/Habit_tracker_app/Yummy_Noodles-logos_omwkjj.jpg",
-    "website": "www.yummunoodles.com",
-    "country": "United Kingdom",
-    "sector": [
-      5
-    ]
-  }
-},
-{
-  "model": "companies.company",
-  "pk": 4,
-  "fields": {
-    "name": "G&N",
-    "description": "G & N is is a contemporary clothing brand known for its trend-driven styles with affordable prices. Drawing inspiration from the latest trends, from street style to runway, About Us clothing brand offers an array of styles that is fit for the fashion loving girl. From workwear to street style, night out, About Us label can keep you going from day-to-night. Shop the latest collection from About Us clothing line, ranging in dresses to tops, sweater knits, rompers, pants and outerwear.",
-    "logo": "https://res.cloudinary.com/di7ndofao/image/upload/v1646847410/Habit_tracker_app/G_N-logos_fryfpj.jpg",
-    "website": "www.gandnfashion.com",
-    "country": "United Kingdom",
-    "sector": [
-      6
-    ]
-  }
-},
-{
-  "model": "companies.company",
-  "pk": 12,
-  "fields": {
-    "name": "Creative Buzz",
-    "description": "",
-    "logo": "",
-    "website": "",
-    "country": "",
-    "sector": [
-      1
-    ]
-  }
-}
 ]
