@@ -55,7 +55,7 @@ const Form = ({ formType, setIsFlipped, isFlipped, setSelectedPage }) => {
   // Setting form errors
   const [formError, setFormError] = useState({
     error: false,
-    detail: ''
+    message: ''
   })
   const [formSuccess, setFormSuccess] = useState(false)
 
@@ -82,10 +82,10 @@ const Form = ({ formType, setIsFlipped, isFlipped, setSelectedPage }) => {
           navigate('/profile')
         }
       } catch (err) {
-        setFormError({ error: true, detail: err.response.data.detail })
+        setFormError({ error: true, message: err.response.data.detail })
         setTimeout(() => {
-          setFormError({ error: false, detail: '' })
-        }, 3000)
+          setFormError({ error: false, message: '' })
+        }, 4000)
       }
     }
     postData()
@@ -93,10 +93,10 @@ const Form = ({ formType, setIsFlipped, isFlipped, setSelectedPage }) => {
 
   const handleCheckPasswords = () => {
     if (formValues.password && formValues.password_confirmation && formValues.password !== formValues.password_confirmation) {
-      setFormError({ error: true, detail: 'Passwords don\'t match' })
+      setFormError({ error: true, message: 'Passwords don\'t match' })
     }
     setTimeout(() => {
-      setFormError({ error: false, detail: '' })
+      setFormError({ error: false, message: '' })
     }, 3000)
   }
 
@@ -158,6 +158,7 @@ const Form = ({ formType, setIsFlipped, isFlipped, setSelectedPage }) => {
                 onChange={handleInputChange}
                 onBlur={handleCheckPasswords}
                 sx={{ width: '300px' }}
+                required
               />
             </Grid>
           )
@@ -170,11 +171,11 @@ const Form = ({ formType, setIsFlipped, isFlipped, setSelectedPage }) => {
           }
         </Grid> */}
         <Grid item>
-          <Button sx={{ mt: 2 }} variant='contained' type='submit'>Submit</Button>
+          <Button sx={{ mt: 2 }} variant='contained' type='submit' >Submit</Button>
         </Grid>
       </Grid>
-      <Grid item>
-        {formError.error && <Alert severity="error">{formError.detail}</Alert>}
+      <Grid item mt={2}>
+        {formError.error && <Alert severity="error">{formError.message}</Alert>}
       </Grid>
       {formType === 'Register' &&
         <Grid display='flex' flexDirection='column' alignItems='center' mt={4}>

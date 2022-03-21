@@ -22,8 +22,7 @@ class AuthUserSerializer(serializers.ModelSerializer):
         try:
             password_validation.validate_password(password)
         except ValidationError as err:
-            print(err)
-            raise ValidationError({"password": "Invalid password"})
+            raise ValidationError({"detail": err})
         data["password"] = make_password(password)
         return data
 
