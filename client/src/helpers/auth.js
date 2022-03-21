@@ -16,7 +16,6 @@ export const getPayload = () => {
 
 export const userIsAuthenticated = () => {
   const payload = getPayload()
-  console.log(payload)
   if (!payload) return false
   const currentTime = Math.round(Date.now() / 1000)
   return currentTime < payload.expiry

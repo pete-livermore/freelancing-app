@@ -37,7 +37,6 @@ export default function JobModal({ jobData, modalOpenState, setModalOpenState })
 
   const handleSubmit = () => {
     const dataToSend = { assigned_freelancer: [profileData.id] }
-    console.log(dataToSend)
     const addJobToProfile = async () => {
       try {
         await axios.put(`/api/jobs/${id}/`, dataToSend,

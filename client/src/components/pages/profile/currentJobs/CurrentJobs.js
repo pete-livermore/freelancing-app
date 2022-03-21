@@ -24,7 +24,7 @@ export default function CurrentJobs({ profileData, setMilestoneUpdated }) {
   const [month, setMonth] = useState(months[new Date().getMonth()])
   const [selectedJobData, setSelectedJobData] = useState({})
   const [checklistUpdated, setChecklistUpdated] = useState(false)
-  const activeJobs = profileData.jobs.filter(job => !job.complete)
+  const activeJobs = Object.keys(profileData).length ? profileData.jobs.filter(job => !job.complete) : []
   const [selectedJob, setSelectedJob] = useState(activeJobs.length ? { ...activeJobs[0] } : {})
   const handleChange = (e) => {
     const matchedJobs = profileData.jobs.filter(job => job.name === e.target.value)

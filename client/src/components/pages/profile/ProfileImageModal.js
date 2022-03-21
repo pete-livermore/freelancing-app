@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import axios from 'axios'
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
@@ -15,6 +15,7 @@ export default function ProfileImageModal({ profileData, avatarClicked, setAvata
     password: '',
     profile_image: ''
   })
+  const [error, setError] = useState({ error: false, message: '' })
 
   const handleImageUrl = url => {
     setFormValues({ username: profileData.username, email: profileData.email, password: profileData.password, profile_image: url })
@@ -41,8 +42,8 @@ export default function ProfileImageModal({ profileData, avatarClicked, setAvata
         handleClose()
         setImageUploaded(true)
         setImageUploaded(false)
-      } catch (error) {
-        console.log(error)
+      } catch (err) {
+        setError({ error: true, message: err.message })
       }
     }
     postImage()

@@ -8,6 +8,7 @@ import Paper from '@mui/material/Paper'
 const CreateProfile = ({ formValues, setFormValues, setIsLoading, steps }) => {
   const [skills, setSkills] = useState([])
   const [sectors, setSectors] = useState([])
+  const [error, setError] = useState({ error: false, message: '' })
 
 
   useEffect(() => {
@@ -15,8 +16,8 @@ const CreateProfile = ({ formValues, setFormValues, setIsLoading, steps }) => {
       try {
         const { data } = await axios.get('api/skills/')
         setSkills(data)
-      } catch (error) {
-        console.log(error)
+      } catch (err) {
+        setError({ error: true, message: err.message })
       }
     }
     getSkills()
@@ -27,8 +28,8 @@ const CreateProfile = ({ formValues, setFormValues, setIsLoading, steps }) => {
       try {
         const { data } = await axios.get('api/sectors/')
         setSectors(data)
-      } catch (error) {
-        console.log(error)
+      } catch (err) {
+        setError({ error: true, message: err.message })
       }
     }
     getSectors()

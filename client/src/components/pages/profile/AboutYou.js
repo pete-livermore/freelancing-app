@@ -21,6 +21,7 @@ import ExperienceModal from './experience/ExperienceModal'
 
 export default function AboutYou({ profileData, setProfileData, textInput, setTextInput, setSkillsAdded, skillsAdded }) {
   const [experienceModalOpen, setExperienceModalOpen] = useState(false)
+  const [error, setError] = useState({ error: false, message: '' })
 
   const handleChipDelete = (label) => () => {
     const filteredSkills = profileData.skills.filter(skill => skill.id !== label)
@@ -42,7 +43,7 @@ export default function AboutYou({ profileData, setProfileData, textInput, setTe
             }
           })
       } catch (err) {
-        console.log(err)
+        setError({ error: true, message: err.message })
       }
     }
     deleteSkill()
@@ -64,7 +65,6 @@ export default function AboutYou({ profileData, setProfileData, textInput, setTe
       'username': profileData.username,
       'about_me': textInput.text
     }
-    console.log(dataToSend)
     const postData = async () => {
       try {
         const token = localStorage.getItem('outsourcd-token')
@@ -76,7 +76,7 @@ export default function AboutYou({ profileData, setProfileData, textInput, setTe
           })
         setTextInput({ input: false, text: '' })
       } catch (err) {
-        console.log(err)
+        setError({ error: true, message: err.message })
       }
     }
     postData()

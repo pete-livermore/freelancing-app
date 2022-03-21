@@ -25,7 +25,6 @@ export default function CountrySelector({ formValues, setFormValues }) {
         }}
         inputValue={inputValue}
         onInputChange={(event, newInputValue) => {
-          console.log(newInputValue)
           setInputValue(newInputValue)
           setFormValues({ ...formValues, country: newInputValue })
         }}

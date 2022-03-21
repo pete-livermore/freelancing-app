@@ -48,7 +48,6 @@ const SearchBox = ({ label, skillsData, searchResults, setSearchResults, setSkil
     setDisabledStatus(false)
     const arr = [...activeIndices]
     arr.push(name)
-    console.log(name)
     const skillsForAdding = skillsData.filter(obj => arr.includes(obj.name))
     if (skillsForAdding.length === 0) setSkillsToAdd([{ name: name, id: skillsData.length + 1 }])
     else setSkillsToAdd(skillsForAdding)

@@ -16,6 +16,7 @@ export default function ProfileImageModal({ profileData, iconClicked, setIconCli
   const handleClose = () => {
     setIconClicked(false)
   }
+  const [error, setError] = useState({ error: false, message: '' })
 
   const handleFormSubmit = (e) => {
     e.preventDefault()
@@ -29,8 +30,8 @@ export default function ProfileImageModal({ profileData, iconClicked, setIconCli
           }
         )
         handleClose()
-      } catch (error) {
-        console.log(error)
+      } catch (err) {
+        setError({ error: true, message: err.message })
       }
     }
     postImage()

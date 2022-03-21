@@ -24,9 +24,7 @@ export default function HorizontalStepper({ formValues, handleImageUrl, skills, 
   const [activeStep, setActiveStep] = useState(0)
   const [skipped, setSkipped] = useState(new Set())
   const [imageUploading, setImageUploading] = useState(false)
-  const [selectedSector, setSelectedSector] = useState({ name: '', id: '' })
-  const [formErrors, setFormErrors] = useState()
-  const [error, setError] = useState({ error: false, input: '', message: '' })
+  const [error, setError] = useState({ error: false, message: '' })
   const [imageUploaded, setImageUploaded] = useState(false)
   const steps = [{
     text: 'Personal details',
@@ -64,7 +62,6 @@ export default function HorizontalStepper({ formValues, handleImageUrl, skills, 
     }
     setActiveStep((prevActiveStep) => prevActiveStep + 1)
     setSkipped(newSkipped)
-    console.log(formValues)
     if (activeStep === steps.length - 1) {
       const postData = async () => {
         try {
@@ -77,7 +74,7 @@ export default function HorizontalStepper({ formValues, handleImageUrl, skills, 
             })
           setIsLoading(true)
         } catch (err) {
-          console.log(err)
+          setError({ error: true, message: err.message })
         }
       }
       postData()

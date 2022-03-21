@@ -2,9 +2,7 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
-import Typography from '@mui/material/Typography'
 import Modal from '@mui/material/Modal'
-import TextField from '@mui/material/TextField'
 import Stack from '@mui/material/Stack'
 import Alert from '@mui/material/Alert'
 import SearchBox from '../search/SearchBox'
@@ -13,7 +11,7 @@ export default function SkillsModal({ profileData, setSkillsAdded, skillsAdded }
   const [skillsData, setSkillsData] = useState([])
   const [open, setOpen] = useState(false)
   const [skill, setSkill] = useState({ name: '', found: true, message: '', id: 0 })
-  const [isError, setIsError] = useState({ errror: false, message: ' ' })
+  const [error, setError] = useState({ errror: false, message: ' ' })
   const [searchResults, setSearchResults] = useState([])
   const [disabledStatus, setDisabledStatus] = useState(true)
   const [skillsToAdd, setSkillsToAdd] = useState([])
@@ -24,7 +22,7 @@ export default function SkillsModal({ profileData, setSkillsAdded, skillsAdded }
         const { data } = await axios.get('api/skills/')
         setSkillsData(data)
       } catch (err) {
-        console.log(err)
+        setError({ error: true, message: err.message })
       }
     }
     getSkills()
@@ -52,7 +50,7 @@ export default function SkillsModal({ profileData, setSkillsAdded, skillsAdded }
         setSearchResults([{ ...skill }])
         setSkill({ name: '', found: true, message: '' })
       } catch (error) {
-        setIsError({
+        setError({
           error: true,
           message: error.response.data.name[0]
         })
@@ -93,7 +91,7 @@ export default function SkillsModal({ profileData, setSkillsAdded, skillsAdded }
         setSkillsAdded(false)
         setSearchResults([])
       } catch (err) {
-        console.log(err)
+        setError({ error: true, message: err.message })
       }
     }
     addSkillsToProfile()
@@ -131,7 +129,7 @@ export default function SkillsModal({ profileData, setSkillsAdded, skillsAdded }
                 <Button variant='contained' type='submit' disabled={disabledStatus}>Add to profile</Button>
                 <Button variant='outlined' onClick={handleClose}>Close</Button>
               </Stack>
-              {isError.error && <Alert severity="error">{isError.message}</Alert>}
+              {error.error && <Alert severity="error">{error.message}</Alert>}
             </form>
           </Box>
         </Box>

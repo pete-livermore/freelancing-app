@@ -20,6 +20,7 @@ import TaskAltIcon from '@mui/icons-material/TaskAlt';
 export default function JobDetail() {
   const [jobData, setJobData] = useState({})
   const [modalOpenState, setModalOpenState] = useState(false)
+  const [error, setError] = useState({ error: false, message: '' })
 
   const { id } = useParams()
   const navigate = useNavigate()
@@ -30,7 +31,7 @@ export default function JobDetail() {
         const { data } = await axios.get(`/api/jobs/${id}`)
         setJobData(data)
       } catch (err) {
-        console.log(err)
+        setError({ error: true, message: err.message })
       }
     }
     getJob()

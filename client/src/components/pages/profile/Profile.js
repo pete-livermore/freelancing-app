@@ -35,8 +35,6 @@ const Profile = ({ profileData, setProfileData }) => {
     getProfileData()
   }, [token, skillsAdded, textInput, isLoading, imageUploaded, milestoneUpdated, setProfileData])
 
-  console.log(profileData)
-
 
   return (
     <>

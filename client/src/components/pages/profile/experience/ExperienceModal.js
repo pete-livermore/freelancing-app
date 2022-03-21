@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
 import axios from 'axios'
 import Box from '@mui/material/Box'
 import Grid from '@mui/material/Grid'
@@ -29,6 +28,7 @@ export default function ExperienceModal({ experienceModalOpen, setExperienceModa
     end_date: new Date(),
     user: profileData.id
   })
+  const [error, setError] = useState({ error: false, message: '' })
 
 
   useEffect(() => {
@@ -36,8 +36,8 @@ export default function ExperienceModal({ experienceModalOpen, setExperienceModa
       try {
         const { data } = await axios.get('/api/companies/')
         setCompanies(data)
-      } catch (error) {
-        console.log(error)
+      } catch (err) {
+        setError({ error: true, message: err.message })
       }
     }
     getCompanies()
@@ -59,8 +59,8 @@ export default function ExperienceModal({ experienceModalOpen, setExperienceModa
           }
         )
         handleClose()
-      } catch (error) {
-        console.log(error)
+      } catch (err) {
+        setError({ error: true, message: err.message })
       }
     }
     addExperience()

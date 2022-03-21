@@ -11,6 +11,7 @@ export default function CheckList({ selectedJob, setHoveredDate, months, setMont
   const { milestones } = selectedJob
   const [checked, setChecked] = useState([0])
   const token = localStorage.getItem('outsourcd-token')
+  const [error, setError] = useState({ error: false, message: '' })
 
   useEffect(() => {
     if (Object.keys(selectedJob).length && selectedJob.milestones.length) {
@@ -21,7 +22,6 @@ export default function CheckList({ selectedJob, setHoveredDate, months, setMont
 
 
   const handleToggle = (milestone) => () => {
-    console.log(milestone)
     let updatedCompletion
     if (!milestone.completed) updatedCompletion = true
     else updatedCompletion = false
@@ -37,7 +37,7 @@ export default function CheckList({ selectedJob, setHoveredDate, months, setMont
         setChecklistUpdated(true)
         setChecklistUpdated(false)
       } catch (err) {
-        console.log(err)
+        setError({ error: true, message: err.message })
       }
     }
     updatedCompletedStatus()

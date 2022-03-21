@@ -12,6 +12,7 @@ const JobsList = () => {
   const sectors = jobs.map(job => {
     return job.sector[0].name
   })
+  const [error, setError] = useState({ error: true, message: '' })
 
   useEffect(() => {
     const getAllJobs = async () => {
@@ -20,25 +21,12 @@ const JobsList = () => {
         const availableJobs = data.filter(job => !job.assigned_freelancer.length)
         setJobs(availableJobs)
       } catch (err) {
-        console.log(err)
+        setError({ error: true, message: err.message })
       }
     }
     getAllJobs()
   }, [])
 
-  // useEffect(() => {
-  //   const getAllSectors = async () => {
-  //     try {
-  //       const { data } = await axios.get('/api/sectors/')
-  //       setSectors(data)
-  //     } catch (err) {
-  //       console.log(err)
-  //     }
-  //   }
-  //   getAllSectors()
-  // }, [])
-
-  console.log(jobs)
 
   return (
     <Container>
