@@ -1,5 +1,5 @@
 # Outsourcd - a Python Django API and React app for freelance workers to find jobs - GA Project Four
-**This app has been deployed on Heroku here (https://outsourcd.herokuapp.com/)**
+**This app has been deployed on Heroku [here](https://outsourcd.herokuapp.com/)**
 This is a full-stack application built with Django REST Framework and React, which I submitted as my final project for the General Assembly Software Engineering Immersive course.
 
 The app enables users to register for an account as a freelancer, find and secure posted freelance jobs, and then manage progress in a dashboard. Users can complete specific tasks such as generating a PDF invoice for a particular job. Finally, users can add and modify their profile information in their managed profile area.
@@ -18,18 +18,18 @@ Timeframe: 8 days
 
 Languages/tools Used:
 ------
-Django
-Django REST Framework
-PostgreSQL
-PyJWT
-JavaScript (ES6)
-React.js
-HTML, CSS, Sass
-Material UI
-Axios
-Git + GitHub
-react-router-dom
-react-pdf
+* Django
+* Django REST Framework
+* PostgreSQL
+* PyJWT
+* JavaScript (ES6)
+* React.js
+* HTML, CSS, Sass
+* Material UI
+* Axios
+* Git + GitHub
+* react-router-dom
+* react-pdf
 
 App and user journey walkthrough:
 ------
