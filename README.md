@@ -5,7 +5,7 @@ This is a full-stack application built with Django REST Framework and React, whi
 
 The app enables users to register for an account as a freelancer, find and secure posted freelance jobs, and then manage progress in a dashboard. Users can complete specific tasks such as generating a PDF invoice for a particular job. Finally, users can add and modify their profile information in their managed profile area.
 
-Brief & Timeframe
+Brief & timeframe
 ------
 * Build a full-stack application by making backend and front-end
 * Use a Python Django API using Django REST Framework to serve data from a PostgreSQL database
@@ -17,7 +17,7 @@ Brief & Timeframe
 * Write DRY code and build RESTful APIs
 Timeframe: 8 days
 
-Languages/tools Used
+Languages/tools used
 ------
 * Django
 * Django REST Framework
