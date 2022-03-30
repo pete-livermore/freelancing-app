@@ -137,23 +137,35 @@ Code examples
 
 How I worked
 ------
+### Process
+⋅⋅⋅ Researched and brainstormed features
+⋅⋅⋅ Established MVP
+⋅⋅⋅ Wireframed the app UIs using Miro, including detailing the functionality of the app
+⋅⋅⋅ Generated database models and relationship diagrams (using [quickDBD](https://www.quickdatabasediagrams.com/))
+⋅⋅⋅ Set up feature workflows on Trello, with lists for features that were "in progress", "stuck", and "to-do", and a separate list for bugs. Priority was indicated with a colour label.
 
 What I got from the project
 ------
 ### General points
 Going solo for the final project was a challenge compared to the previous project, where we could progress more quickly, and could bounce ideas off each other and solve issues together. However, it was hugely positive in giving me the confidence that I can build a full-stack app on my own, as all the challenges I faced and was able to overcome in this project helped boost my confidence as a developer.
 
-I felt my planning was good and I made a concerted effort to make detailed database relationship diagrams and UI wireframes, and to manage my workflows via Trello. Nonetheless, a big learning experience was appreciating the trade-off between functionality and robust, bug-free code. The latter was a priority for me in the project, so I was perhaps over-ambitious as my initial vision was to build a fully functional marketplace, where a user could also register as a client and post jobs and hire freelancers. However, I kept my MVP as a job finder for freelancers and I am happy that I managed to build the fully functioning MVP.
+I felt my planning was good and I made a concerted effort to make detailed database relationship diagrams and UI wireframes, and to manage my workflows via Trello. Nonetheless, a big learning experience was appreciating the trade-off between functionality and robust, bug-free code. The latter was a priority for me in the project, so I was perhaps over-ambitious as my initial vision was to build a fully functional marketplace, where a user could also register as a client and post jobs and hire freelancers. However, I kept my MVP as a job finder for freelancers and I am happy that I managed to build the fully functioning MVP in the timeframe.
 
 ### Technical points
-*Git* - Thanks to our collaborative Git approach, I saw a significant improvement in my understanding of Git and my comfortability in using and merging different branches and versions of code, and dealing with any merge conflicts.
+*Git* - Thanks to our collaborative Git approach, I saw a significant improvement in my understanding of Git and my comfortability in using and merging different branches and versions of code, and dealing with any merge conflicts. The key learning were understanding how branches work, and the importance of understanding where you are in the version control tree at any given time.
 
-*Django* - This was the biggest challenge for me
-I found it difficult to populate my serialisers in the right way to be able to send relevant data to the front-end, when some models had simultaneous One-To-Many and Many-To-Many relationships.
+*Django & PostgreSQL* - Having only built a backend previously with Node/Express, learning Python and a whole new back-end framework was a challenge in the time I had available. My main areas of difficulty were around populating my serialisers optimally in oder to serve appropriate data to the front-end, and raising appropriate exceptions and handling errors on the backend. However, through plenty of further reading and testing with Insomnia, I was ultimately able to get the backend functioning stably and predictably, to enable the CRUD I need for this app, which was pleasing. 
 
-*Postgres* - Having previously worked with NoSQL databases only, I wanted to gain a better understanding on whether I was capturing the data and relationships correctly, I spent some time running SQL queries on my data in TablePlus. This was extremely useful in consolidating concepts like data joins and visualising how my Django views were actually working from the database side.
+Having previously worked with NoSQL databases only, I wanted to gain a better understanding on whether I was capturing the data and relationships correctly, I spent some time running SQL queries on my data in TablePlus. This was extremely useful in consolidating concepts like data joins and visualising how my Django views were actually working from the database side, because my database involved a number of different one-to-many and many-to-many relationships that were needed. Getting these relationships set up correctly was probably my biggest challenge on the backend, but I learned a lot about Postgres and Django through the process.
 
-*React* - 
+*React* - Though I was beginning to feel reasonably comfortable with React at the beginning of this project, it actually really helped cement some things for me. 
+
+Once thing that was new was the scale of the React work - this app was quite simple in its overall architecture (a few pages) but there is a lot of conditional rendering and a lot of changes/updates that occur as a result of user interaction. As a result, I had to think much harder about state management. Because I 'componentised' a lot, I had to ensure that state was being passed correctly through the app.
+
+Future features
+------
+As mentioned above, my complete app vision includes the functionality for users to register as clients (rather than freelancers), and then search and secure freelancers, and review and rate them. The way this works is that the user model has a boolean field for 'client' as well as 'freelancer', which I don't currently use for anything on the front end. However, this will utimately be used to conditionally render a client environment instead of the freelancer environment (which is all you see currently). Users will be searchable and filterable, and will be populated using a GET request with a view that serves the relavant data of all users. 
+
 
 
 
