@@ -93,15 +93,18 @@ After logging in, the user returns to their profile "About me" section
 ![alt text](https://res.cloudinary.com/di7ndofao/image/upload/v1647874132/Habit_tracker_app/Screenshot_2022-03-21_at_14.44.37_vqz15q.png "About me")
 
 Users can edit their "About me" text:
+
 ![alt text](https://res.cloudinary.com/di7ndofao/image/upload/v1647874131/Habit_tracker_app/Screenshot_2022-03-21_at_14.43.10_virzzq.png "Edit about me")
 
-They can delete skills:
+They can also delete skills from their profile by clicking the "x" on the relavant skill chip:
+
 ![alt text](https://res.cloudinary.com/di7ndofao/image/upload/v1647874131/Habit_tracker_app/Screenshot_2022-03-21_at_14.43.27_vtyjym.png "Delete skills")
 
-And add skills:
+By clicking "add skills" they see a modal, which allows the user to searcg for skills. If the skill exists, it's populated below as a chip. If it doesn't exist, the user has the option to add it. In either case, the user can then add the skill which will appear on the profile as a new chip.
+
 ![alt text](https://res.cloudinary.com/di7ndofao/image/upload/v1647874131/Habit_tracker_app/Screenshot_2022-03-21_at_14.43.55_yp4iwl.png "Add skills")
 
-And add work experience:
+The user can add work experience:
 
 ![alt text](https://res.cloudinary.com/di7ndofao/image/upload/v1647874132/Habit_tracker_app/Screenshot_2022-03-21_at_14.44.45_esjmmx.png "Add experience")
 
