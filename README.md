@@ -106,21 +106,27 @@ And add work experience:
 ![alt text](https://res.cloudinary.com/di7ndofao/image/upload/v1647874132/Habit_tracker_app/Screenshot_2022-03-21_at_14.44.45_esjmmx.png "Add experience")
 
 The "Current jobs" section shows any uncompleted jobs that the user has signed up for. Milestons of the job are automatically populated into a checklist:
+
 ![alt text](https://res.cloudinary.com/di7ndofao/image/upload/v1647874132/Habit_tracker_app/Screenshot_2022-03-21_at_14.45.11_shqrok.png "Current jobs")
 
 A calendar allows tracking of progress. It automatically shows today's date, and if the user hovers over a milestone, the calendar will skip to that day:
+
 ![alt text](https://res.cloudinary.com/di7ndofao/image/upload/v1647874132/Habit_tracker_app/Screenshot_2022-03-21_at_14.45.19_y8evqi.png "Calendar feature")
 
 Once all milestones are checked off the list, two buttons appear. One is a button to mark the job as complete. When this is clicked, the job moves from "Current jobs" to "Job history".
+
 ![alt text](https://res.cloudinary.com/di7ndofao/image/upload/v1647874132/Habit_tracker_app/Screenshot_2022-03-21_at_14.45.33_f5zpbh.png "Complete job")
 
 The user can also generate a PDF invoice at this point. Data in the PDF is generated from the user and job information in the database.
+
 ![alt text](https://res.cloudinary.com/di7ndofao/image/upload/v1647874132/Habit_tracker_app/Screenshot_2022-03-21_at_14.45.50_zghyht.png "Generate PDF")
 
 When a user hasn't yet completed any jobs, "Job history" is empty:
+
 ![alt text](https://res.cloudinary.com/di7ndofao/image/upload/v1647877280/Habit_tracker_app/Screenshot_2022-03-21_at_14.46.07_ezjn7j.png "No job history")
 
 But once a job is complete, it is populated as decsribed above:
+
 ![alt text](https://res.cloudinary.com/di7ndofao/image/upload/v1647874132/Habit_tracker_app/Screenshot_2022-03-21_at_14.46.21_zsyhcf.png "Complete job history")
 
 Code examples
