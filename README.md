@@ -138,6 +138,42 @@ But once a job is complete, it is populated as decsribed above:
 
 Code examples
 ------
+
+### Building calendar
+```javascript
+  useEffect(() => {
+    let numOfDaysInMonth
+    if (month === 'February') {
+      if ((year % 4 === 0 && year % 100 !== 0) || (year % 400 === 0 )) {
+        numOfDaysInMonth = 29
+      } else numOfDaysInMonth = 28
+    } else if (month === 'April' || month === 'June' || month === 'September' || month === 'November') {
+      numOfDaysInMonth = 30
+    }
+    else numOfDaysInMonth = 31
+    setDaysInMonth(numOfDaysInMonth)
+  }, [month, year])
+  ```
+```javascript
+  const CalendarBuild = () => {
+    const arr = []
+    for (let i = 0; i < 42; i++) {
+      arr.push(<Box sx={{ pl: '8px', mr: '8px', height: '35px' }} key={i} id={i}></Box>)
+    }
+    let inc = 1
+    for (let i = new Date(`${month} 1, ${year}`).getDay(); i < new Date(`${month} 1, ${year}`).getDay() + daysInMonth; i++) {
+      let idDate = new Date(`${month} ${inc}, ${year}`)
+      if (idDate.toLocaleDateString() === today.toLocaleDateString())
+        arr[i] = <Box id={idDate} key={idDate} sx={{ backgroundColor: '#eceff1', pl: '8px', mr: '8px', height: '35px' }}>{inc}</Box>
+      else if (idDate.toLocaleDateString() === new Date(hoveredDate).toLocaleDateString()) arr[i] = <Box id={idDate} key={idDate} sx={{ backgroundColor: '#d81b60', pl: '8px', mr: '8px', height: '35px' }}>{inc}</Box>
+      else arr[i] = <Box id={idDate} key={idDate} sx={{ pl: '8px', mr: '8px', height: '35px' }}>{inc}</Box>
+      inc++
+      idDate.setDate(idDate.getDate() + 1)
+    }
+    return arr
+  }
+  CalendarBuild()
+  ```
 ### Updating profile
 #### Searching for a skill to add to profile in the modal
 
