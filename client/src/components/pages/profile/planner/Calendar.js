@@ -31,7 +31,7 @@ export default function Calendar({ months, month, setMonth, hoveredDate, years, 
   useEffect(() => {
     let numOfDaysInMonth
     if (month === 'February') {
-      if (year === 2024 || year === 2028 || year === 2032) {
+      if ((year % 4 === 0 && year % 100 !== 0) || (year % 400 === 0 )) {
         numOfDaysInMonth = 29
       } else numOfDaysInMonth = 28
     } else if (month === 'April' || month === 'June' || month === 'September' || month === 'November') {
