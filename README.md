@@ -220,18 +220,14 @@ Updating the milestones checklist:
     }  
 ```
 
-
-
-
-
 How I worked
 ------
 ### Process
-⋅⋅⋅Researched and brainstormed features
-⋅⋅⋅Established MVP
-⋅⋅⋅Wireframed the app UIs using Miro, including detailing the functionality of the app
-⋅⋅⋅Generated database models and relationship diagrams (using [quickDBD](https://www.quickdatabasediagrams.com/))
-⋅⋅⋅Set up feature workflows on Trello, with lists for features that were "in progress", "stuck", and "to-do", and a separate list for bugs. Priority was indicated with a colour label.
+1. Researched and brainstormed features
+2. Established MVP
+3. Wireframed the app UIs using Miro, including detailing the functionality of the app
+4. Generated database models and relationship diagrams (using [quickDBD](https://www.quickdatabasediagrams.com/))
+5. Set up feature workflows on Trello, with lists for features that were "in progress", "stuck", and "to-do", and a separate list for bugs. Priority was indicated with a colour label.
 
 What I got from the project
 ------
