@@ -46,7 +46,9 @@ Upon registering, and logging in (reg form transitions to log in form), the user
 
 ![alt text](https://res.cloudinary.com/di7ndofao/image/upload/v1647883007/Habit_tracker_app/Screenshot_2022-03-21_at_17.05.34_efrqhe.png "Reg/login form")
 ![alt text](https://res.cloudinary.com/di7ndofao/image/upload/v1647882582/Habit_tracker_app/Screenshot_2022-03-21_at_17.07.50_ddqphh.png "Step 1")
+
 Moving between steps is only possible once all essential fields are complete:
+
 ![alt text](https://res.cloudinary.com/di7ndofao/image/upload/v1647882582/Habit_tracker_app/Screenshot_2022-03-21_at_17.08.04_ubugx2.png "Step 1 complete")
 
 Step 2 has skippable fields:
