@@ -5,8 +5,9 @@ This is a full-stack application built with Django REST Framework and React, whi
 
 The app enables users to register for an account as a freelancer, find and secure posted freelance jobs, and then manage progress in a dashboard. Users can complete specific tasks such as generating a PDF invoice for a particular job. Finally, users can add and modify their profile information in their managed profile area.
 
-Brief & timeframe
+Brief
 ------
+* Timeframe: 8 days
 * Build a full-stack application by making backend and front-end
 * Use a Python Django API using Django REST Framework to serve data from a PostgreSQL database
 * Consume the API with a separate front-end built with React
@@ -15,12 +16,13 @@ Brief & timeframe
 * Have a visually impressive design
 * Be deployed and publicly accessible online
 * Write DRY code and build RESTful APIs
-Timeframe: 8 days
+
 
 Languages/tools used
 ------
 * Django
 * Django REST Framework
+* Python
 * PostgreSQL
 * PyJWT
 * JavaScript (ES6)
@@ -134,6 +136,91 @@ But once a job is complete, it is populated as decsribed above:
 
 Code examples
 ------
+### Updating profile
+#### Searching for a skill to add to profile in the modal
+
+If a skill is found, the search results are mapped to generate chip components:
+```javascript
+      <Box mt={4} p={1} width='100%' spacing={1} display='flex' flexWrap='wrap' justifyContent='flex-start'>
+        {searchResults.length ? searchResults.map((result, i) => (
+          <Chip
+            onClick={() => handleChipClick(result.name)}
+            key={i}
+            id={result.name}
+            label={result.name}
+            sx={activeIndices.includes(result.name) ? coloured : uncoloured}
+            icon={<AddIcon />}
+          />
+        ))
+          :
+          ''
+        }
+      </Box>
+```
+
+If a skill isn't found, a button appears that has an event handler that runs the function to add the skill to the user's profile:
+
+```javascript
+ {!skill.found &&
+    <Box>
+       <Alert severity="warning">
+          {skill.message} <Button onClick={handleAddSkill}>Add?</Button>
+       </Alert>
+    </Box>
+  }
+```
+
+```javascript
+const handleAddSkill = () => {
+    const addSkill = async () => {
+      const token = localStorage.getItem('outsourcd-token')
+      const dataToSend = { 'name': skill.name }
+      console.log(dataToSend)
+      try {
+        await axios.post('/api/skills/', dataToSend,
+          {
+            'headers': {
+              'Authorization': 'Bearer ' + token
+            }
+          })
+        setSearchResults([{ ...skill }])
+        setSkill({ name: '', found: true, message: '' })
+      } catch (error) {
+        setError({
+          error: true,
+          message: error.response.data.name[0]
+        })
+      }
+    }
+    addSkill()
+  }
+```
+
+
+
+### Altering current job status
+
+Updating the milestones checklist:
+```javascript
+    const updatedCompletedStatus = async () => {
+      try {
+        await axios.put(`/api/milestones/${milestone.id}/`, { ...milestone, completed: updatedCompletion },
+          {
+            'headers': {
+              'Authorization': `Bearer ${token}`
+            }
+          }
+        )
+        setChecklistUpdated(true)
+       } catch (err) {
+        setError({ error: true, message: err.message })
+       }
+    }  
+```
+
+
+
+
 
 How I worked
 ------
@@ -146,7 +233,7 @@ How I worked
 
 What I got from the project
 ------
-## General points
+### General points
 Going solo for the final project was a challenge compared to the previous project, where we could progress more quickly and bounce ideas off each other, solving issues together. However, it was hugely positive in giving me the confidence that I can build a full-stack app on my own, as all the challenges I faced and was able to overcome in this project helped boost my confidence as a developer.
 
 I felt my planning was good and I made a concerted effort to make detailed database relationship diagrams and UI wireframes, and to manage my workflows via Trello. Nonetheless, a big learning experience was appreciating the trade-off between functionality and robust, bug-free code. The latter was a priority for me in the project, so I was perhaps over-ambitious as my initial vision was to build a fully functional marketplace, where a user could also register as a client and post jobs and hire freelancers. However, I kept my MVP as a job finder for freelancers and I am happy that I managed to build the fully functioning MVP in the timeframe.
