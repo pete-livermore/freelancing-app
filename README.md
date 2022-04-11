@@ -5,6 +5,8 @@ This is a full-stack application built with Django REST Framework and React, whi
 
 The app enables users to register for an account as a freelancer, find and secure posted freelance jobs, and then manage progress in a dashboard. Users can complete specific tasks such as generating a PDF invoice for a particular job. Finally, users can add and modify their profile information in their managed profile area.
 
+![alt text](https://res.cloudinary.com/di7ndofao/image/upload/v1647874131/Habit_tracker_app/Screenshot_2022-03-21_at_14.41.16_ivx7xx.png "Homepage")
+
 Brief
 ------
 * Timeframe: 8 days
@@ -36,34 +38,12 @@ Languages/tools used
 
 App and user journey walkthrough
 ------
-
 ### New user
-#### Homepage
-![alt text](https://res.cloudinary.com/di7ndofao/image/upload/v1647874131/Habit_tracker_app/Screenshot_2022-03-21_at_14.41.16_ivx7xx.png "Homepage")
+Upon registering, and logging in (reg form transitions to log in form), the user is required to add their profile information in a 3 step process. Moving between steps is only possible once all essential fields are complete, and step 2 has skippable fields.
 
-#### Registration
-Upon registering, and logging in (reg form transitions to log in form), the user is required to add their profile information in a 3 step process:
-
-![alt text](https://res.cloudinary.com/di7ndofao/image/upload/v1647883007/Habit_tracker_app/Screenshot_2022-03-21_at_17.05.34_efrqhe.png "Reg/login form")
-![alt text](https://res.cloudinary.com/di7ndofao/image/upload/v1647882582/Habit_tracker_app/Screenshot_2022-03-21_at_17.07.50_ddqphh.png "Step 1")
-
-Moving between steps is only possible once all essential fields are complete:
-
-![alt text](https://res.cloudinary.com/di7ndofao/image/upload/v1647882582/Habit_tracker_app/Screenshot_2022-03-21_at_17.08.04_ubugx2.png "Step 1 complete")
-
-Step 2 has skippable fields:
-
-![alt text](https://res.cloudinary.com/di7ndofao/image/upload/v1647875209/Habit_tracker_app/Screenshot_2022-03-21_at_15.03.45_yxwj2o.png "Step 2 complete")
-
-Step 3 allows form submission:
-
-![alt text](https://res.cloudinary.com/di7ndofao/image/upload/v1647875210/Habit_tracker_app/Screenshot_2022-03-21_at_15.05.25_pyovyf.png "Step 3 complete")
+https://user-images.githubusercontent.com/96052888/162734094-00170e9a-ec08-4db2-96ae-68fdacac6b32.mp4
 
 #### Profile
-User is then navigated to their profile
-
-![alt text](https://res.cloudinary.com/di7ndofao/image/upload/v1647875210/Habit_tracker_app/Screenshot_2022-03-21_at_15.05.49_kjdxce.png "New profile")
-
 Upon clicking "Current jobs" in the responsive side drawer, they have the facility to find jobs (can also be achieved via top nav)
 
 ![alt text](https://res.cloudinary.com/di7ndofao/image/upload/v1647877037/Habit_tracker_app/Screenshot_2022-03-21_at_15.36.53_n8yxte.png "Current jobs new")
