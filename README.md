@@ -41,7 +41,7 @@ App and user journey walkthrough
 ### New user
 Upon registering, and logging in (reg form transitions to log in form), the user is required to add their profile information in a 3 step process. Moving between steps is only possible once all essential fields are complete, and step 2 has skippable fields.
 
-https://user-images.githubusercontent.com/96052888/162734094-00170e9a-ec08-4db2-96ae-68fdacac6b32.mp4
+https://user-images.githubusercontent.com/96052888/162734404-ee5c3196-971d-46fd-a275-82ffde31a129.mp4
 
 #### Profile
 Upon clicking "Current jobs" in the responsive side drawer, they have the facility to find jobs (can also be achieved via top nav)
