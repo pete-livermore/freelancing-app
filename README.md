@@ -100,9 +100,6 @@ The user can also generate a PDF invoice at this point. Data in the PDF is gener
 
 ![alt text](https://res.cloudinary.com/di7ndofao/image/upload/v1647874132/Habit_tracker_app/Screenshot_2022-03-21_at_14.45.50_zghyht.png "Generate PDF")
 
-Code examples
-------
-
 Planning & process
 ------
 In the first stage of my design process, I focussed on establishing how the application back-end would look. Therefore, I sketched out an Entity Relationship Diagram for the database architecture.
